@@ -271,7 +271,11 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     flex-direction: column !important;
     align-items: center !important;
     background: linear-gradient(to top, var(--bg) 85%, color-mix(in srgb, var(--bg) 60%, transparent) 95%, transparent) !important;
-    padding: 2.8rem var(--pad) 0 !important;
+    border-radius: 24px 24px 0 0 !important;
+    padding: 2.8rem var(--pad) 1.5rem !important;
+    position: relative !important;
+    z-index: 3 !important;
+    box-sizing: border-box !important;
   }
 
   .blk h2, .blk h3, .blk p, .blk div {
@@ -362,16 +366,37 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     justify-content: center !important;
   }
 
-  /* Center Hero Content */
+  /* Center Hero Content with Black Card (matching other sections) */
   .hero {
-    padding: 0 !important;
+    min-height: 100svh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: max(220px, 32vh) var(--pad) 3.5rem !important;
+    box-sizing: border-box !important;
+  }
+  .hero .sp {
+    display: none !important;
+  }
+  .hero .bd {
+    display: none !important;
   }
   .hero .hc {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    padding: 0 var(--pad) 2rem !important;
+    max-width: 520px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    background: linear-gradient(to top, var(--bg) 85%, color-mix(in srgb, var(--bg) 60%, transparent) 95%, transparent) !important;
+    border-radius: 24px 24px 0 0 !important;
+    padding: 2.8rem var(--pad) 1.5rem !important;
+    position: relative !important;
+    z-index: 3 !important;
+    box-sizing: border-box !important;
   }
   .hero h1 {
     text-align: center !important;
@@ -408,7 +433,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
   .pay-row{font-size:0.76rem !important}
   .cards{grid-template-columns:1fr}.topics{grid-template-columns:1fr}.topics li:nth-last-child(2){border-bottom:0}h1{font-size:clamp(34px,min(12vw,7vh),58px)}
 }
-@media(prefers-reduced-motion:reduce){.hint::before{animation:none}.l,.rv{transition:none;transform:none;opacity:1}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.l,.rv{transition:none;transform:none;opacity:1}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -1015,7 +1040,10 @@ function start(){
     secTargets=[];
     for(var s=0;s<secs.length;s++){
       var side=SIDE[s],ap=shapes[MAP[s]].asp,T;
-      if(s===0)T={x:W/2,y:(top+bot)/2,s:rw/asp0};
+      if(s===0){
+        if(W < 900) T={x:W/2, y:Math.max(120, Math.min(H*0.20, (top+bot)/2)), s:Math.min(H*0.20, (W*0.78)/asp0)};
+        else T={x:W/2, y:(top+bot)/2, s:rw/asp0};
+      }
       else if(W>=900)T={x:W*(side==="R"?.74:.26),y:H*.52,s:Math.min(H*.66,W*.4/ap)};
       else T={x:W/2, y:Math.max(130, H*0.19), s:Math.min(H*0.22, W*0.64/ap)};
       secTargets.push(T);
