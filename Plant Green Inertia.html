@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Plant Green Inertia</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a110c;
+      --fg: #eef3ea;
+      --mute: rgba(238, 243, 234, .68);
+      --line: rgba(238, 243, 234, .16);
+      --green: #2f9a55;
+      --mint: #a8dcb4;
+      --pad: clamp(20px, 3.2vw, 48px);
+      --head: 'Geist', 'Helvetica Neue', Arial, sans-serif;
+      --serif: 'Instrument Serif', 'Times New Roman', serif;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0
+    }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--head);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto;
+      height: env(safe-area-inset-top, 0px);
+      background: var(--bg);
+      z-index: 9
+    }
+
+    a {
+      color: inherit
+    }
+
+    #stage {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none
+    }
+
+    #stage canvas {
+      display: block;
+      width: 100%;
+      height: 100%
+    }
+
+    header {
+      position: fixed;
+      top: env(safe-area-inset-top, 0px);
+      left: 0;
+      right: 0;
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px var(--pad) 14px;
+      background: linear-gradient(var(--bg), rgba(10, 17, 12, 0))
+    }
+
+    .logo {
+      display: flex;
+      gap: .3rem;
+      text-decoration: none;
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: .86;
+      font-size: 1.3rem
+    }
+
+    .logo b {
+      display: block
+    }
+
+    .logo i {
+      display: flex;
+      align-items: center;
+      background: var(--green);
+      color: #fff;
+      font-style: normal;
+      font-size: .6rem;
+      letter-spacing: .14em;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      padding: .3rem .18rem
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2.4vw, 36px);
+      list-style: none;
+      padding: 0
+    }
+
+    .links a {
+      text-decoration: none;
+      font-size: 13.5px;
+      opacity: .72;
+      transition: opacity .2s
+    }
+
+    .links a:hover {
+      opacity: 1
+    }
+
+    .links .pill {
+      opacity: 1;
+      padding: 8px 14px;
+      border: 1px solid rgba(238, 243, 234, .25);
+      border-radius: 99px;
+      transition: background .25s, color .25s
+    }
+
+    .links .pill:hover {
+      background: var(--fg);
+      color: var(--bg)
+    }
+
+    #prog {
+      position: fixed;
+      top: env(safe-area-inset-top, 0px);
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 9;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: left
+    }
+
+    main {
+      position: relative;
+      z-index: 3
+    }
+
+    .sec {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 7rem var(--pad) 4rem;
+      pointer-events: none
+    }
+
+    .sec>* {
+      pointer-events: auto
+    }
+
+    .sec.L {
+      justify-content: flex-end
+    }
+
+    .blk {
+      max-width: 31rem;
+      width: 100%
+    }
+
+    h2 {
+      font-weight: 500;
+      font-size: clamp(2.2rem, 4.8vw, 4.4rem);
+      line-height: .98;
+      letter-spacing: -.04em;
+      margin-bottom: 1.3rem
+    }
+
+    .acc {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -.02em
+    }
+
+    .line {
+      display: block;
+      overflow: hidden;
+      padding-bottom: .08em
+    }
+
+    .l {
+      display: block;
+      transform: translateY(110%);
+      transition: transform .9s cubic-bezier(.2, .8, .2, 1);
+      transition-delay: var(--d, 0s)
+    }
+
+    .in .l {
+      transform: none
+    }
+
+    .rv {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .8s, transform .8s;
+      transition-delay: calc(.15s + var(--i, 0)*90ms)
+    }
+
+    .in .rv {
+      opacity: 1;
+      transform: none
+    }
+
+    p {
+      color: var(--mute);
+      line-height: 1.55
+    }
+
+    ul.rows,
+    ol.steps {
+      list-style: none;
+      padding: 0;
+      margin-top: 1.6rem
+    }
+
+    .rows li,
+    .steps li {
+      padding: 1rem 0;
+      border-top: 1px solid var(--line)
+    }
+
+    .rows li:last-child,
+    .steps li:last-child {
+      border-bottom: 1px solid var(--line)
+    }
+
+    .rows h3,
+    .steps h3 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      letter-spacing: -.02em;
+      margin-bottom: .25rem;
+      color: var(--fg)
+    }
+
+    .rows p,
+    .steps p {
+      font-size: .98rem
+    }
+
+    .steps {
+      counter-reset: s
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 2.4rem 1fr;
+      gap: 0 .6rem
+    }
+
+    .steps li::before {
+      counter-increment: s;
+      content: counter(s);
+      grid-row: span 2;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.9rem;
+      line-height: 1;
+      color: var(--mint)
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      height: 46px;
+      padding: 0 22px;
+      border-radius: 99px;
+      background: var(--fg);
+      color: var(--bg);
+      text-decoration: none;
+      font-size: 14.5px;
+      font-weight: 500;
+      transition: transform .3s cubic-bezier(.2, .7, .2, 1), background .2s
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: #fff
+    }
+
+    .txt {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 14.5px;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(238, 243, 234, .3)
+    }
+
+    a svg {
+      transition: transform .3s
+    }
+
+    a:hover svg {
+      transform: translateX(3px)
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--fg);
+      outline-offset: 4px
+    }
+
+    .ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px;
+      margin-top: 1.6rem
+    }
+
+    /* hero */
+    .hero {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      padding: 0;
+      overflow: hidden
+    }
+
+    .bd {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      font-weight: 600;
+      letter-spacing: -.06em;
+      line-height: .8;
+      color: rgba(238, 243, 234, .05)
+    }
+
+    .hint {
+      position: absolute;
+      z-index: 2;
+      transform: translate(-50%, 0);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      font-size: 12px;
+      letter-spacing: .06em;
+      opacity: .55;
+      pointer-events: none;
+      transition: opacity .8s
+    }
+
+    .hint::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: p 2.4s ease-in-out infinite
+    }
+
+    body[data-t="1"] .hint {
+      opacity: 0
+    }
+
+    @keyframes p {
+
+      0%,
+      100% {
+        transform: scale(.6);
+        opacity: .45
+      }
+
+      50% {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    .sp {
+      flex: 1 1 auto;
+      min-height: 0
+    }
+
+    .hc {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      align-items: end;
+      gap: clamp(24px, 4vw, 72px);
+      padding: 0 var(--pad) clamp(28px, 3.4vw, 52px);
+      pointer-events: none
+    }
+
+    .hc a {
+      pointer-events: auto
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      letter-spacing: .04em;
+      opacity: .65;
+      margin-bottom: clamp(14px, 1.6vw, 22px);
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: .7
+    }
+
+    h1 {
+      font-weight: 500;
+      font-size: clamp(40px, min(6.6vw, 11.5vh), 124px);
+      line-height: .92;
+      letter-spacing: -.045em;
+      text-wrap: balance
+    }
+
+    h1 span {
+      display: block
+    }
+
+    .aside {
+      max-width: 400px;
+      justify-self: end;
+      padding-bottom: .6em
+    }
+
+    .aside p {
+      font-size: clamp(15px, 1.1vw, 17px);
+      margin-bottom: 0
+    }
+
+    .foot {
+      margin-top: 2.4rem;
+      font-size: .88rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    @media(max-width:1023px) {
+      .hc {
+        grid-template-columns: 1fr;
+        gap: 24px
+      }
+
+      .aside {
+        justify-self: start;
+        max-width: 520px;
+        padding: 0
+      }
+
+      h1 {
+        font-size: clamp(40px, min(9.5vw, 9vh), 96px)
+      }
+    }
+
+    @media(max-width:899px) {
+      .sec:not(.hero) {
+        align-items: flex-end;
+        padding-bottom: 2.5rem
+      }
+
+      .sec:not(.hero) .blk {
+        max-width: none;
+        background: linear-gradient(to top, var(--bg) 76%, rgba(10, 17, 12, 0));
+        margin: 0 calc(-1*var(--pad));
+        padding: 4rem var(--pad) 0
+      }
+
+      .steps li {
+        padding: .7rem 0
+      }
+
+      .steps p {
+        font-size: .92rem
+      }
+    }
+
+    @media(max-width:767px) {
+      .links li:not(.k) {
+        display: none
+      }
+    }
+
+    @media(max-width:639px) {
+      h1 {
+        font-size: clamp(36px, min(12.5vw, 7.2vh), 60px)
+      }
+
+      .aside p {
+        font-size: 15px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .hint::before {
+        animation: none
+      }
+
+      .l,
+      .rv {
+        transition: none;
+        transform: none;
+        opacity: 1
+      }
+
+      html {
+        scroll-behavior: auto
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="prog"></div>
+  <div id="stage" aria-hidden="true"></div>
+  <header id="nav">
+    <a class="logo" href="#top" aria-label="Plant Green Inertia"><span><b>Plant</b><b>Green</b></span><i>Inertia</i></a>
+    <ul class="links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#spaces">Spaces</a></li>
+      <li class="k"><a class="pill" href="#contact">Contact</a></li>
+    </ul>
+  </header>
+  <main>
+    <section class="sec hero in" id="top">
+      <div class="bd" id="bd" aria-hidden="true">plant</div>
+      <div class="hint" id="hint" aria-hidden="true">Move across the plant</div>
+      <div class="sp"></div>
+      <div class="hc" id="hcontent">
+        <div>
+          <p class="eyebrow">Plant Green Inertia — Planting &amp; care</p>
+          <h1><span>Planted once.</span><span class="acc">Growing always.</span></h1>
+        </div>
+        <div class="aside">
+          <p>We design, install and care for planted environments as one system, so they keep improving season after
+            season.</p>
+          <div class="ctas">
+            <a class="btn" href="#contact">Start a project <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></a>
+            <a class="txt" href="#about">Our approach <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="about">
+      <div class="blk">
+        <h2><span class="line"><span class="l">Momentum,</span></span><span class="line"><span class="l acc"
+              style="--d:.1s">not maintenance.</span></span></h2>
+        <p class="rv">A planting that is designed, installed and cared for as one system keeps improving each season
+          instead of needing constant repair. That steady, self-sustaining progress is what inertia means to us.</p>
+        <ul class="rows">
+          <li class="rv" style="--i:1">
+            <h3>One system</h3>
+            <p>Design, installation and care are planned together from the start.</p>
+          </li>
+          <li class="rv" style="--i:2">
+            <h3>Right plant, right place</h3>
+            <p>Species chosen for your soil, light, water and climate.</p>
+          </li>
+          <li class="rv" style="--i:3">
+            <h3>Built for years</h3>
+            <p>Every decision favors long-term health over quick effect.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec L" id="services">
+      <div class="blk">
+        <h2><span class="line"><span class="l">From first sketch</span></span><span class="line"><span class="l acc"
+              style="--d:.1s">to every season.</span></span></h2>
+        <ul class="rows">
+          <li class="rv" style="--i:0">
+            <h3>Planting design</h3>
+            <p>Layouts and species lists matched to your site, climate and care budget.</p>
+          </li>
+          <li class="rv" style="--i:1">
+            <h3>Installation</h3>
+            <p>One accountable crew from delivery to the final planting.</p>
+          </li>
+          <li class="rv" style="--i:2">
+            <h3>Care and monitoring</h3>
+            <p>Scheduled maintenance and health checks that keep every plant on track.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" id="process">
+      <div class="blk">
+        <h2><span class="line"><span class="l">How a planting</span></span><span class="line"><span class="l acc"
+              style="--d:.1s">grows with us.</span></span></h2>
+        <ol class="steps">
+          <li class="rv" style="--i:0">
+            <h3>Survey</h3>
+            <p>We study the site, soil and light.</p>
+          </li>
+          <li class="rv" style="--i:1">
+            <h3>Design</h3>
+            <p>We plan the planting and agree it with you.</p>
+          </li>
+          <li class="rv" style="--i:2">
+            <h3>Plant</h3>
+            <p>We install with care and clear the site.</p>
+          </li>
+          <li class="rv" style="--i:3">
+            <h3>Care</h3>
+            <p>We tend and review it through the seasons.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec L" id="spaces">
+      <div class="blk">
+        <h2><span class="line"><span class="l">Where we</span></span><span class="line"><span class="l acc"
+              style="--d:.1s">plant.</span></span></h2>
+        <ul class="rows">
+          <li class="rv" style="--i:0">
+            <h3>Homes and gardens</h3>
+            <p>Private gardens, courtyards and terraces.</p>
+          </li>
+          <li class="rv" style="--i:1">
+            <h3>Workplaces and campuses</h3>
+            <p>Green frontage, atriums and shared grounds.</p>
+          </li>
+          <li class="rv" style="--i:2">
+            <h3>Public and community spaces</h3>
+            <p>Parks, streets and places people gather.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" id="contact" style="justify-content:center;text-align:center;align-items:flex-end">
+      <div class="blk" style="max-width:36rem">
+        <h2><span class="line"><span class="l">Start a <span class="acc">project.</span></span></span></h2>
+        <p class="rv">Tell us about your site and timeline. We reply within two working days.</p>
+        <div class="ctas" style="justify-content:center"><a class="btn"
+            href="mailto:hello@plantgreeninertia.com">hello@plantgreeninertia.com</a></div>
+        <div class="foot rv" style="--i:2;color:var(--mute)"><span>© Plant Green Inertia</span><a href="#top">Back to
+            top</a></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    (function () {
+      var $ = function (i) { return document.getElementById(i) };
+      var stage = $("stage"), navEl = $("nav"), hc = $("hcontent"), bd = $("bd"), hintEl = $("hint"), prog = $("prog");
+      var secs = [].slice.call(document.querySelectorAll(".sec"));
+      var coarse = matchMedia("(pointer: coarse)").matches, rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var N = (coarse || innerWidth < 700) ? 8000 : 15000, F = '"Barlow Condensed"';
+      var MAP = [0, 3, 1, 2, 2, 0], SIDE = ["c", "R", "L", "R", "L", "c"];   /* section -> shape (0 logo, 1 leaf, 2 tree, 3 seedling) and which side the shape sits */
+      function clamp(v, a, b) { return Math.min(b, Math.max(a, v)) }
+      function sstep(a, b, x) { var t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t) }
+      function rnd(n) { var a = new Float32Array(n); for (var i = 0; i < n; i++)a[i] = Math.random(); return a }
+      function mk(w, h) { var c = document.createElement("canvas"); c.width = w; c.height = h; return c }
+
+      /* ---- shapes drawn on canvas, then sampled into particles ---- */
+      function buildLogo() {
+        var c = mk(10, 10), x = c.getContext("2d"); x.font = "800 300px " + F;
+        var wm = Math.max(x.measureText("PLANT").width, x.measureText("GREEN").width), pad = 40, bw = 150, gap = 30, bx = pad + wm + gap;
+        c.width = Math.ceil(bx + bw + pad); c.height = 600; x = c.getContext("2d"); x.font = "800 300px " + F;
+        var g = x.createLinearGradient(0, 80, 0, 560); g.addColorStop(0, "#e6f5e8"); g.addColorStop(.45, "#6fbf86"); g.addColorStop(1, "#14502d");
+        x.fillStyle = g; x.fillText("PLANT", pad, 290); x.fillText("GREEN", pad, 560);
+        x.globalCompositeOperation = "source-atop";
+        for (var i = -600; i < c.width; i += 7) { x.strokeStyle = (i / 7 % 2) ? "rgba(255,255,255,.16)" : "rgba(0,40,20,.2)"; x.lineWidth = 1.5; x.beginPath(); x.moveTo(i, 600); x.lineTo(i + 360, 0); x.stroke() }
+        var r = x.createRadialGradient(c.width * .28, 170, 0, c.width * .28, 170, 360); r.addColorStop(0, "rgba(255,255,255,.4)"); r.addColorStop(1, "rgba(255,255,255,0)");
+        x.fillStyle = r; x.fillRect(0, 0, c.width, 600); x.globalCompositeOperation = "source-over";
+        var b = x.createLinearGradient(bx, 0, bx + bw, 0); b.addColorStop(0, "#4cbd77"); b.addColorStop(1, "#1f6f3b"); x.fillStyle = b; x.fillRect(bx, 80, bw, 480);
+        x.save(); x.translate(bx + bw / 2, 320); x.rotate(-Math.PI / 2); x.font = "700 128px " + F; x.textAlign = "center"; x.textBaseline = "middle";
+        x.globalCompositeOperation = "destination-out"; x.fillText("INERTIA", 0, 4); x.restore(); return c;
+      }
+      function drawLeaf(x, px, py, ang, len, wid, c1, c2, veins) {
+        x.save(); x.translate(px, py); x.rotate(ang);
+        x.beginPath(); x.moveTo(0, 0); x.bezierCurveTo(wid, -len * .25, wid * .9, -len * .75, 0, -len); x.bezierCurveTo(-wid * .9, -len * .75, -wid, -len * .25, 0, 0); x.closePath();
+        var g = x.createLinearGradient(0, 0, 0, -len); g.addColorStop(0, c1); g.addColorStop(1, c2); x.fillStyle = g; x.fill();
+        if (veins) {
+          x.globalCompositeOperation = "destination-out"; x.lineCap = "round"; x.lineWidth = Math.max(2, len * .014); x.beginPath(); x.moveTo(0, len * .02); x.lineTo(0, -len * .92); x.stroke(); x.lineWidth = Math.max(1.5, len * .008);
+          for (var k = 1; k <= 6; k++) { var yy = -len * (.1 + k * .13), l = wid * (.85 - k * .1); x.beginPath(); x.moveTo(0, yy); x.lineTo(-l, yy - l * .55); x.moveTo(0, yy); x.lineTo(l, yy - l * .55); x.stroke() }
+          x.globalCompositeOperation = "source-over"
+        }
+        x.restore();
+      }
+      function buildLeaf() {
+        var c = mk(560, 720), x = c.getContext("2d");
+        x.strokeStyle = "#9fd7ac"; x.lineWidth = 12; x.lineCap = "round"; x.beginPath(); x.moveTo(285, 705); x.quadraticCurveTo(280, 660, 282, 625); x.stroke();
+        drawLeaf(x, 282, 640, -.06, 600, 235, "#14502d", "#b4ecc0", true); return c;
+      }
+      function buildSprout() {
+        var c = mk(560, 720), x = c.getContext("2d");
+        x.fillStyle = "#7b6444"; x.beginPath(); x.ellipse(280, 690, 190, 30, 0, 0, 6.283); x.fill();
+        x.strokeStyle = "#86d398"; x.lineWidth = 15; x.lineCap = "round"; x.beginPath(); x.moveTo(280, 690); x.quadraticCurveTo(250, 520, 292, 330); x.stroke();
+        drawLeaf(x, 276, 520, -1.05, 280, 100, "#1d6a3a", "#9be3ae", true);
+        drawLeaf(x, 282, 440, 1.0, 250, 92, "#237a43", "#b4ecc0", true);
+        drawLeaf(x, 292, 340, .12, 170, 62, "#2f9a55", "#c6f2cf", false); return c;
+      }
+      function buildTree() {
+        var c = mk(640, 760), x = c.getContext("2d"), seed = 11, pal = [["#14502d", "#7fd096"], ["#1f6f3b", "#a8e3b5"], ["#2f9a55", "#c6f2cf"], ["#18603a", "#8fdca3"]];
+        function sr() { seed = (seed * 16807) % 2147483647; return seed / 2147483647 }
+        function leaves(px, py, ang, n) { for (var k = 0; k < n; k++) { var p = pal[Math.floor(sr() * 4)]; drawLeaf(x, px, py, ang + (sr() - .5) * 2.6, 26 + sr() * 18, 9 + sr() * 6, p[0], p[1], false) } }
+        function br(x0, y0, len, ang, w, d) {
+          var x1 = x0 + Math.sin(ang) * len, y1 = y0 - Math.cos(ang) * len;
+          x.lineWidth = w; x.lineCap = "round"; x.strokeStyle = d > 4 ? "#b99a6b" : "#a88c5e"; x.beginPath(); x.moveTo(x0, y0); x.lineTo(x1, y1); x.stroke();
+          if (d <= 0) { leaves(x1, y1, ang, 3); return }
+          if (d <= 3 && sr() > .45) leaves(x1, y1, ang, 2);
+          br(x1, y1, len * .78, ang - (.3 + sr() * .3), w * .7, d - 1); br(x1, y1, len * .78, ang + (.3 + sr() * .3), w * .7, d - 1);
+          if (sr() > .55) br(x1, y1, len * .7, ang + (sr() - .5) * .3, w * .6, d - 1);
+        }
+        br(320, 745, 150, 0, 24, 8); return c;
+      }
+      function sample(cv, sw) {
+        var asp = cv.width / cv.height, sh = Math.round(sw / asp), c = mk(sw, sh), x = c.getContext("2d"); x.drawImage(cv, 0, 0, sw, sh);
+        var d = x.getImageData(0, 0, sw, sh).data, cand = [], xx, y, i;
+        for (y = 0; y < sh; y++)for (xx = 0; xx < sw; xx++) { i = (y * sw + xx) * 4; if (d[i + 3] > 110) cand.push(i, xx, y) }
+        var X = new Float32Array(N), Y = new Float32Array(N), C = new Float32Array(N * 3), m = cand.length / 3;
+        for (var k = 0; k < N; k++) { var j = Math.floor(Math.random() * m) * 3; i = cand[j]; X[k] = ((cand[j + 1] + Math.random()) / sw - .5) * asp; Y[k] = (cand[j + 2] + Math.random()) / sh - .5; C[k * 3] = d[i] / 255; C[k * 3 + 1] = d[i + 1] / 255; C[k * 3 + 2] = d[i + 2] / 255 }
+        return { X: X, Y: Y, C: C, asp: asp };
+      }
+
+      function start() {
+        var logoCv = buildLogo(), shapes = [sample(logoCv, 320), sample(buildLeaf(), 240), sample(buildTree(), 260), sample(buildSprout(), 240)], asp0 = shapes[0].asp;
+        var nd = coarse ? 500 : 1100, DX = new Float32Array(nd), DY = new Float32Array(nd), DC = new Float32Array(nd * 3);
+        for (var i = 0; i < nd; i++) { DX[i] = (Math.random() - .5) * 1.7; DY[i] = (Math.random() - .5) * 1.5; DC[i * 3] = .6 + Math.random() * .3; DC[i * 3 + 1] = .85 + Math.random() * .15; DC[i * 3 + 2] = .65 + Math.random() * .25 }
+
+        var pr = Math.min(devicePixelRatio || 1, 1.5);
+        var R = new THREE.WebGLRenderer({ alpha: true, antialias: false, powerPreference: "high-performance" });
+        R.setPixelRatio(pr); R.setClearColor(0x000000, 0); stage.appendChild(R.domElement);
+        var scene = new THREE.Scene(), cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+        var tex = new THREE.CanvasTexture(logoCv); tex.flipY = false; tex.minFilter = THREE.LinearMipmapLinearFilter;
+        var trailU = []; for (i = 0; i < 32; i++)trailU.push(new THREE.Vector3());
+        var imgU = { uTex: { value: tex }, uRes: { value: new THREE.Vector2(1, 1) }, uDpr: { value: pr }, uR: { value: 200 }, uShow: { value: 0 }, uRect: { value: new THREE.Vector4() }, uT: { value: trailU } };
+        var img = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.RawShaderMaterial({
+          uniforms: imgU, transparent: true, depthTest: false, premultipliedAlpha: true,
+          vertexShader: "attribute vec3 position;void main(){gl_Position=vec4(position.xy,0.,1.);}",
+          fragmentShader: "precision highp float;uniform sampler2D uTex;uniform vec2 uRes;uniform float uDpr,uR,uShow;uniform vec4 uRect;uniform vec3 uT[32];void main(){vec2 px=vec2(gl_FragCoord.x,uRes.y*uDpr-gl_FragCoord.y)/uDpr;vec2 uv=(px-uRect.xy)/uRect.zw;if(uShow<.002||uv.x<0.||uv.x>1.||uv.y<0.||uv.y>1.){gl_FragColor=vec4(0.);return;}float f=0.;for(int i=0;i<32;i++){vec2 d=px-uT[i].xy;f=max(f,exp(-dot(d,d)/(uR*uR))*uT[i].z);}float E=smoothstep(.06,.5,f*1.15);vec4 t=texture2D(uTex,uv);float A=t.a*(1.-E)*uShow;gl_FragColor=vec4(t.rgb*A,A);}"
+        }));
+        img.frustumCulled = false; img.renderOrder = 0; scene.add(img);
+
+        function makeSet(X, Y, C, rest, dust, order) {
+          var n = X[0].length, S = { n: n, X: X, Y: Y, C: C, sd: rnd(n), ph: rnd(n), off: new Float32Array(n * 2), vel: new Float32Array(n * 2), P: new Float32Array(n * 2), AS: new Float32Array(n * 2), col: new Float32Array(C[0]), rest: rest, dust: dust, dot: { value: 2 }, res: new THREE.Vector2(1, 1) };
+          var geo = new THREE.BufferGeometry();
+          geo.setAttribute("position", new THREE.BufferAttribute(S.P, 2).setUsage(THREE.DynamicDrawUsage));
+          geo.setAttribute("aCol", new THREE.BufferAttribute(S.col, 3).setUsage(THREE.DynamicDrawUsage));
+          geo.setAttribute("aAS", new THREE.BufferAttribute(S.AS, 2).setUsage(THREE.DynamicDrawUsage));
+          S.geo = geo;
+          S.pts = new THREE.Points(geo, new THREE.RawShaderMaterial({
+            uniforms: { uRes: { value: S.res }, uPx: { value: pr }, uDot: S.dot }, transparent: true, depthTest: false, premultipliedAlpha: true,
+            vertexShader: "precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.2+.08,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=uDot*uPx*(1.+aAS.y*.12);}",
+            fragmentShader: "precision highp float;varying vec3 vC;varying float vA;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,.28,d)*vA;if(a<.004)discard;gl_FragColor=vec4(vC*a,a);}"
+          }));
+          S.pts.frustumCulled = false; S.pts.renderOrder = order; scene.add(S.pts); return S;
+        }
+        var main = makeSet(shapes.map(function (s) { return s.X }), shapes.map(function (s) { return s.Y }), shapes.map(function (s) { return s.C }), 0, false, 1);
+        var dust = makeSet([DX], [DY], [DC], .42, true, 2);
+
+        function hs(a, b) { var s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return s - Math.floor(s) }
+        function vn(a, b) { var ix = Math.floor(a), iy = Math.floor(b), fx = a - ix, fy = b - iy, ux = fx * fx * fx * (fx * (fx * 6 - 15) + 10), uy = fy * fy * fy * (fy * (fy * 6 - 15) + 10), p = hs(ix, iy), q = hs(ix + 1, iy), r = hs(ix, iy + 1), s = hs(ix + 1, iy + 1); return (p + (q - p) * ux) * (1 - uy) + (r + (s - r) * ux) * uy }
+        var cvx = 0, cvy = 0; function curl(a, b) { var e = .35; cvx = (vn(a, b + e) - vn(a, b - e)) / (2 * e); cvy = -(vn(a + e, b) - vn(a - e, b)) / (2 * e) }
+
+        /* ---- state ---- */
+        var W = 1, H = 1, Rad = 200, t = 0, introT = rm ? 1 : 0, pres = 0, pT = 0, mx = -9999, my = -9999, tx = -9999, ty = -9999, pmx = 0, pmy = 0, mvx = 0, mvy = 0, trail = [], bb = [0, 0, 0, 0], prevAct = 0, STR = rm ? .5 : 1, TURB = rm ? .3 : 1, last = performance.now();
+        var ia = 0, ib = 0, m = 1, want = 0, imgA = 0, colDirty = false, secTargets = [], cur = { x: 0, y: 0, s: 1 }, cx = 0, cy = 0, SZ = 1, activeSec = 0;
+        if (!rm) for (i = 0; i < main.n; i++) { main.off[i * 2] = (Math.random() - .5) * 1100; main.off[i * 2 + 1] = (Math.random() - .5) * 600 }
+
+        function relayout() {
+          W = stage.clientWidth; H = stage.clientHeight; R.setSize(W, H); imgU.uRes.value.set(W, H); main.res.set(W, H); dust.res.set(W, H);
+          Rad = 200 * clamp(Math.min(W, H * 1.6) / 1000, .6, 1.25); imgU.uR.value = Rad; dust.dot.value = 2.2;
+          var top = navEl.offsetHeight + 8, bot = hc.offsetTop - 8, bh = Math.max(120, bot - top), rw = W * (W >= 1024 ? .9 : .94);
+          if (rw / asp0 > bh * 1.1) rw = bh * 1.1 * asp0;
+          secTargets = [];
+          for (var s = 0; s < secs.length; s++) {
+            var side = SIDE[s], T;
+            if (s === 0) T = { x: W / 2, y: (top + bot) / 2, s: rw / asp0 };
+            else if (W >= 900) T = side === "c" ? { x: W / 2, y: H * .36, s: Math.min(H * .42, W * .8 / asp0) } : { x: W * (side === "R" ? .74 : .26), y: H * .52, s: H * .66 };
+            else T = side === "c" ? { x: W / 2, y: H * .2, s: Math.min(H * .2, W * .8 / asp0) } : { x: W / 2, y: H * .27, s: Math.min(H * .34, W * .85) };
+            secTargets.push(T);
+          }
+          if (!cur.init) { cur.x = secTargets[0].x; cur.y = secTargets[0].y; cur.s = secTargets[0].s; cur.init = true }
+          bd.style.fontSize = Math.min(bh * .95, W * .92 / (5 * .56)) + "px"; bd.style.top = (top + bot) / 2 + "px";
+          hintEl.style.left = clamp(W / 2, 80, W - 80) + "px"; hintEl.style.top = Math.min(secTargets[0].y + secTargets[0].s * .48, bot - 24) + "px";
+        }
+        addEventListener("resize", relayout); relayout();
+
+        function pickSec() {
+          var best = activeSec, h = innerHeight;
+          for (var s = 0; s < secs.length; s++) { var b = secs[s].getBoundingClientRect(); if (b.top < h * .75) secs[s].classList.add("in"); if (b.top <= h * .5 && b.bottom > h * .5) best = s }
+          if (best !== activeSec) { activeSec = best; want = MAP[best] }
+        }
+        addEventListener("scroll", function () { var h = document.documentElement.scrollHeight - innerHeight; prog.style.transform = "scaleX(" + (h > 0 ? clamp(scrollY / h, 0, 1) : 0) + ")" }, { passive: true });
+
+        function onMove(e) { tx = e.clientX; ty = e.clientY; if (mx < -9000) { mx = pmx = tx; my = pmy = ty } pT = 1; document.body.dataset.t = "1" }
+        addEventListener("pointermove", function (e) { if (e.pointerType === "touch" && e.buttons === 0 && e.pressure === 0) return; onMove(e) }, { passive: true });
+        addEventListener("pointerdown", onMove, { passive: true });
+        document.addEventListener("pointerleave", function () { pT = 0 });
+        addEventListener("pointerup", function (e) { if (e.pointerType === "touch") setTimeout(function () { pT = 0 }, 260) }, { passive: true });
+
+        function step(S, dt, e, swirl) {
+          var n = S.n, ja = S.dust ? 0 : ia, jb = S.dust ? 0 : ib, XA = S.X[ja], XB = S.X[jb], YA = S.Y[ja], YB = S.Y[jb], off = S.off, vel = S.vel, P = S.P, AS = S.AS, sd = S.sd, ph = S.ph, act = 0, R2 = Rad * Rad, tn = trail.length, pr_ = pres > .001,
+            rest = S.dust ? S.rest : Math.max(S.rest, 1 - imgA), e1 = 1 - e;
+          for (var i = 0; i < n; i++) {
+            var k = i * 2, hx = cx + (XA[i] * e1 + XB[i] * e) * SZ, hy = cy + (YA[i] * e1 + YB[i] * e) * SZ;
+            if (S.dust) { hx += Math.sin(t * .4 + ph[i] * 6.28) * 7; hy += Math.cos(t * .33 + ph[i] * 8.1) * 5 }
+            var ox = off[k], oy = off[k + 1], vx = vel[k], vy = vel[k + 1], px = hx + ox, py = hy + oy, E = 0, ax = 0, ay = 0, lt = .45 + sd[i] * 1.1;
+            if (tn && px > bb[0] && px < bb[2] && py > bb[1] && py < bb[3]) {
+              var f = 0; for (var j = 0; j < tn; j++) { var q = trail[j], dx = px - q.x, dy = py - q.y, d2 = dx * dx + dy * dy; if (d2 < R2 * 4) { var g = Math.exp(-d2 / R2) * q.s; if (g > f) f = g } }
+              E = sstep(.06, .5, f * 1.15);
+            }
+            if (pr_) {
+              var ex = px - mx, ey = py - my, r2 = ex * ex + ey * ey;
+              if (r2 < R2 * 6) { var fm = Math.exp(-r2 / R2) * pres, il = 1 / Math.sqrt(r2 + 1), nx = ex * il, ny = ey * il, a1 = fm * 1.25 * STR * lt, a2 = fm * 1.45 * STR * (.4 + sd[i]); ax += nx * a1 - ny * a2; ay += ny * a1 + nx * a2 }
+            }
+            if (E > .01) {
+              ax += (mvx * lt - vx) * E * .08; ay += (mvy * lt - vy) * E * .08;
+              var qx = px * .0095 + t * .35, qy = py * .0095 - t * .2; curl(qx, qy); var c1 = cvx, c2 = cvy; curl(qx * 2.3 + 7.1, qy * 2.3 + 7.1);
+              ax += (c1 + .5 * cvx) * E * 1.2 * TURB * lt; ay += (c2 + .5 * cvy) * E * 1.2 * TURB * lt;
+            }
+            if (swirl > .002) { ax += Math.sin(py * .012 + t * 2) * swirl * .9 * lt; ay += Math.cos(px * .012 - t * 1.6) * swirl * .9 * lt }
+            var kk = .026 * (.65 + sd[i] * .7) * (1 - swirl * .75); ax -= ox * kk; ay -= oy * kk;
+            vx += ax * dt; vy += ay * dt; var dm = Math.pow(.93 + .025 * E, dt); vx *= dm; vy *= dm; ox += vx * dt; oy += vy * dt;
+            var o2 = ox * ox + oy * oy; if (o2 < .0004 && vx * vx + vy * vy < .0004) { ox = oy = vx = vy = 0 }
+            off[k] = ox; off[k + 1] = oy; vel[k] = vx; vel[k + 1] = vy;
+            P[k] = hx + ox; P[k + 1] = hy + oy; AS[k] = Math.max(E, sstep(.35, 2.5, Math.sqrt(o2)), rest); AS[k + 1] = Math.sqrt(vx * vx + vy * vy);
+            if (E > 0 || o2 > .0004) act++;
+          }
+          S.geo.attributes.position.needsUpdate = true; S.geo.attributes.aAS.needsUpdate = true; return act;
+        }
+
+        function frame(now) {
+          requestAnimationFrame(frame);
+          var ms = now - last; last = now; if (document.hidden) return;
+          var dt = clamp(ms / 16.667, .25, 3); pickSec();
+          var ease = 1 - Math.pow(1 - .22, dt); pmx = mx; pmy = my; mx += (tx - mx) * ease; my += (ty - my) * ease;
+          mvx += (clamp((mx - pmx) / dt, -60, 60) - mvx) * .5; mvy += (clamp((my - pmy) / dt, -60, 60) - mvy) * .5;
+          pres += (pT - pres) * (1 - Math.pow(1 - (pT > pres ? .1 : .035), dt)); if (pres < .001 && !pT) pres = 0;
+          if (introT < 1) introT = Math.min(1, introT + Math.min(ms, 100) / 3200);
+          t += dt / 60 * (1 + pres * 1.6);
+          var T = secTargets[activeSec], lk = 1 - Math.pow(1 - .07, dt); cur.x += (T.x - cur.x) * lk; cur.y += (T.y - cur.y) * lk; cur.s += (T.s - cur.s) * lk; cx = cur.x; cy = cur.y; SZ = cur.s;
+          /* shape morph, queued so a transition always finishes */
+          if (m < 1) m = Math.min(1, m + ms / 1700); else if (want !== ib) { ia = ib; ib = want; m = 0; colDirty = true }
+          var e = m * m * (3 - 2 * m), swirl = rm ? 0 : Math.max(Math.pow(1 - introT, 2), 4 * m * (1 - m) * .9);
+          var tgtImg = (ib === 0 && m >= 1 && introT >= .75) ? 1 : 0; imgA += (tgtImg - imgA) * (1 - Math.pow(1 - .08, dt)); if (Math.abs(tgtImg - imgA) < .003) imgA = tgtImg;
+          imgU.uShow.value = imgA; imgU.uRect.value.set(cx - asp0 * SZ / 2, cy - SZ / 2, asp0 * SZ, SZ);
+          main.dot.value = clamp(SZ * .0085, 2.4, 4.2);
+          if (pres > .02) trail.push({ x: mx, y: my, s: pres });
+          var dec = Math.pow(.955, dt), j; for (j = 0; j < trail.length; j++)trail[j].s *= dec;
+          trail = trail.filter(function (q) { return q.s > .03 }); if (trail.length > 32) trail.splice(0, trail.length - 32);
+          bb = [1e9, 1e9, -1e9, -1e9]; trail.forEach(function (q) { bb[0] = Math.min(bb[0], q.x); bb[1] = Math.min(bb[1], q.y); bb[2] = Math.max(bb[2], q.x); bb[3] = Math.max(bb[3], q.y) });
+          var mg = Rad * 2; bb[0] -= mg; bb[1] -= mg; bb[2] += mg; bb[3] += mg;
+          for (j = 0; j < 32; j++) { var q = trail[j]; trailU[j].set(q ? q.x : 0, q ? q.y : 0, q ? q.s : 0) }
+          if (colDirty) { var ca = main.C[ia], cb = main.C[ib], col = main.col, e1 = 1 - e; for (j = 0; j < col.length; j++)col[j] = ca[j] * e1 + cb[j] * e; main.geo.attributes.aCol.needsUpdate = true; if (m >= 1) colDirty = false }
+          var idle = ib === 0 && m >= 1 && imgA === 1 && !trail.length && pres < .001 && prevAct === 0 && introT >= 1 && Math.abs(T.s - cur.s) < .5 && Math.abs(T.x - cur.x) < .5;
+          main.pts.visible = !idle; if (!idle) prevAct = step(main, dt, e, swirl);
+          step(dust, dt, 0, 0);
+          R.render(scene, cam);
+        }
+        requestAnimationFrame(frame);
+      }
+      var go = false; function run() { if (!go) { go = true; start() } }
+      if (document.fonts && document.fonts.load) { Promise.all([document.fonts.load('800 100px "Barlow Condensed"'), document.fonts.load('700 100px "Barlow Condensed"')]).then(run, run); setTimeout(run, 2500) } else run();
+    })();
+  </script>
+</body>
+
+</html>

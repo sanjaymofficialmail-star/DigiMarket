@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Marketing Course – Plant Green Inertia Pvt. Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<!-- Supabase JS Client & Canvas Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#09060f;
+  --bgt:rgba(9,6,15,0);
+  --fg:#f4f0ff;
+  --mute:rgba(244,240,255,.68);
+  --line:rgba(244,240,255,.16);
+  --acc:#ff3b81;
+  --acc2:#ffa8c5;
+  --onacc:#ffffff;
+  --card:rgba(14,10,24,.88);
+  --field:rgba(244,240,255,.07);
+  --optbg:#140c22;
+  --pad:clamp(20px,3.2vw,48px);
+  --head:'Geist','Helvetica Neue',Arial,sans-serif;
+  --serif:'Instrument Serif','Times New Roman',serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg);scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);transition:background .3s;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+body{background:var(--bg);color:var(--fg);font-family:var(--head);-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .3s,color .3s;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:9}
+a{color:inherit}
+#stage{position:fixed;inset:0;z-index:1;pointer-events:none}
+#stage canvas{display:block;width:100%;height:100%}
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:8;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px var(--pad) 24px;background:linear-gradient(var(--bg) 62%,var(--bgt));transition:background .3s}
+.logo{display:flex;gap:.3rem;text-decoration:none;font-family:"Barlow Condensed",sans-serif;font-weight:800;text-transform:uppercase;line-height:.86;font-size:1.3rem}
+.logo b{display:block}
+.logo i{display:flex;align-items:center;background:var(--acc);color:var(--onacc);font-style:normal;font-size:.6rem;letter-spacing:.14em;writing-mode:vertical-rl;transform:rotate(180deg);padding:.3rem .18rem;transition:background .3s,color .3s}
+.links{display:flex;align-items:center;gap:clamp(16px,2.2vw,32px);list-style:none;padding:0}
+.links a{text-decoration:none;font-size:13.5px;opacity:.75;transition:opacity .2s,color .2s}
+.links a:hover{opacity:1}
+.links .pill{opacity:1;padding:8px 18px;border-radius:99px;background:var(--acc);color:var(--onacc);font-weight:600;transition:transform .2s,background .3s,color .3s}
+.links .pill:hover{transform:translateY(-1px);filter:brightness(1.1)}
+
+/* Theme Icon Only Button */
+.theme-icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s ease;backdrop-filter:blur(8px);padding:0}
+.theme-icon-btn:hover{border-color:var(--acc);color:var(--acc);transform:scale(1.06)}
+
+#prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:2px;z-index:9;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:background .3s}
+main{position:relative;z-index:3}
+.sec{position:relative;min-height:100svh;display:flex;align-items:center;padding:7rem var(--pad) 4rem;pointer-events:none}
+.sec>*{pointer-events:auto}
+.sec.L{justify-content:flex-end}
+.blk{max-width:31rem;width:100%}
+.blk.w{max-width:40rem}
+h2{font-weight:500;font-size:clamp(2.2rem,4.6vw,4.2rem);line-height:.98;letter-spacing:-.04em;margin-bottom:1.2rem}
+.acc{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--acc2);transition:color .3s}
+.line{display:block;overflow:hidden;padding-bottom:.08em}
+.l{display:block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.in .l{transform:none}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .8s,transform .8s;transition-delay:calc(.15s + var(--i,0)*80ms)}
+.in .rv{opacity:1;transform:none}
+p{color:var(--mute);line-height:1.55}
+.rows,.steps,.topics{list-style:none;padding:0;margin-top:1.4rem}
+.rows li,.steps li,.topics li{padding:.9rem 0;border-top:1px solid var(--line)}
+.rows li:last-child,.steps li:last-child{border-bottom:1px solid var(--line)}
+h3{font-weight:500;font-size:1.15rem;letter-spacing:-.02em;margin-bottom:.2rem;color:var(--fg)}
+.rows p,.steps p,.topics p{font-size:.95rem}
+.topics{display:grid;grid-template-columns:1fr 1fr;gap:0 1.6rem}
+.topics li:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
+.steps{counter-reset:s}
+.steps li{display:grid;grid-template-columns:2.4rem 1fr;gap:0 .6rem}
+.steps li::before{counter-increment:s;content:counter(s);grid-row:span 2;font-family:var(--serif);font-style:italic;font-size:1.9rem;line-height:1;color:var(--acc2)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 22px;border:0;border-radius:99px;background:var(--acc);color:var(--onacc);text-decoration:none;font:500 14.5px var(--head);cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.txt{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14.5px;font-weight:500;padding:4px 0;border-bottom:1px solid color-mix(in srgb,var(--fg) 30%,transparent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:1.6rem}
+.hero{flex-direction:column;align-items:stretch;justify-content:flex-start;padding:0;overflow:hidden}
+.bd{position:absolute;left:50%;transform:translate(-50%,-50%);z-index:0;white-space:nowrap;pointer-events:none;user-select:none;font-weight:600;letter-spacing:-.06em;line-height:.8;color:color-mix(in srgb,var(--fg) 5%,transparent)}
+.hint{position:absolute;bottom:clamp(32px,5.2vh,48px);left:50%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:12px;letter-spacing:.06em;opacity:.65;pointer-events:none;transition:opacity .8s}
+.hint::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;animation:p 2.4s ease-in-out infinite}
+body[data-t="1"] .hint{opacity:0}
+@keyframes p{0%,100%{transform:scale(.6);opacity:.45}50%{transform:scale(1);opacity:1}}
+.sp{flex:1 1 auto;min-height:0}
+.hc{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:end;gap:clamp(24px,4vw,72px);padding:0 var(--pad) clamp(28px,3.4vw,52px);pointer-events:none}
+.hc a{pointer-events:auto}
+.eyebrow{font-size:13px;letter-spacing:.03em;opacity:.7;margin-bottom:clamp(14px,1.6vw,22px);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7;flex:none}
+h1{font-weight:500;font-size:clamp(38px,min(6.2vw,11vh),116px);line-height:.92;letter-spacing:-.045em;text-wrap:balance}
+h1 span{display:block}
+.aside{max-width:400px;justify-self:end;padding-bottom:.6em}
+.aside p{font-size:clamp(15px,1.1vw,17px)}
+.aside .price{color:var(--fg);margin-top:.9rem;font-size:1rem}
+.price s,.was{opacity:.5}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1.4rem}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;padding:1.2rem;background:var(--card);backdrop-filter:blur(8px)}
+.card .k{font-size:.85rem;letter-spacing:.04em;color:var(--mute)}
+.card .was{text-decoration:line-through;margin-top:.7rem;font-size:1rem}
+.card .now{font-size:2.5rem;font-weight:500;letter-spacing:-.04em;line-height:1.05}
+.card .off{align-self:flex-start;margin:.5rem 0 .9rem;padding:.2rem .6rem;border-radius:99px;background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--acc2);font-size:.8rem}
+.card ul{list-style:none;padding:0;margin-bottom:1.2rem;display:grid;gap:.45rem;font-size:.92rem;color:var(--mute)}
+.card ul li::before{content:"✓";color:var(--acc);margin-right:.5rem}
+.card .btn{margin-top:auto;justify-content:center}
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.badges span{padding:.35rem .8rem;border:1px solid var(--line);border-radius:99px;font-size:.85rem}
+.foot{margin-top:1.2rem;font-size:.82rem;color:var(--mute)}
+
+/* ==========================================================================
+   Full Footer Section (referenced from Digital Marketing Course (3).html)
+   ========================================================================== */
+footer{position:relative;z-index:3;background:var(--bg);border-top:1px solid var(--line);padding:4rem var(--pad) 5.5rem;transition:background .3s}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:2.5rem}
+.fbrand p{margin:1.1rem 0 1.4rem;max-width:26rem;font-size:.95rem}
+footer h4{font-weight:500;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:1rem}
+footer ul{list-style:none;padding:0;display:grid;gap:.7rem}
+footer nav a{text-decoration:none;font-size:.95rem;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s;padding-bottom:2px;word-break:break-word}
+footer nav a:hover,footer nav a:focus-visible{background-size:100% 1px}
+.fbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem 2rem;margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--mute)}
+.fbar a{color:var(--fg);text-decoration:none}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}.fbrand{grid-column:1/-1}}
+@media(max-width:520px){.fgrid{grid-template-columns:1fr}}
+
+/* Body class to force-hide landing page when application portal is open */
+body.in-application-portal {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+}
+body.in-application-portal html {
+  overflow-y: auto !important;
+  height: auto !important;
+  touch-action: pan-y !important;
+}
+body.in-application-portal main,
+body.in-application-portal footer,
+body.in-application-portal header,
+body.in-application-portal #prog {
+  display: none !important;
+}
+body.in-application-portal #stage {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.in-application-portal #application-portal {
+  display: block !important;
+  position: relative !important;
+  min-height: 100vh !important;
+  overflow: visible !important;
+}
+
+/* ==========================================================================
+   Dedicated Multi-Step Application Portal (#application-portal)
+   Routes to #application/forms as a separate page view
+   ========================================================================== */
+/* Full-Screen Interactive Dynamic Dot Matrix Shader Background (Both Landing Page & Form) */
+#gold-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.38;transition:opacity .5s ease}
+#gold-vignette{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at center,transparent 25%,color-mix(in srgb,var(--bg) 25%,transparent) 70%,color-mix(in srgb,var(--bg) 55%,transparent) 100%);pointer-events:none;transition:background .5s ease}
+
+#application-portal{display:none;position:relative !important;width:100% !important;min-height:100vh !important;z-index:99;background:radial-gradient(circle at center,color-mix(in srgb,var(--bg) 10%,transparent) 0%,color-mix(in srgb,var(--bg) 35%,transparent) 100%);color:var(--fg);padding:5.2rem clamp(1rem,3.2vw,2rem) 4rem !important;transition:background .5s ease;box-sizing:border-box !important;overflow:visible !important;touch-action:pan-y !important;-webkit-overflow-scrolling:touch !important}
+
+/* Concentric Expanding Particle Wave Rings Canvas (Particles, Not Lines) */
+#particle-waves-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+
+.app-back-btn{position:fixed;top:1.2rem;left:clamp(1rem,3vw,2.5rem);z-index:120;display:inline-flex;align-items:center;gap:0.45rem;background:var(--card);border:1px solid var(--line);color:var(--fg);padding:0.55rem 1.15rem;border-radius:99px;font-size:0.82rem;font-weight:600;text-decoration:none;cursor:pointer;backdrop-filter:blur(12px);transition:all .2s ease}
+.app-back-btn:hover{border-color:var(--acc);color:var(--acc);transform:translateX(-2px)}
+
+.app-theme-btn{position:fixed;top:1.2rem;right:clamp(1rem,3vw,2.5rem);z-index:120;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);transition:all .2s ease;padding:0}
+.app-theme-btn:hover{border-color:var(--acc);color:var(--acc);transform:scale(1.08)}
+
+@keyframes modalCardEntrance{
+  0%{opacity:0;transform:scale(0.92) translateY(22px);filter:blur(8px)}
+  100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}
+}
+
+.app-modal-card{position:relative;z-index:3;background:var(--card);backdrop-filter:blur(24px);border-radius:20px;padding:clamp(1.4rem,3.2vw,2.3rem);width:100%;max-width:520px;box-shadow:0 24px 70px rgba(0,0,0,0.55),0 0 45px color-mix(in srgb,var(--acc) 22%,transparent);border:1px solid var(--line);display:flex;flex-direction:column;margin:0 auto !important;animation:modalCardEntrance 0.6s cubic-bezier(.16,1,.3,1) forwards}
+
+.app-header{text-align:center;margin-bottom:1.3rem}
+.app-badge{display:inline-flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--acc) 14%,transparent);border:1px solid color-mix(in srgb,var(--acc) 35%,transparent);color:var(--acc);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:99px;margin-bottom:0.6rem}
+.app-title{font-size:clamp(1.35rem,2.4vw,1.75rem);font-weight:700;letter-spacing:-0.03em;color:var(--fg);margin-bottom:0.3rem}
+.app-title span{color:var(--acc)}
+.app-subtitle{font-size:0.84rem;color:var(--mute);line-height:1.45}
+
+/* Stepper Progress Indicator (3 Steps) */
+.stepper-bar{display:flex;align-items:center;justify-content:space-between;margin:1.1rem 0 1.6rem;position:relative}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2;cursor:default}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--field);border:1px solid var(--line);color:var(--mute);font-size:0.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .25s ease}
+.step-title{font-size:0.72rem;font-weight:600;color:var(--mute);transition:color .25s ease}
+.step-item.active .step-num{background:var(--acc);border-color:var(--acc);color:var(--onacc);box-shadow:0 0 14px color-mix(in srgb,var(--acc) 45%,transparent)}
+.step-item.active .step-title{color:var(--acc)}
+.step-item.done .step-num{background:color-mix(in srgb,var(--acc) 22%,transparent);border-color:var(--acc);color:var(--acc)}
+.step-line{flex:1;height:2px;background:var(--line);margin:0 8px;margin-bottom:16px;transition:background .25s ease}
+.step-line.active{background:var(--acc)}
+
+/* Balanced, Spaced Fields with Compact Heights */
+.form-step-pane{display:none}
+.form-step-pane.active{display:block}
+.app-field-group{display:flex;flex-direction:column;gap:7px;margin-bottom:1.15rem}
+.app-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.15rem}
+.app-label{font-size:0.78rem;color:var(--fg);opacity:.85;font-weight:500;display:flex;justify-content:space-between;letter-spacing:0.01em}
+.app-input{width:100%;height:40px;padding:0 0.95rem;border:1px solid var(--line);border-radius:9px;background:var(--field);color:var(--fg);font:400 0.88rem var(--head);outline:none;transition:border-color .2s,box-shadow .2s}
+.app-input:focus{border-color:var(--acc);box-shadow:0 0 10px color-mix(in srgb,var(--acc) 25%,transparent)}
+select.app-input option{background:var(--optbg);color:var(--fg)}
+
+.mode-toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem;background:var(--field);padding:4px;border-radius:12px;border:1px solid var(--line)}
+.mode-toggle-btn{padding:10px 12px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--mute);font-weight:600;font-size:0.82rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s ease;font-family:inherit}
+.mode-toggle-btn.active{background:color-mix(in srgb,var(--acc) 16%,transparent);border-color:var(--acc);color:var(--acc);box-shadow:0 0 14px color-mix(in srgb,var(--acc) 22%,transparent)}
+.mode-toggle-btn .m-price{font-size:1.06rem;font-weight:700;color:var(--fg)}
+.mode-toggle-btn.active .m-price{color:var(--acc)}
+.mode-toggle-btn .m-tag{font-size:0.7rem;opacity:0.85}
+
+.gpay-top-btn{display:flex;align-items:center;gap:12px;background:#0d111b;border:1.5px solid color-mix(in srgb,#4285F4 60%,var(--acc));border-radius:12px;padding:10px 14px;margin-bottom:1.1rem;text-decoration:none;color:#ffffff;cursor:pointer;transition:all .22s cubic-bezier(.16,1,.3,1);box-shadow:0 4px 18px rgba(66,133,244,0.22),0 0 10px color-mix(in srgb,var(--acc) 18%,transparent)}
+.gpay-top-btn:hover{transform:translateY(-2px);border-color:#4285F4;background:#131826;box-shadow:0 6px 24px rgba(66,133,244,0.36),0 0 16px color-mix(in srgb,var(--acc) 30%,transparent)}
+.gpay-icon-wrap{width:36px;height:36px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
+.gpay-btn-labels{display:flex;flex-direction:column;gap:2px;flex:1;text-align:left}
+.gpay-main-text{font-size:0.9rem;font-weight:700;color:#ffffff;letter-spacing:-0.01em;display:flex;align-items:center;gap:6px}
+.gpay-fast-badge{background:#34A853;color:#ffffff;font-size:0.62rem;font-weight:700;padding:1px 6px;border-radius:99px;text-transform:uppercase;letter-spacing:.06em}
+.gpay-sub-text{font-size:0.74rem;color:rgba(255,255,255,0.72)}
+.gpay-arrow-badge{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.1);color:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s ease,background .2s ease}
+.gpay-top-btn:hover .gpay-arrow-badge{background:#4285F4;transform:translate(2px,-2px)}
+
+.payment-info-box{background:color-mix(in srgb,var(--acc) 7%,transparent);border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);border-radius:12px;padding:0.95rem 1.15rem;margin-bottom:1.25rem;display:grid;gap:0.55rem}
+.pay-row{display:flex;justify-content:space-between;align-items:center;font-size:0.8rem}
+.pay-copy-badge{display:inline-flex;align-items:center;gap:4px;background:color-mix(in srgb,var(--acc) 18%,transparent);border:1px solid color-mix(in srgb,var(--acc) 45%,transparent);color:var(--acc);padding:3px 8px;border-radius:6px;cursor:pointer;font-size:0.74rem;font-weight:600;font-family:monospace;transition:all .2s}
+.pay-copy-badge:hover{background:color-mix(in srgb,var(--acc) 32%,transparent)}
+.file-upload-zone{border:1px dashed color-mix(in srgb,var(--acc) 40%,transparent);border-radius:9px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--field);font-size:0.76rem;color:var(--mute);transition:all .2s;padding:0 0.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-upload-zone:hover{border-color:var(--acc);color:var(--fg)}
+
+.step-btn-row{display:flex;gap:12px;margin-top:1.4rem}
+.step-prev-btn{height:44px;padding:0 20px;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--fg);font:600 0.86rem var(--head);cursor:pointer;transition:all .2s ease}
+.step-prev-btn:hover{border-color:var(--acc);color:var(--acc)}
+.step-next-btn,.app-submit-btn{flex:1;height:44px;border:none;border-radius:10px;background:var(--acc);color:var(--onacc);font-weight:700;font-size:0.9rem;cursor:pointer;box-shadow:0 4px 20px color-mix(in srgb,var(--acc) 40%,transparent);transition:all .2s ease;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+.step-next-btn:hover,.app-submit-btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.app-submit-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.app-success-box{display:none;text-align:center;padding:0.8rem 0}
+
+@media(max-width:1023px){
+  .hc{grid-template-columns:1fr;gap:24px}
+  .aside{justify-self:center;max-width:520px;padding:0;text-align:center}
+  h1{font-size:clamp(38px,min(9.5vw,9vh),92px)}
+}
+
+@media(max-width:899px){
+  /* Fix Mobile Touch Scrolling - Ensure pointer events and pan-y are explicitly active */
+  .sec, .sec.L, .sec > *, main, .blk, .blk *, #application-portal, #application-portal * {
+    pointer-events: auto !important;
+    touch-action: pan-y !important;
+  }
+
+  /* Center All Sections and Add Ample Top Spacing For 3D Particles */
+  .sec, .sec.L, .sec:not(.hero) {
+    min-height: 100svh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    text-align: center !important;
+    padding: max(220px, 32vh) var(--pad) 4.5rem !important;
+  }
+
+  /* Centered block with smooth ambient gradient */
+  .sec .blk, .sec.L .blk, .sec .blk.w, .sec.L .blk.w {
+    max-width: 520px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    background: linear-gradient(to top, var(--bg) 85%, color-mix(in srgb, var(--bg) 60%, transparent) 95%, transparent) !important;
+    padding: 2.8rem var(--pad) 0 !important;
+  }
+
+  .blk h2, .blk h3, .blk p, .blk div {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .blk h2 span.line, .blk h2 span.l {
+    display: block !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Center All List Rows, Steps, and Topics */
+  .rows, .steps, .topics {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    max-width: 440px !important;
+    padding: 0 !important;
+  }
+  .rows li, .topics li {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: .85rem 0 !important;
+  }
+  .steps li {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 1.1rem 0 !important;
+    grid-template-columns: none !important;
+  }
+  .steps li::before {
+    display: block !important;
+    margin: 0 auto 6px !important;
+    text-align: center !important;
+    grid-row: auto !important;
+  }
+  .topics p, .steps p, .rows p {
+    font-size: .88rem;
+    text-align: center !important;
+  }
+
+  /* Center All CTAs and Buttons */
+  .ctas {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 1.8rem auto 0 !important;
+    width: 100% !important;
+  }
+  .ctas a.btn, .ctas button.btn {
+    margin: 0 auto !important;
+  }
+
+  /* Center Cards in Pricing & Enroll */
+  .cards {
+    grid-template-columns: 1fr !important;
+    max-width: 400px;
+    margin: 1.4rem auto 0 !important;
+  }
+  .card {
+    text-align: center !important;
+    align-items: center !important;
+  }
+  .card .off {
+    align-self: center !important;
+  }
+  .card ul {
+    text-align: left;
+    display: inline-grid;
+    margin: 0 auto 1.2rem;
+  }
+  .card .btn {
+    width: 100%;
+  }
+  .badges {
+    justify-content: center !important;
+  }
+
+  /* Center Hero Content */
+  .hero {
+    padding: 0 !important;
+  }
+  .hero .hc {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 0 var(--pad) 2rem !important;
+  }
+  .hero h1 {
+    text-align: center !important;
+  }
+  .hero .eyebrow {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .hero .eyebrow::before {
+    display: none;
+  }
+  .hero .aside {
+    text-align: center !important;
+    max-width: 480px;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  .hero .price {
+    text-align: center !important;
+  }
+}
+@media(max-width:767px){
+  .links li:not(.k):not(.theme-li){display:none}
+  .links{gap:10px !important}
+  .links .pill{padding:7px 14px !important;font-size:12.5px !important}
+  header{padding:14px var(--pad) 16px !important}
+}
+@media(max-width:580px){
+  .app-modal-card{padding:1.4rem 1.1rem !important;border-radius:16px !important}
+  .app-grid-2{grid-template-columns:1fr !important;gap:1.15rem !important}
+  .gpay-top-btn{padding:9px 12px !important}
+  .gpay-main-text{font-size:0.86rem !important}
+  .gpay-sub-text{font-size:0.71rem !important}
+  .pay-row{font-size:0.76rem !important}
+  .cards{grid-template-columns:1fr}.topics{grid-template-columns:1fr}.topics li:nth-last-child(2){border-bottom:0}h1{font-size:clamp(34px,min(12vw,7vh),58px)}
+}
+@media(prefers-reduced-motion:reduce){.hint::before{animation:none}.l,.rv{transition:none;transform:none;opacity:1}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<!-- Full-Screen Interactive Dynamic Dot Matrix Shader Background (Both Landing Page & Form) -->
+<canvas id="gold-canvas" aria-hidden="true"></canvas>
+<div id="gold-vignette" aria-hidden="true"></div>
+<div id="stage" aria-hidden="true"></div>
+
+<!-- Main Top Header -->
+<header id="nav">
+  <a class="logo" href="#top" aria-label="Plant Green Inertia Pvt. Ltd."><span><b>Plant</b><b>Green</b></span><i>Inertia</i></a>
+  <ul class="links">
+    <li><a href="#curriculum">Course</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#company">About</a></li>
+    <li class="theme-li">
+      <button type="button" class="theme-icon-btn" id="theme-toggle-header" aria-label="Toggle light or dark theme" title="Toggle theme">
+        <svg class="theme-icon-moon" id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-icon-sun" id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </li>
+    <li class="k"><a class="pill" href="#application/forms">Enroll now</a></li>
+  </ul>
+</header>
+
+<main>
+  <section class="sec hero in" id="top">
+    <div class="bd" id="bd" aria-hidden="true">skills</div>
+    <div class="hint" id="hint" aria-hidden="true">Move cursor across the logo</div>
+    <div class="sp"></div>
+    <div class="hc" id="hcontent">
+      <div>
+        <p class="eyebrow">Official Training Partner of TN Skills · TNSDC</p>
+        <h1><span>Master digital marketing.</span><span class="acc">Get career-ready.</span></h1>
+      </div>
+      <div class="aside">
+        <p>Industry-aligned training in AI SEO, paid ads, analytics, lead generation and more, taught through hands-on practice.</p>
+        <p class="price">Online <s>₹10,000</s> <b>₹4,999</b> · Offline <s>₹50,000</s> <b>₹14,999</b></p>
+        <div class="ctas"><a class="btn" href="#application/forms">Enroll now</a><a class="txt" href="#curriculum">View course</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="why">
+    <div class="blk">
+      <h2><span class="line"><span class="l">Skills employers</span></span><span class="line"><span class="l acc" style="--d:.1s">actually hire for.</span></span></h2>
+      <p class="rv">Our experiential learning approach bridges the gap between academic education and what the industry needs, so you finish ready to work.</p>
+      <ul class="rows">
+        <li class="rv" style="--i:1"><h3>Industry-aligned syllabus</h3><p>Topics chosen to match how digital marketing is practised today.</p></li>
+        <li class="rv" style="--i:2"><h3>Hands-on practice</h3><p>You learn each skill by using it on real tasks.</p></li>
+        <li class="rv" style="--i:3"><h3>Career readiness</h3><p>Build the knowledge and confidence to start your career.</p></li>
+      </ul>
+      <div class="ctas rv" style="--i:4"><a class="btn" href="#application/forms">Enroll now</a></div>
+    </div>
+  </section>
+
+  <section class="sec L" id="curriculum">
+    <div class="blk w">
+      <h2><span class="line"><span class="l">Everything you need,</span></span><span class="line"><span class="l acc" style="--d:.1s">in one course.</span></span></h2>
+      <ul class="topics">
+        <li class="rv" style="--i:0"><h3>AI SEO</h3><p>Rank higher with AI-assisted research and optimisation.</p></li>
+        <li class="rv" style="--i:1"><h3>Web Marketing</h3><p>Plan and run campaigns across digital channels.</p></li>
+        <li class="rv" style="--i:2"><h3>Content Creation</h3><p>Write, design and publish content that performs.</p></li>
+        <li class="rv" style="--i:3"><h3>Paid Ads</h3><p>Launch and optimise paid campaigns.</p></li>
+        <li class="rv" style="--i:4"><h3>Web Analytics</h3><p>Track results and turn data into decisions.</p></li>
+        <li class="rv" style="--i:5"><h3>Lead Generation</h3><p>Build funnels that turn visitors into enquiries.</p></li>
+        <li class="rv" style="--i:6"><h3>Software Marketing</h3><p>Position and promote software products.</p></li>
+        <li class="rv" style="--i:7"><h3>And more</h3><p>Additional topics across digital marketing.</p></li>
+      </ul>
+      <div class="ctas rv" style="--i:8"><a class="btn" href="#application/forms">Enroll now</a></div>
+    </div>
+  </section>
+
+  <section class="sec" id="learn">
+    <div class="blk">
+      <h2><span class="line"><span class="l">Learn it by</span></span><span class="line"><span class="l acc" style="--d:.1s">doing it.</span></span></h2>
+      <ol class="rows steps">
+        <li class="rv" style="--i:0"><h3>Learn the concept</h3><p>Clear lessons on each topic.</p></li>
+        <li class="rv" style="--i:1"><h3>Practise with tools</h3><p>Apply it with the tools marketers use.</p></li>
+        <li class="rv" style="--i:2"><h3>Build real work</h3><p>Create campaigns and content you can show.</p></li>
+        <li class="rv" style="--i:3"><h3>Launch your career</h3><p>Step into the industry with confidence.</p></li>
+      </ol>
+      <div class="ctas rv" style="--i:4"><a class="btn" href="#application/forms">Enroll now</a></div>
+    </div>
+  </section>
+
+  <section class="sec L" id="pricing">
+    <div class="blk w">
+      <h2><span class="line"><span class="l">Choose how</span></span><span class="line"><span class="l acc" style="--d:.1s">you learn.</span></span></h2>
+      <div class="cards">
+        <div class="card rv" style="--i:0"><span class="k">Online</span><span class="was">₹10,000</span><span class="now">₹4,999</span><span class="off">50% off</span>
+          <ul><li>All topics covered</li><li>Learn from anywhere</li><li>Hands-on practice</li></ul>
+          <a class="btn" href="#application/forms" data-mode="Online">Enroll online</a></div>
+        <div class="card rv" style="--i:1"><span class="k">Offline</span><span class="was">₹50,000</span><span class="now">₹14,999</span><span class="off">70% off</span>
+          <ul><li>All topics covered</li><li>Classroom training</li><li>Hands-on practice</li></ul>
+          <a class="btn" href="#application/forms" data-mode="Offline">Enroll offline</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="company">
+    <div class="blk">
+      <h2><span class="line"><span class="l">About</span></span><span class="line"><span class="l acc" style="--d:.1s">Plant Green Inertia.</span></span></h2>
+      <p class="rv">Plant Green Inertia Pvt. Ltd. is an Official Training Partner of TN Skills, Tamil Nadu Skill Development Corporation (TNSDC), dedicated to delivering industry-aligned skill development programs that enhance students’ knowledge, practical competencies, and career readiness. Our experiential learning approach bridges the gap between academic education and industry requirements, empowering learners with future-ready skills.</p>
+      <div class="badges rv" style="--i:1"><span>Official Training Partner</span><span>TN Skills</span><span>TNSDC</span></div>
+      <div class="ctas rv" style="--i:2"><a class="btn" href="#application/forms">Enroll now</a></div>
+    </div>
+  </section>
+
+  <!-- Section 7: Concise Course Info in Form Section (Short & High Impact) -->
+  <section class="sec L" id="enroll">
+    <div class="blk" style="max-width:30rem">
+      <h2><span class="line"><span class="l">Next cohort</span></span><span class="line"><span class="l acc" style="--d:.1s">now open.</span></span></h2>
+      <p class="rv" style="margin-bottom:1rem;font-size:0.95rem">Tamil Nadu's premier government-accredited digital marketing certification.</p>
+      
+      <ul class="rows rv" style="--i:1;margin-bottom:1.4rem">
+        <li style="padding:0.6rem 0">
+          <h3 style="font-size:1.02rem;color:var(--acc)">TN Skills &amp; TNSDC Partner</h3>
+          <p style="font-size:0.88rem">Government-recognized qualification with placement assistance.</p>
+        </li>
+        <li style="padding:0.6rem 0">
+          <h3 style="font-size:1.02rem;color:var(--acc)">100+ Hours Live Training</h3>
+          <p style="font-size:0.88rem">Hands-on AI SEO, Meta Ads, Google Ads &amp; conversion funnels.</p>
+        </li>
+        <li style="padding:0.6rem 0">
+          <h3 style="font-size:1.02rem;color:var(--acc)">Online ₹4,999 · Offline ₹14,999</h3>
+          <p style="font-size:0.88rem">Limited seats per cohort. Interactive batches starting soon.</p>
+        </li>
+      </ul>
+
+      <div class="ctas rv" style="--i:2">
+        <a class="btn" href="#application/forms" id="btn-goto-application" style="height:46px;padding:0 26px;font-size:14.5px;box-shadow:0 4px 20px color-mix(in srgb,var(--acc) 35%,transparent)">
+          Open Application Form &rarr;
+        </a>
+      </div>
+      <p class="foot">© Plant Green Inertia Pvt. Ltd. · Official Training Partner of TN Skills, TNSDC</p>
+    </div>
+  </section>
+</main>
+
+<!-- Full Structured Footer -->
+<footer id="footer">
+  <div class="fgrid">
+    <div class="fbrand">
+      <a class="logo" href="#top" aria-label="Plant Green Inertia Pvt. Ltd."><span><b>Plant</b><b>Green</b></span><i>Inertia</i></a>
+      <p>Plant Green Inertia Pvt. Ltd. — industry-aligned digital marketing training, delivered as an Official Training Partner of TN Skills, TNSDC.</p>
+      <a class="btn" href="#application/forms">Enroll now</a>
+    </div>
+    <nav aria-label="Course">
+      <h4>Course</h4>
+      <ul><li><a href="#curriculum">Topics covered</a></li><li><a href="#learn">How you learn</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#application/forms">Enroll</a></li></ul>
+    </nav>
+    <nav aria-label="Company">
+      <h4>Company</h4>
+      <ul><li><a href="#company">About us</a></li><li><a href="#why">Why choose us</a></li><li><a href="#company">Training partnership</a></li><li><a href="#application/forms">Contact us</a></li></ul>
+    </nav>
+    <nav aria-label="Partner and contact">
+      <h4>Partner &amp; contact</h4>
+      <ul><li><a href="https://www.tnskill.tn.gov.in" target="_blank" rel="noopener">TN Skills (TNSDC) ↗</a></li><li><a href="mailto:hello@plantgreeninertia.com">hello@plantgreeninertia.com</a></li></ul>
+    </nav>
+  </div>
+  <div class="fbar"><span>© 2026 Plant Green Inertia Pvt. Ltd. All rights reserved.</span><span>Official Training Partner of TN Skills, TNSDC</span><a href="#top">Back to top ↑</a></div>
+</footer>
+
+<!-- ==========================================================================
+     NEW SECTION: Fullpage Dedicated Application Portal at #application/forms
+     Features 3-Step Pagination: 1. Personal Details, 2. Course Details, 3. Payment
+     ========================================================================== -->
+<div id="application-portal">
+  <!-- Concentric Expanding Particle Wave Rings Canvas (Particles, Not Lines) -->
+  <canvas id="particle-waves-canvas" aria-hidden="true"></canvas>
+
+  <a href="#enroll" class="app-back-btn" id="app-back-btn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Back to Overview</span>
+  </a>
+
+  <!-- Dedicated Theme Toggle Button inside Form Portal -->
+  <button type="button" class="app-theme-btn" id="app-theme-toggle" aria-label="Toggle light or dark theme" title="Toggle theme">
+    <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </button>
+
+  <div class="app-modal-card">
+    <div class="app-header">
+      <div class="app-badge">Official Training Partner · TN Skills, TNSDC</div>
+      <h2 class="app-title">Course Admission <span>Application</span></h2>
+      <p class="app-subtitle">Complete 3 simple steps to secure your batch credentials.</p>
+    </div>
+
+    <!-- 3-Step Pagination Stepper -->
+    <div class="stepper-bar">
+      <div class="step-item active" id="step-tab-1">
+        <span class="step-num">1</span>
+        <span class="step-title">Personal</span>
+      </div>
+      <div class="step-line" id="step-line-1"></div>
+      <div class="step-item" id="step-tab-2">
+        <span class="step-num">2</span>
+        <span class="step-title">Course</span>
+      </div>
+      <div class="step-line" id="step-line-2"></div>
+      <div class="step-item" id="step-tab-3">
+        <span class="step-num">3</span>
+        <span class="step-title">Payment</span>
+      </div>
+    </div>
+
+    <form id="app-form">
+      <!-- STEP 1: Personal Details -->
+      <div class="form-step-pane active" id="step-pane-1">
+        <div class="app-field-group">
+          <label class="app-label" for="inp-name">Full Student Name *</label>
+          <input class="app-input" id="inp-name" name="name" placeholder="e.g. Sanjay M" required autocomplete="name">
+        </div>
+
+        <div class="app-grid-2">
+          <div class="app-field-group" style="margin-bottom:0">
+            <label class="app-label" for="inp-phone">WhatsApp Number *</label>
+            <input class="app-input" id="inp-phone" name="phone" type="tel" placeholder="98765 43210" required autocomplete="tel">
+          </div>
+          <div class="app-field-group" style="margin-bottom:0">
+            <label class="app-label" for="inp-email">Email Address *</label>
+            <input class="app-input" id="inp-email" name="email" type="email" placeholder="name@email.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="app-field-group" style="margin-top:1.15rem">
+          <label class="app-label" for="inp-address">City / Location *</label>
+          <input class="app-input" id="inp-address" name="address" placeholder="e.g. Chennai, Tamil Nadu" required>
+        </div>
+
+        <div class="step-btn-row">
+          <button type="button" class="step-next-btn" id="btn-to-step-2">
+            <span>Next: Course Details &rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Course Details -->
+      <div class="form-step-pane" id="step-pane-2">
+        <div class="app-label" style="margin-bottom:7px">Select Learning Format *</div>
+        <div class="mode-toggle-group">
+          <button type="button" class="mode-toggle-btn active" id="btn-mode-online" data-target-mode="Online">
+            <span class="m-price">₹4,999</span>
+            <span class="m-tag">Online Batch (50% Off)</span>
+          </button>
+          <button type="button" class="mode-toggle-btn" id="btn-mode-offline" data-target-mode="Offline">
+            <span class="m-price">₹14,999</span>
+            <span class="m-tag">Offline Classroom (70% Off)</span>
+          </button>
+        </div>
+
+        <div class="app-field-group">
+          <label class="app-label" for="inp-college">College / University Name *</label>
+          <input class="app-input" id="inp-college" name="college" placeholder="e.g. Anna University / Loyola" required>
+        </div>
+
+        <div class="app-grid-2">
+          <div class="app-field-group" style="margin-bottom:0">
+            <label class="app-label" for="sel-degree">Highest Degree *</label>
+            <select class="app-input" id="sel-degree">
+              <option value="UG">Undergraduate (UG)</option>
+              <option value="PG">Postgraduate (PG)</option>
+              <option value="Diploma">Diploma / HSC</option>
+              <option value="Working Professional">Working Professional</option>
+            </select>
+          </div>
+          <div class="app-field-group" style="margin-bottom:0">
+            <label class="app-label" for="sel-status">Academic Status *</label>
+            <select class="app-input" id="sel-status">
+              <option value="Pursuing">Pursuing</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="step-btn-row">
+          <button type="button" class="step-prev-btn" id="btn-back-to-1">&larr; Back</button>
+          <button type="button" class="step-next-btn" id="btn-to-step-3">
+            <span>Next: Payment &rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Payment Verification & Confirmation -->
+      <div class="form-step-pane" id="step-pane-3">
+        <!-- Prominent Open in GPay Action at Top -->
+        <a id="btn-open-gpay" href="upi://pay?pa=lokeshlaven-2@okicici&pn=Laven%20Lokesh%20Barani&am=4999&cu=INR&tn=Plant%20Green%20Course%20Fee" class="gpay-top-btn" target="_blank" rel="noopener" title="Open in Google Pay (GPay)">
+          <div class="gpay-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.13C3.26 21.36 7.33 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.13z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.13c.95-2.83 3.6-4.96 6.72-4.96z"/>
+            </svg>
+          </div>
+          <div class="gpay-btn-labels">
+            <div class="gpay-main-text">
+              <span>Open in Google Pay (GPay)</span>
+              <span class="gpay-fast-badge">Direct Pay</span>
+            </div>
+            <div class="gpay-sub-text" id="gpay-btn-amt">Pay ₹4,999 directly via UPI / GPay app &rarr;</div>
+          </div>
+          <div class="gpay-arrow-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </div>
+        </a>
+
+        <div class="payment-info-box">
+          <div class="pay-row">
+            <span style="color:var(--acc);font-weight:700">UPI / GPay Payment</span>
+            <span style="font-weight:700;color:var(--fg);font-size:0.92rem" id="pay-amount-display">Payable: ₹4,999</span>
+          </div>
+          <div class="pay-row">
+            <span style="color:var(--mute)">UPI ID: <b style="color:var(--fg)">lokeshlaven-2@okicici</b></span>
+            <span class="pay-copy-badge" data-copy="lokeshlaven-2@okicici">Copy UPI</span>
+          </div>
+          <div class="pay-row">
+            <span style="color:var(--mute)">GPay / PhonePe: <b style="color:var(--fg)">8220699083</b></span>
+            <span class="pay-copy-badge" data-copy="8220699083">Copy No.</span>
+          </div>
+          <div class="pay-row" style="font-size:0.72rem;color:var(--mute)">
+            Recipient: Mr. Laven Lokesh Barani
+          </div>
+        </div>
+
+        <div class="app-field-group">
+          <label class="app-label" for="inp-utr">12-Digit UPI / UTR Ref Number *</label>
+          <input class="app-input" id="inp-utr" name="utr" placeholder="e.g. 428901234567" required maxlength="25">
+        </div>
+
+        <div class="app-field-group" style="margin-bottom:0.4rem">
+          <label class="app-label" for="inp-screenshot">
+            <span>Payment Proof Screenshot (Upload) *</span>
+            <span style="opacity:0.6;font-size:0.72rem">No login needed</span>
+          </label>
+          <input type="file" id="inp-screenshot" accept="image/*" style="display:none">
+          <label class="file-upload-zone" for="inp-screenshot" id="screenshot-label">
+            <span id="upload-hint-text">📎 Attach payment screenshot file</span>
+          </label>
+        </div>
+
+        <div style="font-size:0.75rem;color:var(--mute);display:flex;align-items:center;gap:8px;margin:0.8rem 0 1rem">
+          <input type="checkbox" id="chk-refund" checked required style="width:15px;height:15px;accent-color:var(--acc);cursor:pointer">
+          <label for="chk-refund" style="cursor:pointer">Fee is non-refundable once batch seat is allocated.</label>
+        </div>
+
+        <div class="step-btn-row">
+          <button type="button" class="step-prev-btn" id="btn-back-to-2">&larr; Back</button>
+          <button class="app-submit-btn" type="submit" id="btn-submit-app">
+            <span>Submit Application ✓</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Instant Confirmation Card -->
+    <div class="app-success-box" id="app-success-box">
+      <div style="width:52px;height:52px;border-radius:50%;background:color-mix(in srgb,var(--acc) 15%,transparent);border:2px solid var(--acc);display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;color:var(--acc);font-size:1.6rem">✓</div>
+      <h3 style="font-size:1.3rem;color:var(--fg);margin-bottom:0.2rem">Application Submitted!</h3>
+      <p style="font-size:0.82rem;color:var(--mute);margin-bottom:1rem">Your admission details are saved in our verified admissions ledger.</p>
+      
+      <div style="background:color-mix(in srgb,var(--acc) 6%,transparent);border:1px dashed color-mix(in srgb,var(--acc) 35%,transparent);padding:0.85rem;border-radius:10px;margin-bottom:1.1rem;text-align:left">
+        <div style="font-size:0.7rem;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px">Application Reference ID</div>
+        <div style="font-size:1.2rem;font-weight:700;color:var(--acc);letter-spacing:.05em" id="conf-app-id">PGI-DM-12345</div>
+        <div style="font-size:0.78rem;color:var(--mute);margin-top:6px" id="conf-summary-text">Online Batch · ₹4,999 · Status: Pending UTR Verification</div>
+      </div>
+
+      <a id="conf-wa-btn" href="https://wa.me/918220699083?text=Hi,%20I%20have%20submitted%20my%20application%20for%20the%20Digital%20Marketing%20Course." target="_blank" class="app-submit-btn" style="text-decoration:none;background:#25D366;color:#fff;margin-bottom:0.6rem;height:40px">
+        <span>Notify Coordinator on WhatsApp</span>
+      </a>
+      <a href="#top" class="txt" style="display:inline-block;margin-top:0.3rem;color:var(--mute);font-size:0.8rem">Back to Course Home</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var stage=$("stage"),navEl=$("nav"),hc=$("hcontent"),bd=$("bd"),hintEl=$("hint"),prog=$("prog");
+var secs=[].slice.call(document.querySelectorAll(".sec"));
+var coarse=matchMedia("(pointer: coarse)").matches,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var N=(coarse||innerWidth<700)?8000:15000,F='"Barlow Condensed"';
+var MAP=[0,1,2,3,5,0,4],SIDE=["c","R","L","R","L","R","L"];
+
+function hx(h){var n=parseInt(h.slice(1),16);return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]}
+
+/* User Themes: Violet Pulse (Dark) and Clean Light (White) */
+var THEMES=[
+{n:"Violet Pulse (Dark)",dark:1,bg:"#09060f",fg:"#f4f0ff",mute:"rgba(244,240,255,.68)",line:"rgba(244,240,255,.16)",acc:"#ff3b81",acc2:"#ffa8c5",onacc:"#ffffff",card:"rgba(14,10,24,.88)",field:"rgba(244,240,255,.07)",optbg:"#140c22",
+ p:{l:["#f6f0ff","#b48cff","#5a2bd8"],hl:"rgba(255,255,255,.16)",hd:"rgba(40,10,80,.25)",a:["#ff3b81","#d1176f"],b:["#c8aaff","#6a3be0"],pale:"#efe6ff",mid:"#9a6bff",deep:"#7b4df0",pur:"#e66bd0",acc:"#ff3b81",rim:"#ffd0e6",dc:["#9a6bff","#ff3b81"],sw:["#b48cff","#ff3b81","#efe6ff"]}},
+{n:"Clean Light (White)",dark:0,bg:"#ffffff",fg:"#0e1220",mute:"rgba(14,18,32,.66)",line:"rgba(14,18,32,.14)",acc:"#ff5722",acc2:"#d84315",onacc:"#ffffff",card:"rgba(255,255,255,.94)",field:"rgba(14,18,32,.05)",optbg:"#ffffff",
+ p:{l:["#1b2347","#3548c8","#6f8bff"],hl:"rgba(255,255,255,.1)",hd:"rgba(255,255,255,.12)",a:["#ff7a59","#e03a14"],b:["#6f8bff","#2b3fc4"],pale:"#a9b8ff",mid:"#4f6bff",deep:"#3348d6",pur:"#8a5cff",acc:"#ff5722",rim:"#ffc9b5",dc:["#4f6bff","#ff5722"],sw:["#3548c8","#ff5722","#a9b8ff"]}},
+{n:"Midnight Coral",dark:1,bg:"#070912",fg:"#eef1ff",mute:"rgba(238,241,255,.68)",line:"rgba(238,241,255,.16)",acc:"#ff7a59",acc2:"#ffb199",onacc:"#1a0a05",card:"rgba(7,9,18,.8)",field:"rgba(238,241,255,.06)",optbg:"#0d1020",
+ p:{l:["#f2f5ff","#8da2ff","#3b2fc9"],hl:"rgba(255,255,255,.16)",hd:"rgba(10,10,60,.22)",a:["#ffa56e","#e8452c"],b:["#9fb8ff","#3a4fd8"],pale:"#e4eaff",mid:"#6f8bff",deep:"#5b7cff",pur:"#c070d8",acc:"#ff7a59",rim:"#ffd6c2",dc:["#7388ff","#ff7a59"],sw:["#8da2ff","#ff7a59","#e4eaff"]}}
+];
+
+// Detect User's Default Browser Theme Preference
+var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+var ti = prefersDark ? 0 : 1;
+try {
+  var saved = localStorage.getItem("pgi-theme");
+  if (saved !== null && THEMES[+saved]) ti = +saved;
+} catch(e){}
+
+var P = THEMES[ti].p;
+function setCss(th){
+  var r = document.documentElement.style, b = hx(th.bg);
+  r.setProperty("--bg", th.bg);
+  r.setProperty("--bgt", "rgba(" + Math.round(b[0]*255) + "," + Math.round(b[1]*255) + "," + Math.round(b[2]*255) + ",0)");
+  ["fg","mute","line","acc","acc2","onacc","card","field","optbg"].forEach(function(k){ r.setProperty("--"+k, th[k]); });
+  r.colorScheme = th.dark ? "dark" : "light";
+  
+  // Update theme icons everywhere (both header and application form)
+  document.querySelectorAll(".theme-icon-moon").forEach(function(el){
+    el.style.display = th.dark ? "none" : "block";
+  });
+  document.querySelectorAll(".theme-icon-sun").forEach(function(el){
+    el.style.display = th.dark ? "block" : "none";
+  });
+}
+setCss(THEMES[ti]);
+
+// Listen to browser theme changes if not locked by user
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
+    try {
+      if (!localStorage.getItem("pgi-theme-custom")) {
+        pick(e.matches ? 0 : 1);
+      }
+    } catch(err){}
+  });
+}
+
+function fillDust(DC){var a=hx(P.dc[0]),b=hx(P.dc[1]);for(var i=0;i<DC.length/3;i++){var q=Math.random();DC[i*3]=a[0]+(b[0]-a[0])*q;DC[i*3+1]=a[1]+(b[1]-a[1])*q;DC[i*3+2]=a[2]+(b[2]-a[2])*q}}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function sstep(a,b,x){var t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)}
+function rnd(n){var a=new Float32Array(n);for(var i=0;i<n;i++)a[i]=Math.random();return a}
+function mk(w,h){var c=document.createElement("canvas");c.width=w;c.height=h;return c}
+function lg(x,x0,y0,x1,y1,stops){var g=x.createLinearGradient(x0,y0,x1,y1);stops.forEach(function(s,i){g.addColorStop(i/(stops.length-1),s)});return g}
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+
+function buildLogo(){
+  var c=mk(10,10),x=c.getContext("2d");x.font="800 300px "+F;
+  var wm=Math.max(x.measureText("PLANT").width,x.measureText("GREEN").width),pad=40,bw=150,gap=30,bx=pad+wm+gap;
+  c.width=Math.ceil(bx+bw+pad);c.height=600;x=c.getContext("2d");x.font="800 300px "+F;
+  x.fillStyle=lg(x,0,80,0,560,P.l);x.fillText("PLANT",pad,290);x.fillText("GREEN",pad,560);
+  x.globalCompositeOperation="source-atop";
+  for(var i=-600;i<c.width;i+=7){x.strokeStyle=(i/7%2)?P.hl:P.hd;x.lineWidth=1.5;x.beginPath();x.moveTo(i,600);x.lineTo(i+360,0);x.stroke()}
+  var r=x.createRadialGradient(c.width*.28,170,0,c.width*.28,170,360);r.addColorStop(0,"rgba(255,255,255,.4)");r.addColorStop(1,"rgba(255,255,255,0)");
+  x.fillStyle=r;x.fillRect(0,0,c.width,600);x.globalCompositeOperation="source-over";
+  x.fillStyle=lg(x,bx,0,bx+bw,0,P.a);x.fillRect(bx,80,bw,480);
+  x.save();x.translate(bx+bw/2,320);x.rotate(-Math.PI/2);x.font="700 128px "+F;x.textAlign="center";x.textBaseline="middle";
+  x.globalCompositeOperation="destination-out";x.fillText("INERTIA",0,4);x.restore();return c;
+}
+function buildGrowth(){
+  var c=mk(560,720),x=c.getContext("2d"),h=[120,200,280,370,460],i;
+  for(i=0;i<5;i++){x.fillStyle=lg(x,0,690-h[i],0,690,(i===4?P.a:P.b));rr(x,50+i*100,690-h[i],78,h[i],14);x.fill()}
+  var pts=[[90,500],[190,420],[290,340],[390,250],[490,150]];
+  x.strokeStyle=P.acc;x.lineWidth=22;x.lineCap="round";x.lineJoin="round";x.beginPath();x.moveTo(pts[0][0],pts[0][1]);for(i=1;i<5;i++)x.lineTo(pts[i][0],pts[i][1]);x.stroke();
+  var a=Math.atan2(pts[4][1]-pts[3][1],pts[4][0]-pts[3][0]);x.save();x.translate(pts[4][0],pts[4][1]);x.rotate(a);x.fillStyle=P.acc;x.beginPath();x.moveTo(52,0);x.lineTo(-18,-44);x.lineTo(-18,44);x.closePath();x.fill();x.restore();
+  return c;
+}
+function buildSeo(){
+  var c=mk(560,720),x=c.getContext("2d");
+  x.strokeStyle=lg(x,60,100,420,460,[P.l[1],P.pur]);x.lineWidth=54;x.beginPath();x.arc(240,330,170,0,6.283);x.stroke();
+  x.strokeStyle=P.acc;x.lineWidth=72;x.lineCap="round";x.beginPath();x.moveTo(365,455);x.lineTo(500,600);x.stroke();
+  x.font="800 190px "+F;x.fillStyle=P.pale;x.textAlign="center";x.textBaseline="middle";x.fillText("SEO",240,340);return c;
+}
+function buildMega(){
+  var c=mk(640,720),x=c.getContext("2d");
+  x.fillStyle=P.mid;rr(x,70,320,110,120,20);x.fill();
+  x.fillStyle=lg(x,150,0,380,0,P.a);x.beginPath();x.moveTo(150,330);x.lineTo(380,180);x.lineTo(380,520);x.lineTo(150,430);x.closePath();x.fill();
+  x.fillStyle=P.rim;x.beginPath();x.ellipse(380,350,30,170,0,0,6.283);x.fill();
+  x.fillStyle=P.deep;rr(x,165,425,60,170,16);x.fill();
+  x.strokeStyle=P.b[0];x.lineWidth=26;x.lineCap="round";
+  [110,170,230].forEach(function(r){x.beginPath();x.arc(395,350,r+40,-.55,.55);x.stroke()});
+  return c;
+}
+function buildFunnel(){
+  var c=mk(560,720),x=c.getContext("2d"),L=[[520,420,60,200],[400,300,215,200],[280,200,370,200],[110,110,525,150]],cols=[[P.b[0],P.mid],[P.mid,P.deep],[P.pur,P.acc],[P.a[0],P.a[1]]];
+  L.forEach(function(l,i){var cx=280,y=l[2],h=i===3?150:130;x.fillStyle=lg(x,0,y,0,y+h,cols[i]);x.beginPath();x.moveTo(cx-l[0]/2,y);x.lineTo(cx+l[0]/2,y);x.lineTo(cx+l[1]/2,y+h);x.lineTo(cx-l[1]/2,y+h);x.closePath();x.fill()});
+  return c;
+}
+function buildTarget(){
+  var c=mk(560,720),x=c.getContext("2d"),cs=[P.mid,P.pale,P.mid,P.pale,P.acc],rs=[250,200,150,100,50];
+  rs.forEach(function(r,i){x.fillStyle=cs[i];x.beginPath();x.arc(280,380,r,0,6.283);x.fill()});
+  x.strokeStyle=P.a[1];x.lineWidth=16;x.lineCap="round";x.beginPath();x.moveTo(280,380);x.lineTo(490,170);x.stroke();
+  x.fillStyle=P.a[1];x.beginPath();x.moveTo(520,140);x.lineTo(470,150);x.lineTo(500,180);x.closePath();x.fill();
+  x.beginPath();x.moveTo(520,140);x.lineTo(505,95);x.lineTo(470,130);x.closePath();x.fill();
+  x.beginPath();x.moveTo(520,140);x.lineTo(565,155);x.lineTo(530,185);x.closePath();x.fill();return c;
+}
+function sample(cv,sw){
+  var asp=cv.width/cv.height,sh=Math.round(sw/asp),c=mk(sw,sh),x=c.getContext("2d");x.drawImage(cv,0,0,sw,sh);
+  var d=x.getImageData(0,0,sw,sh).data,cand=[],xx,y,i;
+  for(y=0;y<sh;y++)for(xx=0;xx<sw;xx++){i=(y*sw+xx)*4;if(d[i+3]>110)cand.push(i,xx,y)}
+  var X=new Float32Array(N),Y=new Float32Array(N),C=new Float32Array(N*3),m=cand.length/3;
+  for(var k=0;k<N;k++){var j=Math.floor(Math.random()*m)*3;i=cand[j];X[k]=((cand[j+1]+Math.random())/sw-.5)*asp;Y[k]=(cand[j+2]+Math.random())/sh-.5;C[k*3]=d[i]/255;C[k*3+1]=d[i+1]/255;C[k*3+2]=d[i+2]/255}
+  return {X:X,Y:Y,C:C,asp:asp};
+}
+
+function start(){
+  var logoCv=buildLogo(),shapes=[sample(logoCv,320),sample(buildGrowth(),240),sample(buildSeo(),240),sample(buildMega(),260),sample(buildFunnel(),240),sample(buildTarget(),240)],asp0=shapes[0].asp;
+  var nd=coarse?500:1100,DX=new Float32Array(nd),DY=new Float32Array(nd),DC=new Float32Array(nd*3);
+  for(var i=0;i<nd;i++){DX[i]=(Math.random()-.5)*1.7;DY[i]=(Math.random()-.5)*1.5}fillDust(DC);
+
+  var pr=Math.min(devicePixelRatio||1,1.5);
+  var R=new THREE.WebGLRenderer({alpha:true,antialias:false,powerPreference:"high-performance"});
+  R.setPixelRatio(pr);R.setClearColor(0x000000,0);stage.appendChild(R.domElement);
+  var scene=new THREE.Scene(),cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+
+  var tex=new THREE.CanvasTexture(logoCv);tex.flipY=false;tex.minFilter=THREE.LinearMipmapLinearFilter;
+  var trailU=[];for(var i=0;i<32;i++)trailU.push(new THREE.Vector3());
+  var imgU={uTex:{value:tex},uRes:{value:new THREE.Vector2(1,1)},uDpr:{value:pr},uR:{value:200},uShow:{value:0},uRect:{value:new THREE.Vector4()},uT:{value:trailU}};
+  var img=new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.RawShaderMaterial({uniforms:imgU,transparent:true,depthTest:false,premultipliedAlpha:true,
+    vertexShader:"attribute vec3 position;void main(){gl_Position=vec4(position.xy,0.,1.);}",
+    fragmentShader:"precision highp float;uniform sampler2D uTex;uniform vec2 uRes;uniform float uDpr,uR,uShow;uniform vec4 uRect;uniform vec3 uT[32];void main(){vec2 px=vec2(gl_FragCoord.x,uRes.y*uDpr-gl_FragCoord.y)/uDpr;vec2 uv=(px-uRect.xy)/uRect.zw;if(uShow<.002||uv.x<0.||uv.x>1.||uv.y<0.||uv.y>1.){gl_FragColor=vec4(0.);return;}float f=0.;for(int i=0;i<32;i++){vec2 d=px-uT[i].xy;f=max(f,exp(-dot(d,d)/(uR*uR))*uT[i].z);}float E=smoothstep(.06,.5,f*1.15);vec4 t=texture2D(uTex,uv);float A=t.a*(1.-E)*uShow;gl_FragColor=vec4(t.rgb*A,A);}"}));
+  img.frustumCulled=false;img.renderOrder=0;scene.add(img);
+
+  function makeSet(X,Y,C,rest,dust,order){
+    var n=X[0].length,S={n:n,X:X,Y:Y,C:C,sd:rnd(n),ph:rnd(n),off:new Float32Array(n*2),vel:new Float32Array(n*2),P:new Float32Array(n*2),AS:new Float32Array(n*2),col:new Float32Array(C[0]),rest:rest,dust:dust,dot:{value:2},res:new THREE.Vector2(1,1)};
+    var geo=new THREE.BufferGeometry();
+    geo.setAttribute("position",new THREE.BufferAttribute(S.P,2).setUsage(THREE.DynamicDrawUsage));
+    geo.setAttribute("aCol",new THREE.BufferAttribute(S.col,3).setUsage(THREE.DynamicDrawUsage));
+    geo.setAttribute("aAS",new THREE.BufferAttribute(S.AS,2).setUsage(THREE.DynamicDrawUsage));
+    S.geo=geo;
+    S.pts=new THREE.Points(geo,new THREE.RawShaderMaterial({uniforms:{uRes:{value:S.res},uPx:{value:pr},uDot:S.dot},transparent:true,depthTest:false,premultipliedAlpha:true,
+      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.2+.08,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=uDot*uPx*(1.+aAS.y*.12);}",
+      fragmentShader:"precision highp float;varying vec3 vC;varying float vA;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,.28,d)*vA;if(a<.004)discard;gl_FragColor=vec4(vC*a,a);}"}));
+    S.pts.frustumCulled=false;S.pts.renderOrder=order;scene.add(S.pts);return S;
+  }
+  var main=makeSet(shapes.map(function(s){return s.X}),shapes.map(function(s){return s.Y}),shapes.map(function(s){return s.C}),0,false,1);
+  var dust=makeSet([DX],[DY],[DC],.42,true,2);
+
+  // Theme Toggle Wiring for Header and Application Portal
+  var themeNavBtn = $("theme-toggle-header"), appThemeToggle = $("app-theme-toggle");
+  function toggleTheme(){
+    var next = (ti === 0) ? 1 : 0;
+    pick(next);
+  }
+  if(themeNavBtn) themeNavBtn.onclick = toggleTheme;
+  if(appThemeToggle) appThemeToggle.onclick = toggleTheme;
+
+  function pick(k){
+    ti=k;P=THEMES[k].p;setCss(THEMES[k]);
+    try{
+      localStorage.setItem("pgi-theme",k);
+      localStorage.setItem("pgi-theme-custom","1");
+    }catch(e){}
+    thBtns.forEach(function(b,j){b.classList.toggle("on",j===k)});
+    setTimeout(rebuild,30);
+    if(window.updateGoldShaderTheme) window.updateGoldShaderTheme(THEMES[k]);
+  }
+  window.pickTheme = pick;
+
+  function rebuild(){
+    var lc=buildLogo(),sh=[sample(lc,320),sample(buildGrowth(),240),sample(buildSeo(),240),sample(buildMega(),260),sample(buildFunnel(),240),sample(buildTarget(),240)];
+    sh.forEach(function(s,k){main.X[k].set(s.X);main.Y[k].set(s.Y);main.C[k].set(s.C)});
+    tex.image=lc;tex.needsUpdate=true;
+    if(m>=1)main.col.set(main.C[ib]);else colDirty=true;
+    main.geo.attributes.aCol.needsUpdate=true;
+    fillDust(DC);dust.col.set(DC);dust.geo.attributes.aCol.needsUpdate=true;
+  }
+
+  function hs(a,b){var s=Math.sin(a*127.1+b*311.7)*43758.5453;return s-Math.floor(s)}
+  function vn(a,b){var ix=Math.floor(a),iy=Math.floor(b),fx=a-ix,fy=b-iy,ux=fx*fx*fx*(fx*(fx*6-15)+10),uy=fy*fy*fy*(fy*(fy*6-15)+10),p=hs(ix,iy),q=hs(ix+1,iy),r=hs(ix,iy+1),s=hs(ix+1,iy+1);return (p+(q-p)*ux)*(1-uy)+(r+(s-r)*ux)*uy}
+  var cvx=0,cvy=0;function curl(a,b){var e=.35;cvx=(vn(a,b+e)-vn(a,b-e))/(2*e);cvy=-(vn(a+e,b)-vn(a-e,b))/(2*e)}
+
+  var W=1,H=1,Rad=200,t=0,introT=rm?1:0,pres=0,pT=0,mx=-9999,my=-9999,tx=-9999,ty=-9999,pmx=0,pmy=0,mvx=0,mvy=0,trail=[],bb=[0,0,0,0],prevAct=0,STR=rm?.5:1,TURB=rm?.3:1,last=performance.now();
+  var ia=0,ib=0,m=1,want=0,imgA=0,colDirty=false,secTargets=[],cur={x:0,y:0,s:1},cx=0,cy=0,SZ=1,activeSec=0;
+  if(!rm)for(var i=0;i<main.n;i++){main.off[i*2]=(Math.random()-.5)*1100;main.off[i*2+1]=(Math.random()-.5)*600}
+
+  function relayout(){
+    W=stage.clientWidth;H=stage.clientHeight;R.setSize(W,H);imgU.uRes.value.set(W,H);main.res.set(W,H);dust.res.set(W,H);
+    Rad=200*clamp(Math.min(W,H*1.6)/1000,.6,1.25);imgU.uR.value=Rad;dust.dot.value=2.2;
+    var top=navEl.offsetHeight+8,bot=hc.offsetTop-8,bh=Math.max(120,bot-top),rw=W*(W>=1024?.9:.94);
+    if(rw/asp0>bh*1.1)rw=bh*1.1*asp0;
+    secTargets=[];
+    for(var s=0;s<secs.length;s++){
+      var side=SIDE[s],ap=shapes[MAP[s]].asp,T;
+      if(s===0)T={x:W/2,y:(top+bot)/2,s:rw/asp0};
+      else if(W>=900)T={x:W*(side==="R"?.74:.26),y:H*.52,s:Math.min(H*.66,W*.4/ap)};
+      else T={x:W/2, y:Math.max(130, H*0.19), s:Math.min(H*0.22, W*0.64/ap)};
+      secTargets.push(T);
+    }
+    if(!cur.init){cur.x=secTargets[0].x;cur.y=secTargets[0].y;cur.s=secTargets[0].s;cur.init=true}
+    bd.style.fontSize=Math.min(bh*.95,W*.92/(6*.56))+"px";bd.style.top=(top+bot)/2+"px";
+    
+    // Position hint text at bottom of hero section, safely clear of the logo
+    hintEl.style.left="50%";
+    hintEl.style.top="";
+    hintEl.style.bottom="clamp(32px, 5.2vh, 48px)";
+  }
+  addEventListener("resize",relayout);relayout();
+
+  window.relayoutStage = function(){
+    try {
+      relayout();
+      pickSec();
+      last = performance.now();
+      prevAct = 1;
+      if (main && main.pts) main.pts.visible = true;
+    } catch(err){}
+  };
+
+  function pickSec(){
+    var best=activeSec,h=innerHeight;
+    for(var s=0;s<secs.length;s++){var b=secs[s].getBoundingClientRect();if(b.top<h*.75)secs[s].classList.add("in");if(b.top<=h*.5&&b.bottom>h*.5)best=s}
+    if(best!==activeSec){activeSec=best;want=MAP[best]}
+  }
+  addEventListener("scroll",function(){var h=document.documentElement.scrollHeight-innerHeight;prog.style.transform="scaleX("+(h>0?clamp(scrollY/h,0,1):0)+")"},{passive:true});
+
+  function onMove(e){
+    if(e.pointerType==="touch")return; // Never interfere with mobile native scrolling
+    tx=e.clientX;ty=e.clientY;if(mx<-9000){mx=pmx=tx;my=pmy=ty}pT=1;document.body.dataset.t="1";
+  }
+  addEventListener("pointermove",function(e){if(e.pointerType==="touch")return;onMove(e);},{passive:true});
+  addEventListener("pointerdown",function(e){if(e.pointerType==="touch")return;onMove(e);},{passive:true});
+  document.addEventListener("pointerleave",function(){pT=0});
+  addEventListener("pointerup",function(e){if(e.pointerType==="touch")return;setTimeout(function(){pT=0},260);},{passive:true});
+
+  function step(S,dt,e,swirl){
+    var n=S.n,ja=S.dust?0:ia,jb=S.dust?0:ib,XA=S.X[ja],XB=S.X[jb],YA=S.Y[ja],YB=S.Y[jb],off=S.off,vel=S.vel,P=S.P,AS=S.AS,sd=S.sd,ph=S.ph,act=0,R2=Rad*Rad,tn=trail.length,pr_=pres>.001,
+        rest=S.dust?S.rest:Math.max(S.rest,1-imgA),e1=1-e;
+    for(var i=0;i<n;i++){
+      var k=i*2,hx=cx+(XA[i]*e1+XB[i]*e)*SZ,hy=cy+(YA[i]*e1+YB[i]*e)*SZ;
+      if(S.dust){hx+=Math.sin(t*.4+ph[i]*6.28)*7;hy+=Math.cos(t*.33+ph[i]*8.1)*5}
+      var ox=off[k],oy=off[k+1],vx=vel[k],vy=vel[k+1],px=hx+ox,py=hy+oy,E=0,ax=0,ay=0,lt=.45+sd[i]*1.1;
+      if(tn&&px>bb[0]&&px<bb[2]&&py>bb[1]&&py<bb[3]){
+        var f=0;for(var j=0;j<tn;j++){var q=trail[j],dx=px-q.x,dy=py-q.y,d2=dx*dx+dy*dy;if(d2<R2*4){var g=Math.exp(-d2/R2)*q.s;if(g>f)f=g}}
+        E=sstep(.06,.5,f*1.15);
+      }
+      if(pr_){var ex=px-mx,ey=py-my,r2=ex*ex+ey*ey;
+        if(r2<R2*6){var fm=Math.exp(-r2/R2)*pres,il=1/Math.sqrt(r2+1),nx=ex*il,ny=ey*il,a1=fm*1.25*STR*lt,a2=fm*1.45*STR*(.4+sd[i]);ax+=nx*a1-ny*a2;ay+=ny*a1+nx*a2}}
+      if(E>.01){
+        ax+=(mvx*lt-vx)*E*.08;ay+=(mvy*lt-vy)*E*.08;
+        var qx=px*.0095+t*.35,qy=py*.0095-t*.2;curl(qx,qy);var c1=cvx,c2=cvy;curl(qx*2.3+7.1,qy*2.3+7.1);
+        ax+=(c1+.5*cvx)*E*1.2*TURB*lt;ay+=(c2+.5*cvy)*E*1.2*TURB*lt;
+      }
+      if(swirl>.002){ax+=Math.sin(py*.012+t*2)*swirl*.9*lt;ay+=Math.cos(px*.012-t*1.6)*swirl*.9*lt}
+      var kk=.026*(.65+sd[i]*.7)*(1-swirl*.75);ax-=ox*kk;ay-=oy*kk;
+      vx+=ax*dt;vy+=ay*dt;var dm=Math.pow(.93+.025*E,dt);vx*=dm;vy*=dm;ox+=vx*dt;oy+=vy*dt;
+      var o2=ox*ox+oy*oy;if(o2<.0004&&vx*vx+vy*vy<.0004){ox=oy=vx=vy=0}
+      off[k]=ox;off[k+1]=oy;vel[k]=vx;vel[k+1]=vy;
+      P[k]=hx+ox;P[k+1]=hy+oy;AS[k]=Math.max(E,sstep(.35,2.5,Math.sqrt(o2)),rest);AS[k+1]=Math.sqrt(vx*vx+vy*vy);
+      if(E>0||o2>.0004)act++;
+    }
+    S.geo.attributes.position.needsUpdate=true;S.geo.attributes.aAS.needsUpdate=true;return act;
+  }
+
+  function frame(now){
+    requestAnimationFrame(frame);
+    var ms=now-last;last=now;if(document.hidden)return;
+    var dt=clamp(ms/16.667,.25,3);pickSec();
+    var ease=1-Math.pow(1-.22,dt);pmx=mx;pmy=my;mx+=(tx-mx)*ease;my+=(ty-my)*ease;
+    mvx+=(clamp((mx-pmx)/dt,-60,60)-mvx)*.5;mvy+=(clamp((my-pmy)/dt,-60,60)-mvy)*.5;
+    pres+=(pT-pres)*(1-Math.pow(1-(pT>pres?.1:.035),dt));if(pres<.001&&!pT)pres=0;
+    if(introT<1)introT=Math.min(1,introT+Math.min(ms,100)/3200);
+    t+=dt/60*(1+pres*1.6);
+    
+    // Smoothly anchor the final particle to form section (#enroll) when scrolling to footer
+    var T=secTargets[activeSec];
+    if(activeSec === 6 && secs[6]){
+      var eb = secs[6].getBoundingClientRect();
+      var baseOff = (W >= 900) ? Math.min(H * 0.52, eb.height * 0.5) : Math.max(130, Math.min(H * 0.19, eb.height * 0.22));
+      var dynY = eb.top + baseOff;
+      if (dynY < T.y) {
+        T = { x: T.x, y: dynY, s: T.s };
+      }
+    }
+    
+    var lk=1-Math.pow(1-.07,dt);cur.x+=(T.x-cur.x)*lk;cur.y+=(T.y-cur.y)*lk;cur.s+=(T.s-cur.s)*lk;cx=cur.x;cy=cur.y;SZ=cur.s;
+    if(m<1)m=Math.min(1,m+ms/1700);else if(want!==ib){ia=ib;ib=want;m=0;colDirty=true}
+    var e=m*m*(3-2*m),swirl=rm?0:Math.max(Math.pow(1-introT,2),4*m*(1-m)*.9);
+    var tgtImg=(ib===0&&m>=1&&introT>=.75)?1:0;imgA+=(tgtImg-imgA)*(1-Math.pow(1-.08,dt));if(Math.abs(tgtImg-imgA)<.003)imgA=tgtImg;
+    imgU.uShow.value=imgA;imgU.uRect.value.set(cx-asp0*SZ/2,cy-SZ/2,asp0*SZ,SZ);
+    main.dot.value=clamp(SZ*.0085,2.4,4.2);
+    if(pres>.02)trail.push({x:mx,y:my,s:pres});
+    var dec=Math.pow(.955,dt),j;for(j=0;j<trail.length;j++)trail[j].s*=dec;
+    trail=trail.filter(function(q){return q.s>.03});if(trail.length>32)trail.splice(0,trail.length-32);
+    bb=[1e9,1e9,-1e9,-1e9];trail.forEach(function(q){bb[0]=Math.min(bb[0],q.x);bb[1]=Math.min(bb[1],q.y);bb[2]=Math.max(bb[2],q.x);bb[3]=Math.max(bb[3],q.y)});
+    var mg=Rad*2;bb[0]-=mg;bb[1]-=mg;bb[2]+=mg;bb[3]+=mg;
+    for(j=0;j<32;j++){var q=trail[j];trailU[j].set(q?q.x:0,q?q.y:0,q?q.s:0)}
+    if(colDirty){var ca=main.C[ia],cb=main.C[ib],col=main.col,e1=1-e;for(j=0;j<col.length;j++)col[j]=ca[j]*e1+cb[j]*e;main.geo.attributes.aCol.needsUpdate=true;if(m>=1)colDirty=false}
+    
+    // Check if scrolled into footer: hide particles so they don't linger over footer
+    var footEl = $("footer");
+    var footRect = footEl ? footEl.getBoundingClientRect() : null;
+    var eb6 = secs[6] ? secs[6].getBoundingClientRect() : null;
+    var inFooter = footRect && (footRect.top < H * 0.85 || (eb6 && eb6.bottom < H * 0.15));
+    var idle=ib===0&&m>=1&&imgA===1&&!trail.length&&pres<.001&&prevAct===0&&introT>=1&&Math.abs(T.s-cur.s)<.5&&Math.abs(T.x-cur.x)<.5;
+    
+    var showPts = !idle && !inFooter && cur.y > -SZ * 0.6;
+    main.pts.visible = showPts;
+    if(dust && dust.pts) dust.pts.visible = !inFooter;
+    if(showPts) prevAct = step(main, dt, e, swirl);
+    if(!inFooter) step(dust, dt, 0, 0);
+    R.render(scene,cam);
+  }
+  requestAnimationFrame(frame);
+}
+var go=false;function run(){if(!go){go=true;start()}}
+if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('800 100px "Barlow Condensed"'),document.fonts.load('700 100px "Barlow Condensed"')]).then(run,run);setTimeout(run,2500)}else run();
+})();
+
+/* ==========================================================================
+   Fullpage Routing (#application/forms) & 3-Step Paginated Form with Supabase
+   ========================================================================== */
+(function(){
+  var SUPABASE_URL = 'https://hswxckkvpmjndmwexioa.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_avGK3uUQfnDYN2ZbSRW3DA_8-R4Dz8v';
+  var sb = null;
+  if (window.supabase && window.supabase.createClient) {
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+
+  var selectedMode = 'Online';
+  var feeAmount = 4999;
+  var currentStep = 1;
+
+  var appPortal = document.getElementById('application-portal');
+  var mainEl = document.querySelector('main');
+  var footerEl = document.getElementById('footer');
+  var navEl = document.getElementById('nav');
+  var stageEl = document.getElementById('stage');
+  var progEl = document.getElementById('prog');
+
+  // Multi-step pagination DOM elements
+  var stepPane1 = document.getElementById('step-pane-1');
+  var stepPane2 = document.getElementById('step-pane-2');
+  var stepPane3 = document.getElementById('step-pane-3');
+  var stepTab1 = document.getElementById('step-tab-1');
+  var stepTab2 = document.getElementById('step-tab-2');
+  var stepTab3 = document.getElementById('step-tab-3');
+  var stepLine1 = document.getElementById('step-line-1');
+  var stepLine2 = document.getElementById('step-line-2');
+
+  var btnToStep2 = document.getElementById('btn-to-step-2');
+  var btnBackTo1 = document.getElementById('btn-back-to-1');
+  var btnToStep3 = document.getElementById('btn-to-step-3');
+  var btnBackTo2 = document.getElementById('btn-back-to-2');
+
+  var btnOnline = document.getElementById('btn-mode-online');
+  var btnOffline = document.getElementById('btn-mode-offline');
+  var payAmountDisplay = document.getElementById('pay-amount-display');
+  var appForm = document.getElementById('app-form');
+  var appSuccessBox = document.getElementById('app-success-box');
+  var btnSubmit = document.getElementById('btn-submit-app');
+  var confAppId = document.getElementById('conf-app-id');
+  var confSummaryText = document.getElementById('conf-summary-text');
+  var confWaBtn = document.getElementById('conf-wa-btn');
+  var screenshotInput = document.getElementById('inp-screenshot');
+  var uploadHintText = document.getElementById('upload-hint-text');
+
+  // SPA Route Handling for http://localhost:5174/#application/forms
+  function handleRouting() {
+    var hash = window.location.hash || '';
+    if (hash === '#application/forms' || hash.indexOf('#application') === 0) {
+      document.body.classList.add('in-application-portal');
+      if (hash !== '#application/forms') {
+        try { history.replaceState(null, '', '#application/forms'); } catch(e){ window.location.hash = '#application/forms'; }
+      }
+      if (mainEl) mainEl.style.display = 'none';
+      if (footerEl) footerEl.style.display = 'none';
+      if (navEl) navEl.style.display = 'none';
+      if (stageEl) { stageEl.style.opacity = '0'; stageEl.style.pointerEvents = 'none'; }
+      if (progEl) progEl.style.display = 'none';
+      if (appPortal) {
+        appPortal.style.display = 'block';
+      }
+      window.scrollTo(0, 0);
+      goToStep(1);
+      triggerWaveAnimation();
+      if (window.resizeGoldCanvas) window.resizeGoldCanvas();
+    } else {
+      document.body.classList.remove('in-application-portal');
+      if (mainEl) mainEl.style.display = '';
+      if (footerEl) footerEl.style.display = '';
+      if (navEl) navEl.style.display = '';
+      if (stageEl) {
+        stageEl.style.display = '';
+        stageEl.style.opacity = '';
+        stageEl.style.pointerEvents = '';
+      }
+      if (progEl) progEl.style.display = '';
+      if (appPortal) appPortal.style.display = 'none';
+      if (hash && hash !== '#top') {
+        var el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+      if (window.relayoutStage) {
+        window.relayoutStage();
+      }
+      setTimeout(function(){
+        if (window.relayoutStage) window.relayoutStage();
+      }, 60);
+    }
+  }
+
+  var waveStartTime = performance.now();
+  function triggerWaveAnimation() {
+    waveStartTime = performance.now();
+  }
+  window.addEventListener('hashchange', handleRouting);
+  handleRouting();
+
+  function goToStep(step) {
+    currentStep = step;
+    [stepPane1, stepPane2, stepPane3].forEach(function(p, i){
+      if (p) p.classList.toggle('active', i + 1 === step);
+    });
+    if (stepTab1) {
+      stepTab1.classList.toggle('active', step === 1);
+      stepTab1.classList.toggle('done', step > 1);
+    }
+    if (stepLine1) stepLine1.classList.toggle('active', step >= 2);
+    if (stepTab2) {
+      stepTab2.classList.toggle('active', step === 2);
+      stepTab2.classList.toggle('done', step > 2);
+    }
+    if (stepLine2) stepLine2.classList.toggle('active', step >= 3);
+    if (stepTab3) {
+      stepTab3.classList.toggle('active', step === 3);
+    }
+  }
+
+  // Step 1 Validation & Transition
+  if (btnToStep2) {
+    btnToStep2.addEventListener('click', function(){
+      var name = document.getElementById('inp-name').value.trim();
+      var phone = document.getElementById('inp-phone').value.trim();
+      var email = document.getElementById('inp-email').value.trim();
+      var address = document.getElementById('inp-address').value.trim();
+      if (!name) { alert('Please enter student full name.'); return; }
+      if (!phone) { alert('Please enter WhatsApp mobile number.'); return; }
+      if (!email) { alert('Please enter email address.'); return; }
+      if (!address) { alert('Please enter your city/location.'); return; }
+      goToStep(2);
+    });
+  }
+
+  if (btnBackTo1) btnBackTo1.addEventListener('click', function(){ goToStep(1); });
+
+  // Step 2 Validation & Transition
+  if (btnToStep3) {
+    btnToStep3.addEventListener('click', function(){
+      var college = document.getElementById('inp-college').value.trim();
+      if (!college) { alert('Please enter college or qualification details.'); return; }
+      goToStep(3);
+    });
+  }
+
+  if (btnBackTo2) btnBackTo2.addEventListener('click', function(){ goToStep(2); });
+
+  function updateGPayButton() {
+    var btnGPay = document.getElementById('btn-open-gpay');
+    var amtSpan = document.getElementById('gpay-btn-amt');
+    var formattedAmt = Number(feeAmount).toLocaleString('en-IN');
+    var upiLink = 'upi://pay?pa=lokeshlaven-2@okicici&pn=' + encodeURIComponent('Laven Lokesh Barani') + '&am=' + feeAmount + '&cu=INR&tn=' + encodeURIComponent('Plant Green Course Fee');
+    if (btnGPay) btnGPay.setAttribute('href', upiLink);
+    if (amtSpan) amtSpan.textContent = 'Pay ₹' + formattedAmt + ' directly via UPI / GPay app \u2192';
+  }
+
+  function setMode(mode) {
+    selectedMode = mode;
+    if (mode === 'Online') {
+      feeAmount = 4999;
+      if (btnOnline) btnOnline.classList.add('active');
+      if (btnOffline) btnOffline.classList.remove('active');
+      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹4,999';
+    } else {
+      feeAmount = 14999;
+      if (btnOffline) btnOffline.classList.add('active');
+      if (btnOnline) btnOnline.classList.remove('active');
+      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹14,999';
+    }
+    updateGPayButton();
+  }
+
+  if (btnOnline) btnOnline.addEventListener('click', function(){ setMode('Online'); });
+  if (btnOffline) btnOffline.addEventListener('click', function(){ setMode('Offline'); });
+
+  // Update mode when pricing links are clicked
+  document.querySelectorAll('[data-mode]').forEach(function(el){
+    el.addEventListener('click', function(){
+      var m = el.getAttribute('data-mode');
+      if (m) setMode(m);
+    });
+  });
+
+  // 1-Tap Copy for UPI ID and GPay Number
+  document.querySelectorAll('.pay-copy-badge').forEach(function(badge){
+    badge.addEventListener('click', function(){
+      var text = badge.getAttribute('data-copy');
+      if (text && navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function(){
+          var original = badge.textContent;
+          badge.textContent = 'Copied!';
+          badge.style.background = 'color-mix(in srgb, var(--acc) 35%, transparent)';
+          setTimeout(function(){
+            badge.textContent = original;
+            badge.style.background = '';
+          }, 1800);
+        });
+      }
+    });
+  });
+
+  // Handle 1-Tap Open in GPay Redirection
+  var btnGPayEl = document.getElementById('btn-open-gpay');
+  if (btnGPayEl) {
+    btnGPayEl.addEventListener('click', function(e){
+      var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      var isAndroid = /Android/i.test(navigator.userAgent);
+      var upiUrl = 'upi://pay?pa=lokeshlaven-2@okicici&pn=' + encodeURIComponent('Laven Lokesh Barani') + '&am=' + feeAmount + '&cu=INR&tn=' + encodeURIComponent('Plant Green Course Fee');
+      var tezUrl = 'tez://upi/pay?pa=lokeshlaven-2@okicici&pn=' + encodeURIComponent('Laven Lokesh Barani') + '&am=' + feeAmount + '&cu=INR&tn=' + encodeURIComponent('Plant Green Course Fee');
+
+      if (isAndroid) {
+        e.preventDefault();
+        var clicked = Date.now();
+        window.location.href = tezUrl;
+        setTimeout(function(){
+          if (Date.now() - clicked < 1600) {
+            window.location.href = upiUrl;
+          }
+        }, 550);
+      } else if (isMobile) {
+        // iOS or general mobile follows native upi:// href
+      } else {
+        // Desktop: copy UPI ID and prompt user
+        e.preventDefault();
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText('lokeshlaven-2@okicici');
+        }
+        try { window.location.href = upiUrl; } catch(err){}
+        alert('UPI ID (lokeshlaven-2@okicici) copied to clipboard!\n\nTo complete payment of \u20B9' + Number(feeAmount).toLocaleString('en-IN') + ', open Google Pay (GPay) on your phone or use GPay number: 8220699083.');
+      }
+    });
+  }
+
+  // Screenshot input preview text
+  if (screenshotInput) {
+    screenshotInput.addEventListener('change', function(){
+      if (screenshotInput.files && screenshotInput.files[0]) {
+        var file = screenshotInput.files[0];
+        uploadHintText.textContent = '✓ ' + file.name.slice(0, 16) + '...';
+        uploadHintText.style.color = 'var(--acc)';
+      }
+    });
+  }
+
+  // Handle Application Form Submission to Supabase & Storage (No Auth Popup)
+  if (appForm) {
+    appForm.addEventListener('submit', async function(e){
+      e.preventDefault();
+      
+      var name = document.getElementById('inp-name').value.trim();
+      var phone = document.getElementById('inp-phone').value.trim();
+      var email = document.getElementById('inp-email').value.trim();
+      var address = document.getElementById('inp-address').value.trim();
+      var college = document.getElementById('inp-college').value.trim();
+      var degree = document.getElementById('sel-degree').value;
+      var status = document.getElementById('sel-status').value;
+      var utr = document.getElementById('inp-utr').value.trim();
+
+      if (!utr) {
+        alert('Please enter your 12-digit UPI / UTR transaction reference number.');
+        return;
+      }
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = '<span>Verifying & Saving...</span>';
+
+      var appId = 'PGI-DM-' + Math.floor(10000 + Math.random() * 90000);
+      var screenshotUrl = null;
+
+      // If student attached a screenshot file, upload silently to Supabase storage (no popup!)
+      if (screenshotInput && screenshotInput.files && screenshotInput.files[0]) {
+        var sFile = screenshotInput.files[0];
+        try {
+          btnSubmit.innerHTML = '<span>Saving payment proof...</span>';
+          if (sb) {
+            var fileExt = (sFile.name && sFile.name.indexOf('.') > -1) ? sFile.name.split('.').pop() : 'png';
+            var filePath = appId + '_' + Date.now() + '.' + fileExt;
+            var uploadRes = await sb.storage.from('payment_proofs').upload(filePath, sFile);
+            if (!uploadRes.error) {
+              var urlData = sb.storage.from('payment_proofs').getPublicUrl(filePath);
+              if (urlData && urlData.data) screenshotUrl = urlData.data.publicUrl;
+            } else {
+              console.warn('Supabase storage upload notice:', uploadRes.error);
+            }
+          }
+        } catch(sbErr) {
+          console.warn('Screenshot upload notice:', sbErr);
+        }
+      }
+
+      btnSubmit.innerHTML = '<span>Finalizing Registration...</span>';
+
+      // Record payload for public.enrollments table
+      var payload = {
+        application_id: appId,
+        name: name,
+        mobile_number: phone,
+        email: email || null,
+        address: address || 'Tamil Nadu',
+        college_name: college || 'Degree Program',
+        highest_study: degree || 'UG',
+        degree: degree || 'Undergraduate',
+        branch: 'Digital Marketing',
+        passing_status: status || 'Pursuing',
+        start_date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        mode: selectedMode,
+        fee_amount: feeAmount,
+        gpay_number: '8220699083',
+        upi_id: 'lokeshlaven-2@okicici',
+        recipient_name: 'Mr. Laven Lokesh Barani',
+        utr_number: utr,
+        payment_screenshot_url: screenshotUrl,
+        agreed_no_refund: true,
+        verification_status: 'pending'
+      };
+
+      try {
+        if (sb) {
+          var insertRes = await sb.from('enrollments').insert([payload]);
+          if (insertRes.error) {
+            console.error('Supabase Insert Error:', insertRes.error);
+          }
+        }
+      } catch (err) {
+        console.error('Database connection error:', err);
+      }
+
+      // Trigger Celebration Confetti
+      if (window.confetti) {
+        window.confetti({
+          particleCount: 85,
+          spread: 75,
+          origin: { y: 0.6 }
+        });
+      }
+
+      // Display Confirmation Box
+      if (confAppId) confAppId.textContent = appId;
+      if (confSummaryText) {
+        var proofNotice = screenshotUrl ? '<br><a href="' + screenshotUrl + '" target="_blank" style="color:var(--acc);font-weight:600;text-decoration:underline;display:inline-block;margin-top:6px">📁 View Uploaded Proof ↗</a>' : '';
+        confSummaryText.innerHTML = selectedMode + ' Batch · ₹' + feeAmount.toLocaleString() + ' · Status: Pending UTR Verification' + proofNotice;
+      }
+      if (confWaBtn) {
+        var waMsg = 'Hi Plant Green Inertia Team! I have submitted my admission application for the Digital Marketing Course.\n\nApplication ID: ' + appId + '\nName: ' + name + '\nMode: ' + selectedMode + ' (₹' + feeAmount + ')\nUTR: ' + utr;
+        if (screenshotUrl) waMsg += '\nPayment Proof: ' + screenshotUrl;
+        confWaBtn.href = 'https://wa.me/918220699083?text=' + encodeURIComponent(waMsg);
+      }
+
+      appForm.style.display = 'none';
+      if (appSuccessBox) appSuccessBox.style.display = 'block';
+    });
+  }
+
+  // WebGL Shader for Application Portal (#application-portal) — Dynamic Theme Palettes
+  function initGoldDotsShader() {
+    var canvas = document.getElementById('gold-canvas');
+    if (!canvas || !window.THREE) return;
+    
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false });
+    var pr = Math.min(window.devicePixelRatio || 1, 1.5);
+    renderer.setPixelRatio(pr);
+    
+    var scene = new THREE.Scene();
+    var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    
+    function parseHexToVec3(h) {
+      var c = parseInt(h.slice(1), 16);
+      return new THREE.Vector3((c>>16&255)/255, (c>>8&255)/255, (c&255)/255);
+    }
+
+    var uniforms = {
+      u_time: { value: 0 },
+      u_resolution: { value: new THREE.Vector2(window.innerWidth * 2, window.innerHeight * 2) },
+      u_opacities: { value: [0.35, 0.45, 0.55, 0.65, 0.72, 0.8, 0.88, 0.94, 0.98, 1.0] },
+      u_colors: { value: [
+        parseHexToVec3('#ff3b81'),
+        parseHexToVec3('#b48cff'),
+        parseHexToVec3('#5a2bd8'),
+        parseHexToVec3('#ffa8c5'),
+        parseHexToVec3('#ff4fa3'),
+        parseHexToVec3('#9a6bff')
+      ] },
+      u_total_size: { value: 22.0 },
+      u_dot_size: { value: 6.0 },
+      u_reverse: { value: 0 }
+    };
+
+    window.updateGoldShaderTheme = function(currentTheme) {
+      if (!currentTheme || !uniforms) return;
+      var sw = currentTheme.p.sw;
+      var c1 = parseHexToVec3(currentTheme.acc);
+      var c2 = parseHexToVec3(sw[0] || currentTheme.p.mid);
+      var c3 = parseHexToVec3(sw[1] || currentTheme.acc);
+      var c4 = parseHexToVec3(sw[2] || currentTheme.p.pale);
+      var c5 = parseHexToVec3(currentTheme.p.deep || currentTheme.acc);
+      var c6 = parseHexToVec3(currentTheme.p.pur || currentTheme.acc2);
+      uniforms.u_colors.value = [c1, c2, c3, c4, c5, c6];
+    };
+
+    var material = new THREE.ShaderMaterial({
+      vertexShader: `
+        precision mediump float;
+        uniform vec2 u_resolution;
+        varying vec2 vFragCoord;
+        void main() {
+          gl_Position = vec4(position, 1.0);
+          vFragCoord = (position.xy + 1.0) * 0.5 * u_resolution;
+          vFragCoord.y = u_resolution.y - vFragCoord.y;
+        }
+      `,
+      fragmentShader: `
+        precision mediump float;
+        varying vec2 vFragCoord;
+
+        uniform float u_time;
+        uniform float u_opacities[10];
+        uniform vec3 u_colors[6];
+        uniform float u_total_size;
+        uniform float u_dot_size;
+        uniform vec2 u_resolution;
+
+        float PHI = 1.61803398874989484820459;
+        float random(vec2 xy) {
+            return fract(tan(distance(xy * PHI, xy) * 0.5) * xy.x);
+        }
+
+        void main() {
+            vec2 st = vFragCoord.xy;
+            st.x -= abs(floor((mod(u_resolution.x, u_total_size) - u_dot_size) * 0.5));
+            st.y -= abs(floor((mod(u_resolution.y, u_total_size) - u_dot_size) * 0.5));
+
+            float opacity = step(0.0, st.x) * step(0.0, st.y);
+
+            vec2 st2 = vec2(floor(st.x / u_total_size), floor(st.y / u_total_size));
+
+            float frequency = 5.0;
+            float show_offset = random(st2);
+            float rand = random(st2 * floor((u_time / frequency) + show_offset + frequency));
+            
+            int opIdx = int(clamp(rand * 10.0, 0.0, 9.0));
+            opacity *= u_opacities[opIdx];
+            
+            vec2 frac = fract(st / u_total_size);
+            opacity *= 1.0 - step(u_dot_size / u_total_size, frac.x);
+            opacity *= 1.0 - step(u_dot_size / u_total_size, frac.y);
+
+            int colIdx = int(clamp(show_offset * 6.0, 0.0, 5.0));
+            vec3 color = u_colors[colIdx];
+
+            float animation_speed_factor = 2.5;
+            vec2 center_grid = u_resolution / 2.0 / u_total_size;
+            float dist_from_center = distance(center_grid, st2);
+
+            float timing_offset_intro = dist_from_center * 0.01 + (random(st2) * 0.15);
+            opacity *= step(timing_offset_intro, u_time * animation_speed_factor);
+
+            gl_FragColor = vec4(color * opacity, opacity);
+        }
+      `,
+      uniforms: uniforms,
+      transparent: true,
+      depthTest: false
+    });
+
+    var geometry = new THREE.PlaneGeometry(2, 2);
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    function onResize() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      renderer.setSize(w, h);
+      uniforms.u_resolution.value.set(w * 2, h * 2);
+    }
+    window.addEventListener('resize', onResize);
+    window.resizeGoldCanvas = onResize;
+    onResize();
+
+    var startTime = performance.now();
+    function animate() {
+      requestAnimationFrame(animate);
+      uniforms.u_time.value = (performance.now() - startTime) / 1000.0;
+      renderer.render(scene, camera);
+    }
+    animate();
+  }
+
+  // Concentric Expanding Circular Particle Waves (Pure Particle Dots, No Lines)
+  function initParticleWaves() {
+    var canvas = document.getElementById('particle-waves-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var width = 0, height = 0;
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    var WAVES_COUNT = 2; // Exactly 2 waves at a time as requested
+    var DURATION = 3600; // ms per wave lifecycle
+    var PARTICLES_PER_RING = 52; // Distinct glowing particle dots around circumference
+
+    function render(now) {
+      requestAnimationFrame(render);
+      if (!document.body.classList.contains('in-application-portal')) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      ctx.scale(dpr, dpr);
+
+      // Center around form modal card if available, else center of screen
+      var cx = width / 2;
+      var cy = height / 2;
+      var cardHalf = 280;
+      var card = document.querySelector('.app-modal-card');
+      if (card) {
+        var rect = card.getBoundingClientRect();
+        cx = rect.left + rect.width / 2;
+        cy = rect.top + rect.height / 2;
+        // Diagonal half-size of the modal card
+        cardHalf = Math.sqrt(Math.pow(rect.width / 2, 2) + Math.pow(rect.height / 2, 2)) * 0.72;
+      }
+
+      // Shorter radius: hugs modal card tightly as a pulsating particle halo
+      var minRadius = cardHalf + 6;
+      var maxRadius = cardHalf + 95;
+
+      var cs = getComputedStyle(document.documentElement);
+      var acc = cs.getPropertyValue('--acc').trim() || '#ff3b81';
+      var acc2 = cs.getPropertyValue('--acc2').trim() || '#ffa8c5';
+
+      var elapsed = now - waveStartTime;
+
+      for (var w = 0; w < WAVES_COUNT; w++) {
+        var phase = (w / WAVES_COUNT) * DURATION;
+        var p = ((elapsed + phase) % DURATION) / DURATION; // 0 to 1
+
+        // Smooth cubic expansion curve
+        var easeOut = 1 - Math.pow(1 - p, 2.2);
+        var r = minRadius + (maxRadius - minRadius) * easeOut;
+
+        // Opacity envelope: quick fade-in, smooth quadratic fade-out
+        var alpha = 0;
+        if (p < 0.15) {
+          alpha = p / 0.15;
+        } else {
+          alpha = Math.pow(1 - (p - 0.15) / 0.85, 1.8);
+        }
+
+        if (alpha <= 0.005) continue;
+
+        // Particle dot size: 2.5px to 3.5px
+        var dotRadius = 3.0 * (1 - p * 0.25);
+
+        for (var i = 0; i < PARTICLES_PER_RING; i++) {
+          // Circumferential angle with slight continuous rotation
+          var angle = (i / PARTICLES_PER_RING) * Math.PI * 2 + (w * 0.28) + (now * 0.00015);
+          
+          // Organic micro-variation in particle radius so it looks like authentic floating particles
+          var jitter = Math.sin(i * 7.5 + w * 3.8) * 2.2;
+          var curR = r + jitter;
+
+          var px = cx + Math.cos(angle) * curR;
+          var py = cy + Math.sin(angle) * curR;
+
+          // Color: alternate between vibrant accent and lighter tint
+          var color = (i % 3 === 0) ? acc2 : acc;
+
+          // Soft outer particle glow aura
+          ctx.beginPath();
+          ctx.arc(px, py, dotRadius * 2.0, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.globalAlpha = alpha * 0.32;
+          ctx.fill();
+
+          // Bright solid particle dot
+          ctx.beginPath();
+          ctx.arc(px, py, dotRadius, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.globalAlpha = alpha * 0.95;
+          ctx.fill();
+        }
+      }
+
+      ctx.restore();
+    }
+
+    requestAnimationFrame(render);
+  }
+
+  function startPortals() {
+    initGoldDotsShader();
+    initParticleWaves();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startPortals);
+  } else {
+    setTimeout(startPortals, 200);
+  }
+})();
+</script>
+</body>
+</html>
