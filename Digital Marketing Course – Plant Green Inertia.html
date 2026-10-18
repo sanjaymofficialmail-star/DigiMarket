@@ -82,10 +82,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:1.6rem}
 .hero{flex-direction:column;align-items:stretch;justify-content:flex-start;padding:0;overflow:hidden}
 .bd{position:absolute;left:50%;transform:translate(-50%,-50%);z-index:0;white-space:nowrap;pointer-events:none;user-select:none;font-weight:600;letter-spacing:-.06em;line-height:.8;color:color-mix(in srgb,var(--fg) 5%,transparent)}
-.hint{position:absolute;bottom:clamp(32px,5.2vh,48px);left:50%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:12px;letter-spacing:.06em;opacity:.65;pointer-events:none;transition:opacity .8s}
-.hint::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;animation:p 2.4s ease-in-out infinite}
-body[data-t="1"] .hint{opacity:0}
-@keyframes p{0%,100%{transform:scale(.6);opacity:.45}50%{transform:scale(1);opacity:1}}
 .sp{flex:1 1 auto;min-height:0}
 .hc{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:end;gap:clamp(24px,4vw,72px);padding:0 var(--pad) clamp(28px,3.4vw,52px);pointer-events:none}
 .hc a{pointer-events:auto}
@@ -333,11 +329,12 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    margin: 1.8rem auto 0 !important;
+    gap: 16px !important;
+    margin: 1.6rem auto 0 !important;
     width: 100% !important;
   }
-  .ctas a.btn, .ctas button.btn {
-    margin: 0 auto !important;
+  .ctas a.btn, .ctas button.btn, .ctas a.txt {
+    margin: 0 !important;
   }
 
   /* Center Cards in Pricing & Enroll */
@@ -453,7 +450,6 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 <main>
   <section class="sec hero in" id="top">
     <div class="bd" id="bd" aria-hidden="true">skills</div>
-    <div class="hint" id="hint" aria-hidden="true">Move cursor across the logo</div>
     <div class="sp"></div>
     <div class="hc" id="hcontent">
       <div>
@@ -650,23 +646,23 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
       <div class="form-step-pane active" id="step-pane-1">
         <div class="app-field-group">
           <label class="app-label" for="inp-name">Full Student Name *</label>
-          <input class="app-input" id="inp-name" name="name" placeholder="e.g. Sanjay M" required autocomplete="name">
+          <input class="app-input" id="inp-name" name="name" placeholder="Enter your name" required autocomplete="name">
         </div>
 
         <div class="app-grid-2">
           <div class="app-field-group" style="margin-bottom:0">
             <label class="app-label" for="inp-phone">WhatsApp Number *</label>
-            <input class="app-input" id="inp-phone" name="phone" type="tel" placeholder="98765 43210" required autocomplete="tel">
+            <input class="app-input" id="inp-phone" name="phone" type="tel" placeholder="e.g. 9999999999" required autocomplete="tel">
           </div>
           <div class="app-field-group" style="margin-bottom:0">
             <label class="app-label" for="inp-email">Email Address *</label>
-            <input class="app-input" id="inp-email" name="email" type="email" placeholder="name@email.com" required autocomplete="email">
+            <input class="app-input" id="inp-email" name="email" type="email" placeholder="Enter your email address" required autocomplete="email">
           </div>
         </div>
 
         <div class="app-field-group" style="margin-top:1.15rem">
           <label class="app-label" for="inp-address">City / Location *</label>
-          <input class="app-input" id="inp-address" name="address" placeholder="e.g. Chennai, Tamil Nadu" required>
+          <input class="app-input" id="inp-address" name="address" placeholder="Enter your city / location" required>
         </div>
 
         <div class="step-btn-row">
@@ -692,7 +688,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
         <div class="app-field-group">
           <label class="app-label" for="inp-college">College / University Name *</label>
-          <input class="app-input" id="inp-college" name="college" placeholder="e.g. Anna University / Loyola" required>
+          <input class="app-input" id="inp-college" name="college" placeholder="Enter college / university name" required>
         </div>
 
         <div class="app-grid-2">
@@ -766,7 +762,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
         <div class="app-field-group">
           <label class="app-label" for="inp-utr">12-Digit UPI / UTR Ref Number *</label>
-          <input class="app-input" id="inp-utr" name="utr" placeholder="e.g. 428901234567" required maxlength="25">
+          <input class="app-input" id="inp-utr" name="utr" placeholder="Enter 12-digit UPI / UTR number" required maxlength="25">
         </div>
 
         <div class="app-field-group" style="margin-bottom:0.4rem">
@@ -818,7 +814,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)};
-var stage=$("stage"),navEl=$("nav"),hc=$("hcontent"),bd=$("bd"),hintEl=$("hint"),prog=$("prog");
+var stage=$("stage"),navEl=$("nav"),hc=$("hcontent"),bd=$("bd"),prog=$("prog");
 var secs=[].slice.call(document.querySelectorAll(".sec"));
 var coarse=matchMedia("(pointer: coarse)").matches,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
 var N=(coarse||innerWidth<700)?8000:15000,F='"Barlow Condensed"';
@@ -1026,11 +1022,6 @@ function start(){
     }
     if(!cur.init){cur.x=secTargets[0].x;cur.y=secTargets[0].y;cur.s=secTargets[0].s;cur.init=true}
     bd.style.fontSize=Math.min(bh*.95,W*.92/(6*.56))+"px";bd.style.top=(top+bot)/2+"px";
-    
-    // Position hint text at bottom of hero section, safely clear of the logo
-    hintEl.style.left="50%";
-    hintEl.style.top="";
-    hintEl.style.bottom="clamp(32px, 5.2vh, 48px)";
   }
   addEventListener("resize",relayout);relayout();
 
@@ -1051,14 +1042,19 @@ function start(){
   }
   addEventListener("scroll",function(){var h=document.documentElement.scrollHeight-innerHeight;prog.style.transform="scaleX("+(h>0?clamp(scrollY/h,0,1):0)+")"},{passive:true});
 
+  // Interactive Particle Physics for both mouse cursor and hand/finger touch
   function onMove(e){
-    if(e.pointerType==="touch")return; // Never interfere with mobile native scrolling
-    tx=e.clientX;ty=e.clientY;if(mx<-9000){mx=pmx=tx;my=pmy=ty}pT=1;document.body.dataset.t="1";
+    tx = e.clientX;
+    ty = e.clientY;
+    if(mx < -9000){ mx = pmx = tx; my = pmy = ty; }
+    pT = 1;
+    document.body.dataset.t = "1";
   }
-  addEventListener("pointermove",function(e){if(e.pointerType==="touch")return;onMove(e);},{passive:true});
-  addEventListener("pointerdown",function(e){if(e.pointerType==="touch")return;onMove(e);},{passive:true});
-  document.addEventListener("pointerleave",function(){pT=0});
-  addEventListener("pointerup",function(e){if(e.pointerType==="touch")return;setTimeout(function(){pT=0},260);},{passive:true});
+  addEventListener("pointermove", onMove, {passive:true});
+  addEventListener("pointerdown", onMove, {passive:true});
+  document.addEventListener("pointerleave", function(){ pT = 0; });
+  addEventListener("pointerup", function(){ setTimeout(function(){ pT = 0; }, 320); }, {passive:true});
+  addEventListener("pointercancel", function(){ pT = 0; }, {passive:true});
 
   function step(S,dt,e,swirl){
     var n=S.n,ja=S.dust?0:ia,jb=S.dust?0:ib,XA=S.X[ja],XB=S.X[jb],YA=S.Y[ja],YB=S.Y[jb],off=S.off,vel=S.vel,P=S.P,AS=S.AS,sd=S.sd,ph=S.ph,act=0,R2=Rad*Rad,tn=trail.length,pr_=pres>.001,
