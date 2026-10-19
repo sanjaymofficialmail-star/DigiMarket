@@ -868,34 +868,34 @@ var MAP=[0,1,2,3,5,0,4],SIDE=["c","R","L","R","L","R","L"];
 
 function hx(h){var n=parseInt(h.slice(1),16);return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]}
 
-/* Plant Green Inertia Brand Theme: White, Forest Green & Deep Charcoal */
+/* Plant Green Inertia Brand Theme: White, Forest Green (#2d663b) & Charcoal (#201b18) */
 var BRAND_THEME = {
   n: "Plant Green Inertia",
   dark: 0,
   bg: "#ffffff",
-  fg: "#14100e",
-  mute: "rgba(20, 16, 14, 0.72)",
-  line: "rgba(24, 79, 39, 0.16)",
-  acc: "#184f27",
-  acc2: "#113c1d",
+  fg: "#201b18",
+  mute: "rgba(32, 27, 24, 0.72)",
+  line: "rgba(45, 102, 59, 0.16)",
+  acc: "#2d663b",
+  acc2: "#1f5e30",
   onacc: "#ffffff",
   card: "#ffffff",
-  field: "rgba(24, 79, 39, 0.04)",
+  field: "rgba(45, 102, 59, 0.04)",
   optbg: "#ffffff",
   p: {
-    l: ["#0f0d0c", "#184f27", "#ffffff"],
-    hl: "rgba(24, 79, 39, 0.25)",
-    hd: "rgba(15, 13, 12, 0.18)",
-    a: ["#184f27", "#0f0d0c"],
-    b: ["#184f27", "#0f0d0c"],
-    pale: "#0f0d0c",
-    mid: "#184f27",
-    deep: "#113c1d",
-    pur: "#0f0d0c",
-    acc: "#184f27",
+    l: ["#201b18", "#2d663b", "#ffffff"],
+    hl: "rgba(45, 102, 59, 0.25)",
+    hd: "rgba(32, 27, 24, 0.18)",
+    a: ["#34a853", "#2d663b"],
+    b: ["#2d8a45", "#1e6634"],
+    pale: "#201b18",
+    mid: "#2d8a45",
+    deep: "#1e6634",
+    pur: "#201b18",
+    acc: "#34a853",
     rim: "#ffffff",
-    dc: ["#184f27", "#0f0d0c", "#ffffff"],
-    sw: ["#184f27", "#0f0d0c", "#ffffff"]
+    dc: ["#2d663b", "#201b18", "#ffffff"],
+    sw: ["#2d663b", "#201b18", "#ffffff"]
   }
 };
 
@@ -915,7 +915,7 @@ function setCss(th){
 setCss(BRAND_THEME);
 
 function fillDust(DC){
-  var pal = [hx("#184f27"), hx("#0f0d0c"), hx("#113c1d"), hx("#0f0d0c"), hx("#ffffff")];
+  var pal = [hx("#2d663b"), hx("#201b18"), hx("#1a5c2a"), hx("#201b18"), hx("#ffffff")];
   for(var i=0;i<DC.length/3;i++){
     var c = pal[Math.floor(Math.random()*pal.length)];
     var q = 0.9 + Math.random()*0.1;
@@ -946,11 +946,11 @@ function buildLogo(){
   c.height = 452;
   x = c.getContext("2d");
   x.font = "800 210px " + F;
-  x.fillStyle = "#0f0d0c";
+  x.fillStyle = "#201b18";
   x.fillText("PLANT", pad, 205);
   x.fillText("GREEN", pad, 436);
   var badgeH = 422;
-  x.fillStyle = "#184f27";
+  x.fillStyle = "#2d663b";
   rr(x, bx, 14, bw, badgeH, 8);
   x.fill();
   x.save();x.translate(bx + bw / 2, 14 + badgeH / 2);x.rotate(-Math.PI / 2);x.font = "700 96px " + F;x.textAlign = "center";x.textBaseline = "middle";
@@ -979,20 +979,20 @@ function buildMega(){
   x.fillStyle=lg(x,125,0,355,0,P.a);x.beginPath();x.moveTo(125,330);x.lineTo(355,180);x.lineTo(355,520);x.lineTo(125,430);x.closePath();x.fill();
   x.fillStyle=P.rim;x.beginPath();x.ellipse(355,350,30,170,0,0,6.283);x.fill();
   x.fillStyle=P.deep;rr(x,140,425,60,170,16);x.fill();
-  x.strokeStyle=P.b[0];x.lineWidth=26;x.lineCap="round";
+  x.strokeStyle=P.acc;x.lineWidth=26;x.lineCap="round";
   [95,155,215].forEach(function(r){x.beginPath();x.arc(370,350,r+35,-.55,.55);x.stroke()});
   return c;
 }
 function buildFunnel(){
-  var c=mk(580,720),x=c.getContext("2d"),L=[[520,420,60,200],[400,300,215,200],[280,200,370,200],[110,110,525,150]],cols=[[P.b[0],P.mid],[P.mid,P.deep],[P.pur,P.acc],[P.a[0],P.a[1]]];
+  var c=mk(580,720),x=c.getContext("2d"),L=[[520,420,60,200],[400,300,215,200],[280,200,370,200],[110,110,525,150]],cols=[[P.a[0],P.mid],[P.mid,P.deep],[P.pur,P.acc],[P.a[0],P.acc]];
   L.forEach(function(l,i){var cx=290,y=l[2],h=i===3?150:130;x.fillStyle=lg(x,0,y,0,y+h,cols[i]);x.beginPath();x.moveTo(cx-l[0]/2,y);x.lineTo(cx+l[0]/2,y);x.lineTo(cx+l[1]/2,y+h);x.lineTo(cx-l[1]/2,y+h);x.closePath();x.fill()});
   return c;
 }
 function buildTarget(){
   var c=mk(620,720),x=c.getContext("2d"),cs=[P.mid,P.pale,P.mid,P.pale,P.acc],rs=[250,200,150,100,50];
   rs.forEach(function(r,i){x.fillStyle=cs[i];x.beginPath();x.arc(290,380,r,0,6.283);x.fill()});
-  x.strokeStyle=P.a[1];x.lineWidth=16;x.lineCap="round";x.beginPath();x.moveTo(290,380);x.lineTo(500,170);x.stroke();
-  x.fillStyle=P.a[1];x.beginPath();x.moveTo(530,140);x.lineTo(480,150);x.lineTo(510,180);x.closePath();x.fill();
+  x.strokeStyle=P.acc;x.lineWidth=16;x.lineCap="round";x.beginPath();x.moveTo(290,380);x.lineTo(500,170);x.stroke();
+  x.fillStyle=P.acc;x.beginPath();x.moveTo(530,140);x.lineTo(480,150);x.lineTo(510,180);x.closePath();x.fill();
   x.beginPath();x.moveTo(530,140);x.lineTo(515,95);x.lineTo(480,130);x.closePath();x.fill();
   x.beginPath();x.moveTo(530,140);x.lineTo(575,155);x.lineTo(540,185);x.closePath();x.fill();return c;
 }
@@ -1031,22 +1031,28 @@ function start(){
     geo.setAttribute("aAS",new THREE.BufferAttribute(S.AS,2).setUsage(THREE.DynamicDrawUsage));
     S.geo=geo;
     S.pts=new THREE.Points(geo,new THREE.RawShaderMaterial({uniforms:{uRes:{value:S.res},uPx:{value:pr},uDot:S.dot},transparent:true,depthTest:false,premultipliedAlpha:true,
-      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){vC=aCol;vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=clamp(uDot*uPx*(1.+min(aAS.y,3.0)*.05),1.8,4.8);}",
+      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.32+.10,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=clamp(uDot*uPx*(1.+min(aAS.y,3.0)*.05),1.8,4.8);}",
       fragmentShader:`precision highp float;
         varying vec3 vC;
         varying float vA;
         void main(){
           float d = length(gl_PointCoord - 0.5);
-          float a = smoothstep(0.5, 0.36, d) * min(1.0, vA * 1.35);
-          if(a < 0.005) discard;
+          float a = smoothstep(0.5, 0.22, d) * vA;
+          if(a < 0.004) discard;
           vec3 col = vC;
-          float isWhite = step(0.80, (col.r + col.g + col.b) / 3.0);
-          if(isWhite < 0.5){
-            col = pow(col, vec3(1.32)) * 0.88;
+          
+          // Boost brightness & vibrancy
+          if(col.g > col.r * 1.05){
+            // Luminous, bright leaf green
+            col = min(col * 1.30 + vec3(0.04, 0.12, 0.04), vec3(1.0));
           } else {
-            vec3 greenRim = vec3(0.09, 0.31, 0.15);
-            col = mix(greenRim, vec3(1.0), smoothstep(0.42, 0.18, d));
+            // Clean charcoal without being overly black
+            col = min(col * 1.18 + 0.05, vec3(1.0));
           }
+          
+          float isWhite = step(0.80, (vC.r + vC.g + vC.b) / 3.0);
+          vec3 greenRim = vec3(0.20, 0.52, 0.28);
+          col = mix(col, mix(greenRim, vec3(1.0), smoothstep(0.42, 0.16, d)), isWhite);
           gl_FragColor = vec4(col * a, a);
         }`}));
     S.pts.frustumCulled=false;S.pts.renderOrder=order;scene.add(S.pts);return S;
