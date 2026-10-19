@@ -37,9 +37,10 @@ a{color:inherit}
 #stage{position:fixed;inset:0;z-index:1;pointer-events:none}
 #stage canvas{display:block;width:100%;height:100%}
 header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:8;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px var(--pad) 24px;background:linear-gradient(var(--bg) 62%,var(--bgt));transition:background .3s}
-.logo{display:flex;gap:.3rem;text-decoration:none;font-family:"Barlow Condensed",sans-serif;font-weight:800;text-transform:uppercase;line-height:.86;font-size:1.3rem}
-.logo b{display:block}
-.logo i{display:flex;align-items:center;background:var(--acc);color:var(--onacc);font-style:normal;font-size:.6rem;letter-spacing:.14em;writing-mode:vertical-rl;transform:rotate(180deg);padding:.3rem .18rem;transition:background .3s,color .3s}
+.logo{display:inline-flex;align-items:center;text-decoration:none;transition:opacity .2s}
+.logo:hover{opacity:0.9}
+.site-logo-img{height:34px;width:auto;max-width:170px;object-fit:contain;display:block}
+.footer-logo-img{height:42px;max-width:200px}
 .links{display:flex;align-items:center;gap:clamp(16px,2.2vw,32px);list-style:none;padding:0}
 .links a{text-decoration:none;font-size:13.5px;opacity:.75;transition:opacity .2s,color .2s}
 .links a:hover{opacity:1}
@@ -90,7 +91,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .header-partner-badge{display:inline-flex;align-items:center;gap:5px;background:color-mix(in srgb,var(--acc) 10%,transparent);border:1px solid color-mix(in srgb,var(--acc) 28%,transparent);color:var(--acc);padding:3px 8px;border-radius:99px;font-size:10px;font-weight:500;letter-spacing:0.01em;white-space:nowrap;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .header-partner-badge .partner-dot{width:5px;height:5px;border-radius:50%;background:var(--acc);box-shadow:0 0 5px var(--acc);flex-shrink:0}
 @media(max-width:860px){.header-partner-badge{display:none}}
-h1{font-weight:500;font-size:clamp(38px,min(6.2vw,11vh),116px);line-height:.92;letter-spacing:-.045em;text-wrap:balance}
+.hero-left-col{max-width:640px;background:none !important;border:none !important;box-shadow:none !important;padding:0 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+h1{font-weight:600;font-size:clamp(34px,min(4.8vw,8.5vh),82px);line-height:.96;letter-spacing:-.04em;text-wrap:balance;margin-bottom:0.2rem}
 h1 span{display:block}
 .aside{max-width:420px;justify-self:end;padding:1.3rem 1.5rem;background:color-mix(in srgb,var(--card) 95%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:22px;box-shadow:0 16px 45px rgba(0,0,0,0.07)}
 .aside p{font-size:clamp(13.5px,1vw,15px);line-height:1.45}
@@ -454,13 +456,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
 <!-- Main Top Header -->
 <header id="nav">
-  <div style="display:flex;align-items:center;gap:clamp(10px,1.8vw,20px)">
-    <a class="logo" href="#top" aria-label="Plant Green Inertia Pvt. Ltd."><span><b>Plant</b><b>Green</b></span><i>Inertia</i></a>
-    <div class="header-partner-badge">
-      <span class="partner-dot"></span>
-      <span>Official Training Partner of <b>TN Skills · TNSDC</b></span>
-    </div>
-  </div>
+  <a class="logo" href="#top" aria-label="Plant Green Inertia Pvt. Ltd."><img src="/logo_clean.png" alt="Plant Green Inertia" class="site-logo-img" /></a>
   <ul class="links">
     <li><a href="#curriculum">Course</a></li>
     <li><a href="#pricing">Pricing</a></li>
@@ -475,11 +471,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     <div class="bd" id="bd" aria-hidden="true">skills</div>
     <div class="sp"></div>
     <div class="hc" id="hcontent">
-      <div>
-        <div class="eyebrow-badge">
-          <span class="partner-dot"></span>
-          <span>Official Training Partner of TN Skills · TNSDC</span>
-        </div>
+      <div class="hero-left-col">
         <h1><span>Master digital marketing.</span><span class="acc">Get career-ready.</span></h1>
       </div>
       <div class="aside">
@@ -492,7 +484,6 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec" id="why">
     <div class="blk">
-      <div class="card-badge">Practical Skills</div>
       <h2><span class="line"><span class="l">Skills employers</span></span><span class="line"><span class="l acc" style="--d:.1s">actually hire for.</span></span></h2>
       <p class="rv rv-lead">Bridging college and corporate through immersive, tool-first marketing training.</p>
       <ul class="rows">
@@ -506,7 +497,6 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec L" id="curriculum">
     <div class="blk w">
-      <div class="card-badge">Comprehensive Curriculum</div>
       <h2><span class="line"><span class="l">Everything you need,</span></span><span class="line"><span class="l acc" style="--d:.1s">in one course.</span></span></h2>
       <ul class="topics">
         <li class="rv" style="--i:0"><h3>AI SEO</h3><p>Keywords &amp; rank optimisation</p></li>
@@ -522,7 +512,6 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec" id="learn">
     <div class="blk">
-      <div class="card-badge">How You Learn</div>
       <h2><span class="line"><span class="l">Learn it by</span></span><span class="line"><span class="l acc" style="--d:.1s">doing it.</span></span></h2>
       <ol class="rows steps">
         <li class="rv" style="--i:0"><h3>Core Playbooks</h3><p>Concise lessons on proven growth frameworks.</p></li>
@@ -536,7 +525,6 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec L" id="pricing">
     <div class="blk w">
-      <div class="card-badge">Subsidized Pricing</div>
       <h2><span class="line"><span class="l">Choose how</span></span><span class="line"><span class="l acc" style="--d:.1s">you learn.</span></span></h2>
       <div class="cards">
         <div class="card rv" style="--i:0">
@@ -577,7 +565,6 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec" id="company">
     <div class="blk">
-      <div class="card-badge">Official Training Partner of TN Skills · TNSDC</div>
       <h2><span class="line"><span class="l">About</span></span><span class="line"><span class="l acc" style="--d:.1s">Plant Green Inertia.</span></span></h2>
       <p class="rv rv-lead">Official Training Partner of TN Skills, Tamil Nadu Skill Development Corporation (TNSDC). Empowering students and graduates with practical, high-demand skills to launch successful careers in digital marketing and tech.</p>
       <div class="badges rv" style="--i:1">
@@ -592,7 +579,6 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
   <!-- Section 7: Concise Course Info in Form Section (Short & High Impact with Background Card) -->
   <section class="sec L" id="enroll">
     <div class="blk">
-      <div class="card-badge">Official Training Partner of TN Skills · TNSDC</div>
       <h2>
         <span class="line"><span class="l">Next cohort</span></span>
         <span class="line"><span class="l acc" style="--d:.1s">now open.</span></span>
@@ -629,7 +615,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 <footer id="footer">
   <div class="fgrid">
     <div class="fbrand">
-      <a class="logo" href="#top" aria-label="Plant Green Inertia"><span><b>Plant</b><b>Green</b></span><i>Inertia</i></a>
+      <a class="logo" href="#top" aria-label="Plant Green Inertia"><img src="/logo_clean.png" alt="Plant Green Inertia" class="site-logo-img footer-logo-img" /></a>
       <p>The World's First Experiential Training Company, bridging college and corporate through immersive learning.</p>
       <a class="btn" href="#application/forms">Enroll now</a>
     </div>
@@ -1045,7 +1031,7 @@ function start(){
     geo.setAttribute("aAS",new THREE.BufferAttribute(S.AS,2).setUsage(THREE.DynamicDrawUsage));
     S.geo=geo;
     S.pts=new THREE.Points(geo,new THREE.RawShaderMaterial({uniforms:{uRes:{value:S.res},uPx:{value:pr},uDot:S.dot},transparent:true,depthTest:false,premultipliedAlpha:true,
-      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.2+.08,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=uDot*uPx*(1.+aAS.y*.14);}",
+      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.2+.08,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=clamp(uDot*uPx*(1.+min(aAS.y,3.0)*.05),1.5,4.8);}",
       fragmentShader:`precision highp float;
         varying vec3 vC;
         varying float vA;
@@ -1103,8 +1089,8 @@ function start(){
     for(var s=0;s<secs.length;s++){
       var side=SIDE[s],ap=shapes[MAP[s]].asp,T;
       if(s===0){
-        if(W < 900) T={x:W/2, y:Math.max(120, Math.min(H*0.20, (top+bot)/2)), s:Math.min(H*0.20, (W*0.78)/asp0)};
-        else T={x:W/2, y:(top+bot)/2, s:rw/asp0};
+        if(W < 900) T={x:W/2, y:Math.max(120, Math.min(H*0.20, (top+bot)/2)), s:Math.min(H*0.20, (W*0.75)/asp0)};
+        else T={x:W/2, y:(top+bot)/2, s:Math.min(H*0.36, Math.min(270, (W*0.38)/asp0))};
       }
       else if(W>=900){
         var maxW = Math.min(W, 1240);
@@ -1116,7 +1102,7 @@ function start(){
       secTargets.push(T);
     }
     if(!cur.init){cur.x=secTargets[0].x;cur.y=secTargets[0].y;cur.s=secTargets[0].s;cur.init=true}
-    bd.style.fontSize=Math.min(bh*.95,W*.92/(6*.56))+"px";bd.style.top=(top+bot)/2+"px";
+    bd.style.fontSize=Math.min(bh*.65,130)+"px";bd.style.top=(top+bot)/2+"px";bd.style.left="50%";
   }
   addEventListener("resize",relayout);relayout();
 
@@ -1135,7 +1121,27 @@ function start(){
     for(var s=0;s<secs.length;s++){var b=secs[s].getBoundingClientRect();if(b.top<h*.75)secs[s].classList.add("in");if(b.top<=h*.5&&b.bottom>h*.5)best=s}
     if(best!==activeSec){activeSec=best;want=MAP[best]}
   }
-  addEventListener("scroll",function(){var h=document.documentElement.scrollHeight-innerHeight;prog.style.transform="scaleX("+(h>0?clamp(scrollY/h,0,1):0)+")"},{passive:true});
+  var isScrolling = false;
+  var scrollVel = 0;
+  var lastScrollY = window.scrollY;
+  var scrollStopTimer = null;
+  var scrollDisp = 0;
+
+  addEventListener("scroll", function(){
+    var curY = window.scrollY;
+    var diff = Math.abs(curY - lastScrollY);
+    lastScrollY = curY;
+    scrollVel = Math.min(1.0, scrollVel + Math.min(diff * 0.015, 0.3));
+    isScrolling = true;
+    
+    var h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = "scaleX(" + (h > 0 ? clamp(scrollY / h, 0, 1) : 0) + ")";
+
+    clearTimeout(scrollStopTimer);
+    scrollStopTimer = setTimeout(function(){
+      isScrolling = false;
+    }, 140);
+  }, { passive: true });
 
   // Interactive Particle Physics for both mouse cursor and hand/finger touch
   function onMove(e){
@@ -1170,11 +1176,19 @@ function start(){
         ax+=(c1+.5*cvx)*E*1.2*TURB*lt;ay+=(c2+.5*cvy)*E*1.2*TURB*lt;
       }
       if(swirl>.002){ax+=Math.sin(py*.012+t*2)*swirl*.9*lt;ay+=Math.cos(px*.012-t*1.6)*swirl*.9*lt}
-      var kk=.026*(.65+sd[i]*.7)*(1-swirl*.75);ax-=ox*kk;ay-=oy*kk;
-      vx+=ax*dt;vy+=ay*dt;var dm=Math.pow(.93+.025*E,dt);vx*=dm;vy*=dm;ox+=vx*dt;oy+=vy*dt;
+      if(scrollDisp>0.02){
+        var flow=scrollDisp*2.8*lt;
+        ax+=Math.sin(sd[i]*6.28+t*2.5)*flow;
+        ay+=Math.cos(ph[i]*6.28-t*2.0)*flow;
+      }
+      var kk=.032*(.65+sd[i]*.7)*Math.max(0.2, 1-swirl*.55);ax-=ox*kk;ay-=oy*kk;
+      vx+=ax*dt;vy+=ay*dt;var dm=Math.pow(.90+.025*E,dt);vx*=dm;vy*=dm;ox+=vx*dt;oy+=vy*dt;
+      var maxOff = 48;
+      if(ox > maxOff) ox = maxOff; else if(ox < -maxOff) ox = -maxOff;
+      if(oy > maxOff) oy = maxOff; else if(oy < -maxOff) oy = -maxOff;
       var o2=ox*ox+oy*oy;if(o2<.0004&&vx*vx+vy*vy<.0004){ox=oy=vx=vy=0}
       off[k]=ox;off[k+1]=oy;vel[k]=vx;vel[k+1]=vy;
-      P[k]=hx+ox;P[k+1]=hy+oy;AS[k]=Math.max(E,sstep(.35,2.5,Math.sqrt(o2)),rest);AS[k+1]=Math.sqrt(vx*vx+vy*vy);
+      P[k]=hx+ox;P[k+1]=hy+oy;AS[k]=Math.max(E,sstep(.35,2.5,Math.sqrt(o2)),rest);AS[k+1]=Math.min(6,Math.sqrt(vx*vx+vy*vy));
       if(E>0||o2>.0004)act++;
     }
     S.geo.attributes.position.needsUpdate=true;S.geo.attributes.aAS.needsUpdate=true;return act;
@@ -1190,6 +1204,13 @@ function start(){
     if(introT<1)introT=Math.min(1,introT+Math.min(ms,100)/3200);
     t+=dt/60*(1+pres*1.6);
     
+    // Smooth scroll dispersion: organic when scrolling, settles when stopped
+    var targetDisp = isScrolling ? Math.min(0.6, 0.2 + scrollVel * 0.4) : 0;
+    var dispRate = isScrolling ? 0.22 : 0.08;
+    scrollDisp += (targetDisp - scrollDisp) * (1 - Math.pow(1 - dispRate, dt));
+    scrollVel *= Math.pow(0.88, dt);
+    if(scrollVel < 0.001) scrollVel = 0;
+    
     // Smoothly anchor the final particle to form section (#enroll) when scrolling to footer
     var T=secTargets[activeSec];
     if(activeSec === 6 && secs[6]){
@@ -1203,9 +1224,16 @@ function start(){
     
     var lk=1-Math.pow(1-.07,dt);cur.x+=(T.x-cur.x)*lk;cur.y+=(T.y-cur.y)*lk;cur.s+=(T.s-cur.s)*lk;cx=cur.x;cy=cur.y;SZ=cur.s;
     if(m<1)m=Math.min(1,m+ms/1700);else if(want!==ib){ia=ib;ib=want;m=0;colDirty=true}
-    var e=m*m*(3-2*m),swirl=rm?0:Math.max(Math.pow(1-introT,2),4*m*(1-m)*.9);
-    var tgtImg=(ib===0&&m>=1&&introT>=.75)?1:0;imgA+=(tgtImg-imgA)*(1-Math.pow(1-.08,dt));if(Math.abs(tgtImg-imgA)<.003)imgA=tgtImg;
-    imgU.uShow.value=imgA;imgU.uRect.value.set(cx-asp0*SZ/2,cy-SZ/2,asp0*SZ,SZ);
+    var e=m*m*(3-2*m);
+    var baseSwirl=rm?0:Math.max(Math.pow(1-introT,2),4*m*(1-m)*.9);
+    var swirl=Math.max(baseSwirl, scrollDisp * 0.7);
+    
+    var atTop = window.scrollY < 20;
+    var tgtImg = (ib === 0 && m >= 1 && introT >= 0.75 && atTop && !isScrolling && scrollDisp < 0.04) ? 1 : 0;
+    imgA += (tgtImg - imgA) * (1 - Math.pow(1 - (tgtImg === 0 ? 0.35 : 0.07), dt));
+    if (Math.abs(tgtImg - imgA) < 0.002) imgA = tgtImg;
+    imgU.uShow.value = imgA;
+    imgU.uRect.value.set(cx - asp0 * SZ / 2, cy - SZ / 2, asp0 * SZ, SZ);
     main.dot.value=clamp(SZ*.0085,2.4,4.2);
     if(pres>.02)trail.push({x:mx,y:my,s:pres});
     var dec=Math.pow(.955,dt),j;for(j=0;j<trail.length;j++)trail[j].s*=dec;
@@ -1287,7 +1315,7 @@ if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('800 10
   // SPA Route Handling for http://localhost:5174/#application/forms
   function handleRouting() {
     var hash = window.location.hash || '';
-    if (hash === '#application/forms' || hash.indexOf('#application') === 0) {
+    if (hash === '#application/forms' || hash.indexOf('#application') === 0 || hash === '#apply' || hash === '#form' || hash === '#forms') {
       document.body.classList.add('in-application-portal');
       if (hash !== '#application/forms') {
         try { history.replaceState(null, '', '#application/forms'); } catch(e){ window.location.hash = '#application/forms'; }
