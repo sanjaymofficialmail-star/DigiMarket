@@ -1,19 +1,36 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+}
+
 :root {
-  color-scheme: dark;
-  --bg: #000000;
-  --bg-subtle: #08080a;
-  --bg-card: rgba(14, 14, 18, 0.88);
-  --fg: #ffffff;
-  --mute: rgba(255, 255, 255, 0.82);
-  --faint: rgba(255, 255, 255, 0.5);
-  --line: rgba(255, 255, 255, 0.16);
-  --gold: #ffffff;
-  --gold-bright: #ffffff;
-  --gold-glow: rgba(255, 255, 255, 0.45);
-  --amber: #e4e4e7;
-  --amber-glow: rgba(255, 255, 255, 0.25);
+  --background: #ffffff;
+  --foreground: #09090b;
+  --primary: #10b981;
+  --primary-foreground: #ffffff;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-subtle: #fbfcfb;
+  --bg-card: rgba(255, 255, 255, 0.94);
+  --fg: #201b18;
+  --mute: rgba(32, 27, 24, 0.72);
+  --faint: rgba(32, 27, 24, 0.45);
+  --line: rgba(45, 102, 59, 0.16);
+  --gold: #2d663b;
+  --gold-bright: #3e824f;
+  --gold-glow: rgba(45, 102, 59, 0.35);
+  --amber: #1f5e30;
+  --amber-glow: rgba(31, 94, 48, 0.25);
   --pad: clamp(20px, 3.8vw, 56px);
   --head: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   --condensed: 'Barlow Condensed', sans-serif;

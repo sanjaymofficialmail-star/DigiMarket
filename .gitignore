@@ -5,3 +5,8 @@ dist/
 client_secret*.json
 *.log
 .DS_Store
+*.mp4
+extracted_frames/
+extracted_interaction_frames/
+loading_animation_frames/
+scratch/

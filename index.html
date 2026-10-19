@@ -10,18 +10,18 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <style>
 :root{
-  color-scheme:dark;
-  --bg:#09060f;
-  --bgt:rgba(9,6,15,0);
-  --fg:#f4f0ff;
-  --mute:rgba(244,240,255,.68);
-  --line:rgba(244,240,255,.16);
-  --acc:#ff3b81;
-  --acc2:#ffa8c5;
+  color-scheme:light;
+  --bg:#ffffff;
+  --bgt:rgba(255,255,255,0);
+  --fg:#201b18;
+  --mute:rgba(32,27,24,.72);
+  --line:rgba(45,102,59,.16);
+  --acc:#2d663b;
+  --acc2:#1f5e30;
   --onacc:#ffffff;
-  --card:rgba(14,10,24,.88);
-  --field:rgba(244,240,255,.07);
-  --optbg:#140c22;
+  --card:#ffffff;
+  --field:rgba(45,102,59,.04);
+  --optbg:#ffffff;
   --pad:clamp(20px,3.2vw,48px);
   --head:'Geist','Helvetica Neue',Arial,sans-serif;
   --serif:'Instrument Serif','Times New Roman',serif;
@@ -46,9 +46,6 @@ header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:8;
 .links .pill{opacity:1;padding:8px 18px;border-radius:99px;background:var(--acc);color:var(--onacc);font-weight:600;transition:transform .2s,background .3s,color .3s}
 .links .pill:hover{transform:translateY(-1px);filter:brightness(1.1)}
 
-/* Theme Icon Only Button */
-.theme-icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s ease;backdrop-filter:blur(8px);padding:0}
-.theme-icon-btn:hover{border-color:var(--acc);color:var(--acc);transform:scale(1.06)}
 
 #prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:2px;z-index:9;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:background .3s}
 main{position:relative;z-index:3}
@@ -94,7 +91,7 @@ h1 span{display:block}
 .aside .price{color:var(--fg);margin-top:.9rem;font-size:1rem}
 .price s,.was{opacity:.5}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1.4rem}
-.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;padding:1.2rem;background:var(--card);backdrop-filter:blur(8px)}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;padding:1.2rem;background:var(--card);box-shadow:0 4px 20px rgba(45,102,59,0.06);backdrop-filter:blur(8px)}
 .card .k{font-size:.85rem;letter-spacing:.04em;color:var(--mute)}
 .card .was{text-decoration:line-through;margin-top:.7rem;font-size:1rem}
 .card .now{font-size:2.5rem;font-weight:500;letter-spacing:-.04em;line-height:1.05}
@@ -109,17 +106,19 @@ h1 span{display:block}
 /* ==========================================================================
    Full Footer Section (referenced from Digital Marketing Course (3).html)
    ========================================================================== */
-footer{position:relative;z-index:3;background:var(--bg);border-top:1px solid var(--line);padding:4rem var(--pad) 5.5rem;transition:background .3s}
-.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:2.5rem}
-.fbrand p{margin:1.1rem 0 1.4rem;max-width:26rem;font-size:.95rem}
-footer h4{font-weight:500;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:1rem}
+footer{position:relative;z-index:3;background:var(--bg);border-top:1px solid var(--line);padding:4rem var(--pad) 4.5rem;transition:background .3s}
+.fgrid{display:grid;grid-template-columns:1.5fr 1.1fr 1fr 1.2fr;gap:2.5rem}
+.fbrand p{margin:1.1rem 0 1.4rem;max-width:26rem;font-size:.95rem;line-height:1.6;color:var(--mute)}
+footer h4{font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);margin-bottom:1rem}
 footer ul{list-style:none;padding:0;display:grid;gap:.7rem}
-footer nav a{text-decoration:none;font-size:.95rem;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s;padding-bottom:2px;word-break:break-word}
-footer nav a:hover,footer nav a:focus-visible{background-size:100% 1px}
+footer a{text-decoration:none;font-size:.92rem;color:var(--mute);transition:color .2s ease}
+footer a:hover,footer a:focus-visible{color:var(--acc)}
+footer .f-addr{font-size:.92rem;line-height:1.6;color:var(--mute)}
 .fbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem 2rem;margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--mute)}
 .fbar a{color:var(--fg);text-decoration:none}
-@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}.fbrand{grid-column:1/-1}}
-@media(max-width:520px){.fgrid{grid-template-columns:1fr}}
+.fbar a:hover{color:var(--acc)}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr;gap:2rem}.fbrand{grid-column:1/-1}}
+@media(max-width:520px){.fgrid{grid-template-columns:1fr;gap:1.8rem}}
 
 /* Body class to force-hide landing page when application portal is open */
 body.in-application-portal {
@@ -168,8 +167,6 @@ body.in-application-portal #application-portal {
 .app-back-btn{position:fixed;top:1.2rem;left:clamp(1rem,3vw,2.5rem);z-index:120;display:inline-flex;align-items:center;gap:0.45rem;background:var(--card);border:1px solid var(--line);color:var(--fg);padding:0.55rem 1.15rem;border-radius:99px;font-size:0.82rem;font-weight:600;text-decoration:none;cursor:pointer;backdrop-filter:blur(12px);transition:all .2s ease}
 .app-back-btn:hover{border-color:var(--acc);color:var(--acc);transform:translateX(-2px)}
 
-.app-theme-btn{position:fixed;top:1.2rem;right:clamp(1rem,3vw,2.5rem);z-index:120;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);transition:all .2s ease;padding:0}
-.app-theme-btn:hover{border-color:var(--acc);color:var(--acc);transform:scale(1.08)}
 
 @keyframes modalCardEntrance{
   0%{opacity:0;transform:scale(0.92) translateY(22px);filter:blur(8px)}
@@ -419,7 +416,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
   }
 }
 @media(max-width:767px){
-  .links li:not(.k):not(.theme-li){display:none}
+  .links li:not(.k){display:none}
   .links{gap:10px !important}
   .links .pill{padding:7px 14px !important;font-size:12.5px !important}
   header{padding:14px var(--pad) 16px !important}
@@ -442,6 +439,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 <canvas id="gold-canvas" aria-hidden="true"></canvas>
 <div id="gold-vignette" aria-hidden="true"></div>
 <div id="stage" aria-hidden="true"></div>
+<img id="pgi-clean-logo" src="/logo_clean.png" alt="logo" style="display:none;" />
 
 <!-- Main Top Header -->
 <header id="nav">
@@ -450,24 +448,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     <li><a href="#curriculum">Course</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#company">About</a></li>
-    <li class="theme-li">
-      <button type="button" class="theme-icon-btn" id="theme-toggle-header" aria-label="Toggle light or dark theme" title="Toggle theme">
-        <svg class="theme-icon-moon" id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-        <svg class="theme-icon-sun" id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-      </button>
-    </li>
+
     <li class="k"><a class="pill" href="#application/forms">Enroll now</a></li>
   </ul>
 </header>
@@ -590,24 +571,36 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 <footer id="footer">
   <div class="fgrid">
     <div class="fbrand">
-      <a class="logo" href="#top" aria-label="Plant Green Inertia Pvt. Ltd."><span><b>Plant</b><b>Green</b></span><i>Inertia</i></a>
-      <p>Plant Green Inertia Pvt. Ltd. — industry-aligned digital marketing training, delivered as an Official Training Partner of TN Skills, TNSDC.</p>
+      <a class="logo" href="#top" aria-label="Plant Green Inertia"><span><b>Plant</b><b>Green</b></span><i>Inertia</i></a>
+      <p>The World's First Experiential Training Company, bridging college and corporate through immersive learning.</p>
       <a class="btn" href="#application/forms">Enroll now</a>
     </div>
-    <nav aria-label="Course">
-      <h4>Course</h4>
-      <ul><li><a href="#curriculum">Topics covered</a></li><li><a href="#learn">How you learn</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#application/forms">Enroll</a></li></ul>
-    </nav>
-    <nav aria-label="Company">
-      <h4>Company</h4>
-      <ul><li><a href="#company">About us</a></li><li><a href="#why">Why choose us</a></li><li><a href="#company">Training partnership</a></li><li><a href="#application/forms">Contact us</a></li></ul>
-    </nav>
-    <nav aria-label="Partner and contact">
-      <h4>Partner &amp; contact</h4>
-      <ul><li><a href="https://www.tnskill.tn.gov.in" target="_blank" rel="noopener">TN Skills (TNSDC) ↗</a></li><li><a href="mailto:hello@plantgreeninertia.com">hello@plantgreeninertia.com</a></li></ul>
-    </nav>
+    <div class="fcol">
+      <h4>Office</h4>
+      <p class="f-addr">No: 4, Alapakkam Main Road, Maduravoyal, Chennai - 600095</p>
+    </div>
+    <div class="fcol">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="tel:9345029705">9345029705</a></li>
+        <li><a href="tel:9345886690">9345886690</a></li>
+        <li><a href="mailto:plantgreeninertia@gmail.com">plantgreeninertia@gmail.com</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Follow Us</h4>
+      <ul class="f-socials">
+        <li><a href="https://www.instagram.com/pginertia?stkn=MWZ6NHE1NHp1dWVvcQ==" target="_blank" rel="noopener">Instagram ↗</a></li>
+        <li><a href="https://youtube.com/@plantgreeninertia" target="_blank" rel="noopener">YouTube ↗</a></li>
+        <li><a href="https://www.linkedin.com/company/plantgreeninertia/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a href="https://wa.me/919345029705" target="_blank" rel="noopener">WhatsApp ↗</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="fbar"><span>© 2026 Plant Green Inertia Pvt. Ltd. All rights reserved.</span><span>Official Training Partner of TN Skills, TNSDC</span><a href="#top">Back to top ↑</a></div>
+  <div class="fbar">
+    <span>© 2026 Plant Green Inertia. Developed with Passion.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
 </footer>
 
 <!-- ==========================================================================
@@ -623,23 +616,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     <span>Back to Overview</span>
   </a>
 
-  <!-- Dedicated Theme Toggle Button inside Form Portal -->
-  <button type="button" class="app-theme-btn" id="app-theme-toggle" aria-label="Toggle light or dark theme" title="Toggle theme">
-    <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-    <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
-  </button>
+
 
   <div class="app-modal-card">
     <div class="app-header">
@@ -847,54 +824,62 @@ var MAP=[0,1,2,3,5,0,4],SIDE=["c","R","L","R","L","R","L"];
 
 function hx(h){var n=parseInt(h.slice(1),16);return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]}
 
-/* User Themes: Violet Pulse (Dark) and Clean Light (White) */
-var THEMES=[
-{n:"Violet Pulse (Dark)",dark:1,bg:"#09060f",fg:"#f4f0ff",mute:"rgba(244,240,255,.68)",line:"rgba(244,240,255,.16)",acc:"#ff3b81",acc2:"#ffa8c5",onacc:"#ffffff",card:"rgba(14,10,24,.88)",field:"rgba(244,240,255,.07)",optbg:"#140c22",
- p:{l:["#f6f0ff","#b48cff","#5a2bd8"],hl:"rgba(255,255,255,.16)",hd:"rgba(40,10,80,.25)",a:["#ff3b81","#d1176f"],b:["#c8aaff","#6a3be0"],pale:"#efe6ff",mid:"#9a6bff",deep:"#7b4df0",pur:"#e66bd0",acc:"#ff3b81",rim:"#ffd0e6",dc:["#9a6bff","#ff3b81"],sw:["#b48cff","#ff3b81","#efe6ff"]}},
-{n:"Clean Light (White)",dark:0,bg:"#ffffff",fg:"#0e1220",mute:"rgba(14,18,32,.66)",line:"rgba(14,18,32,.14)",acc:"#ff5722",acc2:"#d84315",onacc:"#ffffff",card:"rgba(255,255,255,.94)",field:"rgba(14,18,32,.05)",optbg:"#ffffff",
- p:{l:["#1b2347","#3548c8","#6f8bff"],hl:"rgba(255,255,255,.1)",hd:"rgba(255,255,255,.12)",a:["#ff7a59","#e03a14"],b:["#6f8bff","#2b3fc4"],pale:"#a9b8ff",mid:"#4f6bff",deep:"#3348d6",pur:"#8a5cff",acc:"#ff5722",rim:"#ffc9b5",dc:["#4f6bff","#ff5722"],sw:["#3548c8","#ff5722","#a9b8ff"]}},
-{n:"Midnight Coral",dark:1,bg:"#070912",fg:"#eef1ff",mute:"rgba(238,241,255,.68)",line:"rgba(238,241,255,.16)",acc:"#ff7a59",acc2:"#ffb199",onacc:"#1a0a05",card:"rgba(7,9,18,.8)",field:"rgba(238,241,255,.06)",optbg:"#0d1020",
- p:{l:["#f2f5ff","#8da2ff","#3b2fc9"],hl:"rgba(255,255,255,.16)",hd:"rgba(10,10,60,.22)",a:["#ffa56e","#e8452c"],b:["#9fb8ff","#3a4fd8"],pale:"#e4eaff",mid:"#6f8bff",deep:"#5b7cff",pur:"#c070d8",acc:"#ff7a59",rim:"#ffd6c2",dc:["#7388ff","#ff7a59"],sw:["#8da2ff","#ff7a59","#e4eaff"]}}
-];
+/* Plant Green Inertia Brand Theme: White, Forest Green (#2d663b) & Minimal Black (#201b18) from logo.png */
+var BRAND_THEME = {
+  n: "Plant Green Inertia",
+  dark: 0,
+  bg: "#ffffff",
+  fg: "#201b18",
+  mute: "rgba(32, 27, 24, 0.72)",
+  line: "rgba(45, 102, 59, 0.16)",
+  acc: "#2d663b",
+  acc2: "#1f5e30",
+  onacc: "#ffffff",
+  card: "#ffffff",
+  field: "rgba(45, 102, 59, 0.04)",
+  optbg: "#ffffff",
+  p: {
+    l: ["#201b18", "#2d663b", "#ffffff"],
+    hl: "rgba(45, 102, 59, 0.25)",
+    hd: "rgba(32, 27, 24, 0.18)",
+    a: ["#2d663b", "#201b18"],
+    b: ["#2d663b", "#201b18"],
+    pale: "#201b18",
+    mid: "#2d663b",
+    deep: "#1a5c2a",
+    pur: "#201b18",
+    acc: "#2d663b",
+    rim: "#ffffff",
+    dc: ["#2d663b", "#201b18", "#ffffff"],
+    sw: ["#2d663b", "#201b18", "#ffffff"]
+  }
+};
 
-// Detect User's Default Browser Theme Preference
-var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-var ti = prefersDark ? 0 : 1;
 try {
-  var saved = localStorage.getItem("pgi-theme");
-  if (saved !== null && THEMES[+saved]) ti = +saved;
+  localStorage.removeItem("pgi-theme");
+  localStorage.removeItem("pgi-theme-custom");
 } catch(e){}
 
-var P = THEMES[ti].p;
+var P = BRAND_THEME.p;
 function setCss(th){
   var r = document.documentElement.style, b = hx(th.bg);
   r.setProperty("--bg", th.bg);
   r.setProperty("--bgt", "rgba(" + Math.round(b[0]*255) + "," + Math.round(b[1]*255) + "," + Math.round(b[2]*255) + ",0)");
   ["fg","mute","line","acc","acc2","onacc","card","field","optbg"].forEach(function(k){ r.setProperty("--"+k, th[k]); });
-  r.colorScheme = th.dark ? "dark" : "light";
-  
-  // Update theme icons everywhere (both header and application form)
-  document.querySelectorAll(".theme-icon-moon").forEach(function(el){
-    el.style.display = th.dark ? "none" : "block";
-  });
-  document.querySelectorAll(".theme-icon-sun").forEach(function(el){
-    el.style.display = th.dark ? "block" : "none";
-  });
+  r.colorScheme = "light";
 }
-setCss(THEMES[ti]);
+setCss(BRAND_THEME);
 
-// Listen to browser theme changes if not locked by user
-if (window.matchMedia) {
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e){
-    try {
-      if (!localStorage.getItem("pgi-theme-custom")) {
-        pick(e.matches ? 0 : 1);
-      }
-    } catch(err){}
-  });
+function fillDust(DC){
+  var pal = [hx("#2d663b"), hx("#201b18"), hx("#1a5c2a"), hx("#201b18"), hx("#ffffff")];
+  for(var i=0;i<DC.length/3;i++){
+    var c = pal[Math.floor(Math.random()*pal.length)];
+    var q = 0.9 + Math.random()*0.1;
+    DC[i*3]=Math.min(1, c[0]*q);
+    DC[i*3+1]=Math.min(1, c[1]*q);
+    DC[i*3+2]=Math.min(1, c[2]*q);
+  }
 }
-
-function fillDust(DC){var a=hx(P.dc[0]),b=hx(P.dc[1]);for(var i=0;i<DC.length/3;i++){var q=Math.random();DC[i*3]=a[0]+(b[0]-a[0])*q;DC[i*3+1]=a[1]+(b[1]-a[1])*q;DC[i*3+2]=a[2]+(b[2]-a[2])*q}}
 function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
 function sstep(a,b,x){var t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)}
 function rnd(n){var a=new Float32Array(n);for(var i=0;i<n;i++)a[i]=Math.random();return a}
@@ -903,17 +888,32 @@ function lg(x,x0,y0,x1,y1,stops){var g=x.createLinearGradient(x0,y0,x1,y1);stops
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
 
 function buildLogo(){
-  var c=mk(10,10),x=c.getContext("2d");x.font="800 300px "+F;
-  var wm=Math.max(x.measureText("PLANT").width,x.measureText("GREEN").width),pad=40,bw=150,gap=30,bx=pad+wm+gap;
-  c.width=Math.ceil(bx+bw+pad);c.height=600;x=c.getContext("2d");x.font="800 300px "+F;
-  x.fillStyle=lg(x,0,80,0,560,P.l);x.fillText("PLANT",pad,290);x.fillText("GREEN",pad,560);
-  x.globalCompositeOperation="source-atop";
-  for(var i=-600;i<c.width;i+=7){x.strokeStyle=(i/7%2)?P.hl:P.hd;x.lineWidth=1.5;x.beginPath();x.moveTo(i,600);x.lineTo(i+360,0);x.stroke()}
-  var r=x.createRadialGradient(c.width*.28,170,0,c.width*.28,170,360);r.addColorStop(0,"rgba(255,255,255,.4)");r.addColorStop(1,"rgba(255,255,255,0)");
-  x.fillStyle=r;x.fillRect(0,0,c.width,600);x.globalCompositeOperation="source-over";
-  x.fillStyle=lg(x,bx,0,bx+bw,0,P.a);x.fillRect(bx,80,bw,480);
-  x.save();x.translate(bx+bw/2,320);x.rotate(-Math.PI/2);x.font="700 128px "+F;x.textAlign="center";x.textBaseline="middle";
-  x.globalCompositeOperation="destination-out";x.fillText("INERTIA",0,4);x.restore();return c;
+  var c = mk(688, 452), x = c.getContext("2d");
+  var img = document.getElementById("pgi-clean-logo");
+  if (img && img.naturalWidth > 0) {
+    x.drawImage(img, 0, 0, 688, 452);
+    return c;
+  }
+  var pad = 20, bw = 124, gap = 24;
+  x.font = "800 210px " + F;
+  var wm = Math.max(x.measureText("PLANT").width, x.measureText("GREEN").width);
+  var bx = pad + wm + gap;
+  c.width = Math.ceil(bx + bw + pad);
+  c.height = 452;
+  x = c.getContext("2d");
+  x.font = "800 210px " + F;
+  x.fillStyle = "#201b18";
+  x.fillText("PLANT", pad, 205);
+  x.fillText("GREEN", pad, 436);
+  var badgeH = 422;
+  x.fillStyle = "#2d663b";
+  rr(x, bx, 14, bw, badgeH, 8);
+  x.fill();
+  x.save();x.translate(bx + bw / 2, 14 + badgeH / 2);x.rotate(-Math.PI / 2);x.font = "700 96px " + F;x.textAlign = "center";x.textBaseline = "middle";
+  x.fillStyle = "#ffffff";
+  x.fillText("INERTIA", 0, 3);
+  x.restore();
+  return c;
 }
 function buildGrowth(){
   var c=mk(560,720),x=c.getContext("2d"),h=[120,200,280,370,460],i;
@@ -987,33 +987,26 @@ function start(){
     geo.setAttribute("aAS",new THREE.BufferAttribute(S.AS,2).setUsage(THREE.DynamicDrawUsage));
     S.geo=geo;
     S.pts=new THREE.Points(geo,new THREE.RawShaderMaterial({uniforms:{uRes:{value:S.res},uPx:{value:pr},uDot:S.dot},transparent:true,depthTest:false,premultipliedAlpha:true,
-      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.2+.08,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=uDot*uPx*(1.+aAS.y*.12);}",
-      fragmentShader:"precision highp float;varying vec3 vC;varying float vA;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,.28,d)*vA;if(a<.004)discard;gl_FragColor=vec4(vC*a,a);}"}));
+      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.2+.08,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=uDot*uPx*(1.+aAS.y*.14);}",
+      fragmentShader:`precision highp float;
+        varying vec3 vC;
+        varying float vA;
+        void main(){
+          float d = length(gl_PointCoord - 0.5);
+          float a = smoothstep(0.5, 0.22, d) * vA;
+          if(a < 0.004) discard;
+          vec3 col = vC;
+          float isWhite = step(0.82, (vC.r + vC.g + vC.b) / 3.0);
+          vec3 greenRim = vec3(0.176, 0.40, 0.231);
+          col = mix(col, mix(greenRim, vec3(1.0), smoothstep(0.42, 0.16, d)), isWhite);
+          gl_FragColor = vec4(col * a, a);
+        }`}));
     S.pts.frustumCulled=false;S.pts.renderOrder=order;scene.add(S.pts);return S;
   }
   var main=makeSet(shapes.map(function(s){return s.X}),shapes.map(function(s){return s.Y}),shapes.map(function(s){return s.C}),0,false,1);
   var dust=makeSet([DX],[DY],[DC],.42,true,2);
 
-  // Theme Toggle Wiring for Header and Application Portal
-  var themeNavBtn = $("theme-toggle-header"), appThemeToggle = $("app-theme-toggle");
-  function toggleTheme(){
-    var next = (ti === 0) ? 1 : 0;
-    pick(next);
-  }
-  if(themeNavBtn) themeNavBtn.onclick = toggleTheme;
-  if(appThemeToggle) appThemeToggle.onclick = toggleTheme;
-
-  function pick(k){
-    ti=k;P=THEMES[k].p;setCss(THEMES[k]);
-    try{
-      localStorage.setItem("pgi-theme",k);
-      localStorage.setItem("pgi-theme-custom","1");
-    }catch(e){}
-    thBtns.forEach(function(b,j){b.classList.toggle("on",j===k)});
-    setTimeout(rebuild,30);
-    if(window.updateGoldShaderTheme) window.updateGoldShaderTheme(THEMES[k]);
-  }
-  window.pickTheme = pick;
+  window.pickTheme = function(){};
 
   function rebuild(){
     var lc=buildLogo(),sh=[sample(lc,320),sample(buildGrowth(),240),sample(buildSeo(),240),sample(buildMega(),260),sample(buildFunnel(),240),sample(buildTarget(),240)];
@@ -1022,6 +1015,17 @@ function start(){
     if(m>=1)main.col.set(main.C[ib]);else colDirty=true;
     main.geo.attributes.aCol.needsUpdate=true;
     fillDust(DC);dust.col.set(DC);dust.geo.attributes.aCol.needsUpdate=true;
+  }
+
+  var cleanImg = document.getElementById("pgi-clean-logo");
+  if (cleanImg) {
+    if (cleanImg.complete && cleanImg.naturalWidth > 0) {
+      setTimeout(rebuild, 20);
+    } else {
+      cleanImg.addEventListener("load", function() {
+        setTimeout(rebuild, 20);
+      });
+    }
   }
 
   function hs(a,b){var s=Math.sin(a*127.1+b*311.7)*43758.5453;return s-Math.floor(s)}
@@ -1545,27 +1549,26 @@ if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('800 10
       u_resolution: { value: new THREE.Vector2(window.innerWidth * 2, window.innerHeight * 2) },
       u_opacities: { value: [0.35, 0.45, 0.55, 0.65, 0.72, 0.8, 0.88, 0.94, 0.98, 1.0] },
       u_colors: { value: [
-        parseHexToVec3('#ff3b81'),
-        parseHexToVec3('#b48cff'),
-        parseHexToVec3('#5a2bd8'),
-        parseHexToVec3('#ffa8c5'),
-        parseHexToVec3('#ff4fa3'),
-        parseHexToVec3('#9a6bff')
+        parseHexToVec3('#2d663b'),
+        parseHexToVec3('#201b18'),
+        parseHexToVec3('#ffffff'),
+        parseHexToVec3('#1a5c2a'),
+        parseHexToVec3('#201b18'),
+        parseHexToVec3('#2d663b')
       ] },
       u_total_size: { value: 22.0 },
       u_dot_size: { value: 6.0 },
       u_reverse: { value: 0 }
     };
 
-    window.updateGoldShaderTheme = function(currentTheme) {
-      if (!currentTheme || !uniforms) return;
-      var sw = currentTheme.p.sw;
-      var c1 = parseHexToVec3(currentTheme.acc);
-      var c2 = parseHexToVec3(sw[0] || currentTheme.p.mid);
-      var c3 = parseHexToVec3(sw[1] || currentTheme.acc);
-      var c4 = parseHexToVec3(sw[2] || currentTheme.p.pale);
-      var c5 = parseHexToVec3(currentTheme.p.deep || currentTheme.acc);
-      var c6 = parseHexToVec3(currentTheme.p.pur || currentTheme.acc2);
+    window.updateGoldShaderTheme = function() {
+      if (!uniforms) return;
+      var c1 = parseHexToVec3('#2d663b');
+      var c2 = parseHexToVec3('#201b18');
+      var c3 = parseHexToVec3('#ffffff');
+      var c4 = parseHexToVec3('#1a5c2a');
+      var c5 = parseHexToVec3('#201b18');
+      var c6 = parseHexToVec3('#2d663b');
       uniforms.u_colors.value = [c1, c2, c3, c4, c5, c6];
     };
 
@@ -1743,14 +1746,15 @@ if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('800 10
           var px = cx + Math.cos(angle) * curR;
           var py = cy + Math.sin(angle) * curR;
 
-          // Color: alternate between vibrant accent and lighter tint
-          var color = (i % 3 === 0) ? acc2 : acc;
+          // Cycle through Brand Green, Minimal Black, and White (like in logo.png)
+          var color = (i % 3 === 0) ? '#2d663b' : (i % 3 === 1) ? '#201b18' : '#ffffff';
+          var isWhite = (i % 3 === 2);
 
           // Soft outer particle glow aura
           ctx.beginPath();
-          ctx.arc(px, py, dotRadius * 2.0, 0, Math.PI * 2);
-          ctx.fillStyle = color;
-          ctx.globalAlpha = alpha * 0.32;
+          ctx.arc(px, py, dotRadius * 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = isWhite ? 'rgba(45, 102, 59, 0.45)' : color;
+          ctx.globalAlpha = alpha * 0.35;
           ctx.fill();
 
           // Bright solid particle dot
