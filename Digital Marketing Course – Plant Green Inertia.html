@@ -868,34 +868,34 @@ var MAP=[0,1,2,3,5,0,4],SIDE=["c","R","L","R","L","R","L"];
 
 function hx(h){var n=parseInt(h.slice(1),16);return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]}
 
-/* Plant Green Inertia Brand Theme: White, Forest Green (#2d663b) & Minimal Black (#201b18) from logo.png */
+/* Plant Green Inertia Brand Theme: White, Forest Green & Deep Charcoal */
 var BRAND_THEME = {
   n: "Plant Green Inertia",
   dark: 0,
   bg: "#ffffff",
-  fg: "#201b18",
-  mute: "rgba(32, 27, 24, 0.72)",
-  line: "rgba(45, 102, 59, 0.16)",
-  acc: "#2d663b",
-  acc2: "#1f5e30",
+  fg: "#14100e",
+  mute: "rgba(20, 16, 14, 0.72)",
+  line: "rgba(24, 79, 39, 0.16)",
+  acc: "#184f27",
+  acc2: "#113c1d",
   onacc: "#ffffff",
   card: "#ffffff",
-  field: "rgba(45, 102, 59, 0.04)",
+  field: "rgba(24, 79, 39, 0.04)",
   optbg: "#ffffff",
   p: {
-    l: ["#201b18", "#2d663b", "#ffffff"],
-    hl: "rgba(45, 102, 59, 0.25)",
-    hd: "rgba(32, 27, 24, 0.18)",
-    a: ["#2d663b", "#201b18"],
-    b: ["#2d663b", "#201b18"],
-    pale: "#201b18",
-    mid: "#2d663b",
-    deep: "#1a5c2a",
-    pur: "#201b18",
-    acc: "#2d663b",
+    l: ["#0f0d0c", "#184f27", "#ffffff"],
+    hl: "rgba(24, 79, 39, 0.25)",
+    hd: "rgba(15, 13, 12, 0.18)",
+    a: ["#184f27", "#0f0d0c"],
+    b: ["#184f27", "#0f0d0c"],
+    pale: "#0f0d0c",
+    mid: "#184f27",
+    deep: "#113c1d",
+    pur: "#0f0d0c",
+    acc: "#184f27",
     rim: "#ffffff",
-    dc: ["#2d663b", "#201b18", "#ffffff"],
-    sw: ["#2d663b", "#201b18", "#ffffff"]
+    dc: ["#184f27", "#0f0d0c", "#ffffff"],
+    sw: ["#184f27", "#0f0d0c", "#ffffff"]
   }
 };
 
@@ -915,7 +915,7 @@ function setCss(th){
 setCss(BRAND_THEME);
 
 function fillDust(DC){
-  var pal = [hx("#2d663b"), hx("#201b18"), hx("#1a5c2a"), hx("#201b18"), hx("#ffffff")];
+  var pal = [hx("#184f27"), hx("#0f0d0c"), hx("#113c1d"), hx("#0f0d0c"), hx("#ffffff")];
   for(var i=0;i<DC.length/3;i++){
     var c = pal[Math.floor(Math.random()*pal.length)];
     var q = 0.9 + Math.random()*0.1;
@@ -946,11 +946,11 @@ function buildLogo(){
   c.height = 452;
   x = c.getContext("2d");
   x.font = "800 210px " + F;
-  x.fillStyle = "#201b18";
+  x.fillStyle = "#0f0d0c";
   x.fillText("PLANT", pad, 205);
   x.fillText("GREEN", pad, 436);
   var badgeH = 422;
-  x.fillStyle = "#2d663b";
+  x.fillStyle = "#184f27";
   rr(x, bx, 14, bw, badgeH, 8);
   x.fill();
   x.save();x.translate(bx + bw / 2, 14 + badgeH / 2);x.rotate(-Math.PI / 2);x.font = "700 96px " + F;x.textAlign = "center";x.textBaseline = "middle";
@@ -960,7 +960,7 @@ function buildLogo(){
   return c;
 }
 function buildGrowth(){
-  var c=mk(560,720),x=c.getContext("2d"),h=[120,200,280,370,460],i;
+  var c=mk(600,720),x=c.getContext("2d"),h=[120,200,280,370,460],i;
   for(i=0;i<5;i++){x.fillStyle=lg(x,0,690-h[i],0,690,(i===4?P.a:P.b));rr(x,50+i*100,690-h[i],78,h[i],14);x.fill()}
   var pts=[[90,500],[190,420],[290,340],[390,250],[490,150]];
   x.strokeStyle=P.acc;x.lineWidth=22;x.lineCap="round";x.lineJoin="round";x.beginPath();x.moveTo(pts[0][0],pts[0][1]);for(i=1;i<5;i++)x.lineTo(pts[i][0],pts[i][1]);x.stroke();
@@ -968,33 +968,33 @@ function buildGrowth(){
   return c;
 }
 function buildSeo(){
-  var c=mk(560,720),x=c.getContext("2d");
+  var c=mk(600,720),x=c.getContext("2d");
   x.strokeStyle=lg(x,60,100,420,460,[P.l[1],P.pur]);x.lineWidth=54;x.beginPath();x.arc(240,330,170,0,6.283);x.stroke();
   x.strokeStyle=P.acc;x.lineWidth=72;x.lineCap="round";x.beginPath();x.moveTo(365,455);x.lineTo(500,600);x.stroke();
   x.font="800 190px "+F;x.fillStyle=P.pale;x.textAlign="center";x.textBaseline="middle";x.fillText("SEO",240,340);return c;
 }
 function buildMega(){
-  var c=mk(640,720),x=c.getContext("2d");
-  x.fillStyle=P.mid;rr(x,70,320,110,120,20);x.fill();
-  x.fillStyle=lg(x,150,0,380,0,P.a);x.beginPath();x.moveTo(150,330);x.lineTo(380,180);x.lineTo(380,520);x.lineTo(150,430);x.closePath();x.fill();
-  x.fillStyle=P.rim;x.beginPath();x.ellipse(380,350,30,170,0,0,6.283);x.fill();
-  x.fillStyle=P.deep;rr(x,165,425,60,170,16);x.fill();
+  var c=mk(720,720),x=c.getContext("2d");
+  x.fillStyle=P.mid;rr(x,45,320,110,120,20);x.fill();
+  x.fillStyle=lg(x,125,0,355,0,P.a);x.beginPath();x.moveTo(125,330);x.lineTo(355,180);x.lineTo(355,520);x.lineTo(125,430);x.closePath();x.fill();
+  x.fillStyle=P.rim;x.beginPath();x.ellipse(355,350,30,170,0,0,6.283);x.fill();
+  x.fillStyle=P.deep;rr(x,140,425,60,170,16);x.fill();
   x.strokeStyle=P.b[0];x.lineWidth=26;x.lineCap="round";
-  [110,170,230].forEach(function(r){x.beginPath();x.arc(395,350,r+40,-.55,.55);x.stroke()});
+  [95,155,215].forEach(function(r){x.beginPath();x.arc(370,350,r+35,-.55,.55);x.stroke()});
   return c;
 }
 function buildFunnel(){
-  var c=mk(560,720),x=c.getContext("2d"),L=[[520,420,60,200],[400,300,215,200],[280,200,370,200],[110,110,525,150]],cols=[[P.b[0],P.mid],[P.mid,P.deep],[P.pur,P.acc],[P.a[0],P.a[1]]];
-  L.forEach(function(l,i){var cx=280,y=l[2],h=i===3?150:130;x.fillStyle=lg(x,0,y,0,y+h,cols[i]);x.beginPath();x.moveTo(cx-l[0]/2,y);x.lineTo(cx+l[0]/2,y);x.lineTo(cx+l[1]/2,y+h);x.lineTo(cx-l[1]/2,y+h);x.closePath();x.fill()});
+  var c=mk(580,720),x=c.getContext("2d"),L=[[520,420,60,200],[400,300,215,200],[280,200,370,200],[110,110,525,150]],cols=[[P.b[0],P.mid],[P.mid,P.deep],[P.pur,P.acc],[P.a[0],P.a[1]]];
+  L.forEach(function(l,i){var cx=290,y=l[2],h=i===3?150:130;x.fillStyle=lg(x,0,y,0,y+h,cols[i]);x.beginPath();x.moveTo(cx-l[0]/2,y);x.lineTo(cx+l[0]/2,y);x.lineTo(cx+l[1]/2,y+h);x.lineTo(cx-l[1]/2,y+h);x.closePath();x.fill()});
   return c;
 }
 function buildTarget(){
-  var c=mk(560,720),x=c.getContext("2d"),cs=[P.mid,P.pale,P.mid,P.pale,P.acc],rs=[250,200,150,100,50];
-  rs.forEach(function(r,i){x.fillStyle=cs[i];x.beginPath();x.arc(280,380,r,0,6.283);x.fill()});
-  x.strokeStyle=P.a[1];x.lineWidth=16;x.lineCap="round";x.beginPath();x.moveTo(280,380);x.lineTo(490,170);x.stroke();
-  x.fillStyle=P.a[1];x.beginPath();x.moveTo(520,140);x.lineTo(470,150);x.lineTo(500,180);x.closePath();x.fill();
-  x.beginPath();x.moveTo(520,140);x.lineTo(505,95);x.lineTo(470,130);x.closePath();x.fill();
-  x.beginPath();x.moveTo(520,140);x.lineTo(565,155);x.lineTo(530,185);x.closePath();x.fill();return c;
+  var c=mk(620,720),x=c.getContext("2d"),cs=[P.mid,P.pale,P.mid,P.pale,P.acc],rs=[250,200,150,100,50];
+  rs.forEach(function(r,i){x.fillStyle=cs[i];x.beginPath();x.arc(290,380,r,0,6.283);x.fill()});
+  x.strokeStyle=P.a[1];x.lineWidth=16;x.lineCap="round";x.beginPath();x.moveTo(290,380);x.lineTo(500,170);x.stroke();
+  x.fillStyle=P.a[1];x.beginPath();x.moveTo(530,140);x.lineTo(480,150);x.lineTo(510,180);x.closePath();x.fill();
+  x.beginPath();x.moveTo(530,140);x.lineTo(515,95);x.lineTo(480,130);x.closePath();x.fill();
+  x.beginPath();x.moveTo(530,140);x.lineTo(575,155);x.lineTo(540,185);x.closePath();x.fill();return c;
 }
 function sample(cv,sw){
   var asp=cv.width/cv.height,sh=Math.round(sw/asp),c=mk(sw,sh),x=c.getContext("2d");x.drawImage(cv,0,0,sw,sh);
@@ -1006,7 +1006,7 @@ function sample(cv,sw){
 }
 
 function start(){
-  var logoCv=buildLogo(),shapes=[sample(logoCv,320),sample(buildGrowth(),240),sample(buildSeo(),240),sample(buildMega(),260),sample(buildFunnel(),240),sample(buildTarget(),240)],asp0=shapes[0].asp;
+  var logoCv=buildLogo(),shapes=[sample(logoCv,320),sample(buildGrowth(),250),sample(buildSeo(),250),sample(buildMega(),270),sample(buildFunnel(),250),sample(buildTarget(),250)],asp0=shapes[0].asp;
   var nd=coarse?500:1100,DX=new Float32Array(nd),DY=new Float32Array(nd),DC=new Float32Array(nd*3);
   for(var i=0;i<nd;i++){DX[i]=(Math.random()-.5)*1.7;DY[i]=(Math.random()-.5)*1.5}fillDust(DC);
 
@@ -1031,18 +1031,22 @@ function start(){
     geo.setAttribute("aAS",new THREE.BufferAttribute(S.AS,2).setUsage(THREE.DynamicDrawUsage));
     S.geo=geo;
     S.pts=new THREE.Points(geo,new THREE.RawShaderMaterial({uniforms:{uRes:{value:S.res},uPx:{value:pr},uDot:S.dot},transparent:true,depthTest:false,premultipliedAlpha:true,
-      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.2+.08,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=clamp(uDot*uPx*(1.+min(aAS.y,3.0)*.05),1.5,4.8);}",
+      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){vC=aCol;vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=clamp(uDot*uPx*(1.+min(aAS.y,3.0)*.05),1.8,4.8);}",
       fragmentShader:`precision highp float;
         varying vec3 vC;
         varying float vA;
         void main(){
           float d = length(gl_PointCoord - 0.5);
-          float a = smoothstep(0.5, 0.22, d) * vA;
-          if(a < 0.004) discard;
+          float a = smoothstep(0.5, 0.36, d) * min(1.0, vA * 1.35);
+          if(a < 0.005) discard;
           vec3 col = vC;
-          float isWhite = step(0.82, (vC.r + vC.g + vC.b) / 3.0);
-          vec3 greenRim = vec3(0.176, 0.40, 0.231);
-          col = mix(col, mix(greenRim, vec3(1.0), smoothstep(0.42, 0.16, d)), isWhite);
+          float isWhite = step(0.80, (col.r + col.g + col.b) / 3.0);
+          if(isWhite < 0.5){
+            col = pow(col, vec3(1.32)) * 0.88;
+          } else {
+            vec3 greenRim = vec3(0.09, 0.31, 0.15);
+            col = mix(greenRim, vec3(1.0), smoothstep(0.42, 0.18, d));
+          }
           gl_FragColor = vec4(col * a, a);
         }`}));
     S.pts.frustumCulled=false;S.pts.renderOrder=order;scene.add(S.pts);return S;
@@ -1053,7 +1057,7 @@ function start(){
   window.pickTheme = function(){};
 
   function rebuild(){
-    var lc=buildLogo(),sh=[sample(lc,320),sample(buildGrowth(),240),sample(buildSeo(),240),sample(buildMega(),260),sample(buildFunnel(),240),sample(buildTarget(),240)];
+    var lc=buildLogo(),sh=[sample(lc,320),sample(buildGrowth(),250),sample(buildSeo(),250),sample(buildMega(),270),sample(buildFunnel(),250),sample(buildTarget(),250)];
     sh.forEach(function(s,k){main.X[k].set(s.X);main.Y[k].set(s.Y);main.C[k].set(s.C)});
     tex.image=lc;tex.needsUpdate=true;
     if(m>=1)main.col.set(main.C[ib]);else colDirty=true;
@@ -1082,7 +1086,7 @@ function start(){
 
   function relayout(){
     W=stage.clientWidth;H=stage.clientHeight;R.setSize(W,H);imgU.uRes.value.set(W,H);main.res.set(W,H);dust.res.set(W,H);
-    Rad=200*clamp(Math.min(W,H*1.6)/1000,.6,1.25);imgU.uR.value=Rad;dust.dot.value=2.2;
+    Rad=200*clamp(Math.min(W,H*1.6)/1000,.6,1.25);imgU.uR.value=Rad;dust.dot.value=2.4;
     var top=navEl.offsetHeight+8,bot=hc.offsetTop-8,bh=Math.max(120,bot-top),rw=W*(W>=1024?.9:.94);
     if(rw/asp0>bh*1.1)rw=bh*1.1*asp0;
     secTargets=[];
@@ -1093,12 +1097,25 @@ function start(){
         else T={x:W/2, y:(top+bot)/2, s:Math.min(H*0.36, Math.min(270, (W*0.38)/asp0))};
       }
       else if(W>=900){
-        var maxW = Math.min(W, 1240);
-        var leftEdge = (W - maxW) / 2;
-        var pX = side === "R" ? (leftEdge + maxW * 0.77) : (leftEdge + maxW * 0.23);
-        T = { x: pX, y: H * 0.50, s: Math.min(H * 0.53, maxW * 0.31 / ap) };
+        var maxW = Math.min(W, 1200);
+        var cardW = (s === 4 || s === 3) ? 520 : 470;
+        if(side === "R"){
+          var leftBound = (W - maxW) / 2 + cardW + 36;
+          var rightBound = W - (W - maxW) / 2 - 24;
+          var safeCenter = (leftBound + rightBound) / 2;
+          var availW = Math.max(160, rightBound - leftBound);
+          var sMax = Math.min(availW / ap, H * 0.48);
+          T = { x: safeCenter, y: H * 0.50, s: Math.min(sMax, Math.min(270, 360 / ap)) };
+        } else {
+          var leftBound = (W - maxW) / 2 + 24;
+          var rightBound = (W + maxW) / 2 - cardW - 36;
+          var safeCenter = (leftBound + rightBound) / 2;
+          var availW = Math.max(160, rightBound - leftBound);
+          var sMax = Math.min(availW / ap, H * 0.48);
+          T = { x: safeCenter, y: H * 0.50, s: Math.min(sMax, Math.min(270, 360 / ap)) };
+        }
       }
-      else T={x:W/2, y:Math.max(130, H*0.19), s:Math.min(H*0.22, W*0.64/ap)};
+      else T={x:W/2, y:Math.max(130, H*0.19), s:Math.min(H*0.22, Math.min(220, (W*0.68)/ap))};
       secTargets.push(T);
     }
     if(!cur.init){cur.x=secTargets[0].x;cur.y=secTargets[0].y;cur.s=secTargets[0].s;cur.init=true}
@@ -1140,7 +1157,7 @@ function start(){
     clearTimeout(scrollStopTimer);
     scrollStopTimer = setTimeout(function(){
       isScrolling = false;
-    }, 140);
+    }, 75);
   }, { passive: true });
 
   // Interactive Particle Physics for both mouse cursor and hand/finger touch
@@ -1181,9 +1198,19 @@ function start(){
         ax+=Math.sin(sd[i]*6.28+t*2.5)*flow;
         ay+=Math.cos(ph[i]*6.28-t*2.0)*flow;
       }
-      var kk=.032*(.65+sd[i]*.7)*Math.max(0.2, 1-swirl*.55);ax-=ox*kk;ay-=oy*kk;
-      vx+=ax*dt;vy+=ay*dt;var dm=Math.pow(.90+.025*E,dt);vx*=dm;vy*=dm;ox+=vx*dt;oy+=vy*dt;
-      var maxOff = 48;
+      var isResting = !isScrolling && scrollDisp < 0.01 && pres < 0.005;
+      var baseK = isResting ? 0.088 : 0.034;
+      var kk = baseK * (.75 + sd[i] * .5) * Math.max(0.25, 1 - swirl * .5);
+      ax -= ox * kk;
+      ay -= oy * kk;
+      vx += ax * dt;
+      vy += ay * dt;
+      var dm = Math.pow(isResting ? 0.78 : (0.90 + .025 * E), dt);
+      vx *= dm;
+      vy *= dm;
+      ox += vx * dt;
+      oy += vy * dt;
+      var maxOff = isResting ? 32 : 48;
       if(ox > maxOff) ox = maxOff; else if(ox < -maxOff) ox = -maxOff;
       if(oy > maxOff) oy = maxOff; else if(oy < -maxOff) oy = -maxOff;
       var o2=ox*ox+oy*oy;if(o2<.0004&&vx*vx+vy*vy<.0004){ox=oy=vx=vy=0}
@@ -1204,11 +1231,15 @@ function start(){
     if(introT<1)introT=Math.min(1,introT+Math.min(ms,100)/3200);
     t+=dt/60*(1+pres*1.6);
     
-    // Smooth scroll dispersion: organic when scrolling, settles when stopped
-    var targetDisp = isScrolling ? Math.min(0.6, 0.2 + scrollVel * 0.4) : 0;
-    var dispRate = isScrolling ? 0.22 : 0.08;
-    scrollDisp += (targetDisp - scrollDisp) * (1 - Math.pow(1 - dispRate, dt));
-    scrollVel *= Math.pow(0.88, dt);
+    // Smooth scroll dispersion: rapid snap to 0 when stopped
+    if(!isScrolling){
+      scrollDisp *= Math.pow(0.55, dt);
+      if(scrollDisp < 0.005) scrollDisp = 0;
+    } else {
+      var targetDisp = Math.min(0.55, 0.18 + scrollVel * 0.35);
+      scrollDisp += (targetDisp - scrollDisp) * (1 - Math.pow(1 - 0.28, dt));
+    }
+    scrollVel *= Math.pow(0.85, dt);
     if(scrollVel < 0.001) scrollVel = 0;
     
     // Smoothly anchor the final particle to form section (#enroll) when scrolling to footer
@@ -1222,8 +1253,14 @@ function start(){
       }
     }
     
-    var lk=1-Math.pow(1-.07,dt);cur.x+=(T.x-cur.x)*lk;cur.y+=(T.y-cur.y)*lk;cur.s+=(T.s-cur.s)*lk;cx=cur.x;cy=cur.y;SZ=cur.s;
-    if(m<1)m=Math.min(1,m+ms/1700);else if(want!==ib){ia=ib;ib=want;m=0;colDirty=true}
+    var isResting = !isScrolling && scrollDisp < 0.01 && pres < 0.005;
+    var lkRate = isResting ? 0.20 : 0.12;
+    var lk = 1 - Math.pow(1 - lkRate, dt);
+    cur.x += (T.x - cur.x) * lk;
+    cur.y += (T.y - cur.y) * lk;
+    cur.s += (T.s - cur.s) * lk;
+    cx = cur.x; cy = cur.y; SZ = cur.s;
+    if(m < 1) m = Math.min(1, m + ms / 650); else if(want !== ib){ ia = ib; ib = want; m = 0; colDirty = true; }
     var e=m*m*(3-2*m);
     var baseSwirl=rm?0:Math.max(Math.pow(1-introT,2),4*m*(1-m)*.9);
     var swirl=Math.max(baseSwirl, scrollDisp * 0.7);
@@ -1234,7 +1271,7 @@ function start(){
     if (Math.abs(tgtImg - imgA) < 0.002) imgA = tgtImg;
     imgU.uShow.value = imgA;
     imgU.uRect.value.set(cx - asp0 * SZ / 2, cy - SZ / 2, asp0 * SZ, SZ);
-    main.dot.value=clamp(SZ*.0085,2.4,4.2);
+    main.dot.value=clamp(SZ*.0092,2.8,4.4);
     if(pres>.02)trail.push({x:mx,y:my,s:pres});
     var dec=Math.pow(.955,dt),j;for(j=0;j<trail.length;j++)trail[j].s*=dec;
     trail=trail.filter(function(q){return q.s>.03});if(trail.length>32)trail.splice(0,trail.length-32);
