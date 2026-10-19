@@ -49,59 +49,62 @@ header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:8;
 
 #prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:2px;z-index:9;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:background .3s}
 main{position:relative;z-index:3}
-.sec{position:relative;min-height:100svh;display:flex;align-items:center;padding:7rem var(--pad) 4rem;pointer-events:none}
+.sec{position:relative;min-height:100svh;display:flex;align-items:center;padding:6rem var(--pad) 4rem;pointer-events:none;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box}
+.sec.hero{max-width:100% !important;margin:0 !important;padding:0 !important}
 .sec>*{pointer-events:auto}
 .sec.L{justify-content:flex-end}
-.blk{max-width:31rem;width:100%}
-.blk.w{max-width:40rem}
-h2{font-weight:500;font-size:clamp(2.2rem,4.6vw,4.2rem);line-height:.98;letter-spacing:-.04em;margin-bottom:1.2rem}
+.blk{max-width:29.5rem;width:100%;background:color-mix(in srgb,var(--card) 95%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:24px;padding:clamp(1.4rem,2.8vw,2.1rem);box-shadow:0 20px 50px rgba(0,0,0,0.08),0 0 35px color-mix(in srgb,var(--acc) 8%,transparent);box-sizing:border-box;position:relative;z-index:3}
+.blk.w{max-width:32.5rem}
+.card-badge{display:inline-flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--acc) 12%,transparent);border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);color:var(--acc);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:99px;margin-bottom:0.65rem}
+h2{font-weight:600;font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:.96;letter-spacing:-.035em;margin-bottom:.65rem}
 .acc{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--acc2);transition:color .3s}
 .line{display:block;overflow:hidden;padding-bottom:.08em}
 .l{display:block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
 .in .l{transform:none}
 .rv{opacity:0;transform:translateY(14px);transition:opacity .8s,transform .8s;transition-delay:calc(.15s + var(--i,0)*80ms)}
 .in .rv{opacity:1;transform:none}
-p{color:var(--mute);line-height:1.55}
-.rows,.steps,.topics{list-style:none;padding:0;margin-top:1.4rem}
-.rows li,.steps li,.topics li{padding:.9rem 0;border-top:1px solid var(--line)}
+p{color:var(--mute);line-height:1.45;font-size:.84rem}
+.rv-lead{font-size:.84rem;color:var(--mute);line-height:1.45;margin-bottom:.75rem}
+.rows,.steps,.topics{list-style:none;padding:0;margin-top:.7rem}
+.rows li,.steps li,.topics li{padding:.5rem 0;border-top:1px solid var(--line)}
 .rows li:last-child,.steps li:last-child{border-bottom:1px solid var(--line)}
-h3{font-weight:500;font-size:1.15rem;letter-spacing:-.02em;margin-bottom:.2rem;color:var(--fg)}
-.rows p,.steps p,.topics p{font-size:.95rem}
-.topics{display:grid;grid-template-columns:1fr 1fr;gap:0 1.6rem}
+h3{font-weight:600;font-size:.92rem;letter-spacing:-.015em;margin-bottom:.12rem;color:var(--fg)}
+.rows p,.steps p,.topics p{font-size:.76rem;line-height:1.35;color:var(--mute)}
+.topics{display:grid;grid-template-columns:1fr 1fr;gap:0 1.1rem}
 .topics li:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
 .steps{counter-reset:s}
-.steps li{display:grid;grid-template-columns:2.4rem 1fr;gap:0 .6rem}
-.steps li::before{counter-increment:s;content:counter(s);grid-row:span 2;font-family:var(--serif);font-style:italic;font-size:1.9rem;line-height:1;color:var(--acc2)}
-.btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 22px;border:0;border-radius:99px;background:var(--acc);color:var(--onacc);text-decoration:none;font:500 14.5px var(--head);cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.steps li{display:grid;grid-template-columns:1.8rem 1fr;gap:0 .5rem}
+.steps li::before{counter-increment:s;content:counter(s);grid-row:span 2;font-family:var(--serif);font-style:italic;font-size:1.5rem;line-height:1;color:var(--acc2)}
+.btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 20px;border:0;border-radius:99px;background:var(--acc);color:var(--onacc);text-decoration:none;font:600 13.5px var(--head);cursor:pointer;box-shadow:0 4px 18px color-mix(in srgb,var(--acc) 30%,transparent);transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
 .btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
-.txt{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14.5px;font-weight:500;padding:4px 0;border-bottom:1px solid color-mix(in srgb,var(--fg) 30%,transparent)}
+.txt{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:13.5px;font-weight:500;padding:4px 0;border-bottom:1px solid color-mix(in srgb,var(--fg) 30%,transparent)}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:1.6rem}
+.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:.9rem}
 .hero{flex-direction:column;align-items:stretch;justify-content:flex-start;padding:0;overflow:hidden}
 .bd{position:absolute;left:50%;transform:translate(-50%,-50%);z-index:0;white-space:nowrap;pointer-events:none;user-select:none;font-weight:600;letter-spacing:-.06em;line-height:.8;color:color-mix(in srgb,var(--fg) 5%,transparent)}
 .sp{flex:1 1 auto;min-height:0}
-.hc{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:end;gap:clamp(24px,4vw,72px);padding:0 var(--pad) clamp(28px,3.4vw,52px);pointer-events:none}
+.hc{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:end;gap:clamp(24px,4vw,72px);padding:0 var(--pad) clamp(28px,3.4vw,52px);pointer-events:none;max-width:1200px;margin:0 auto;width:100%;box-sizing:border-box}
 .hc a{pointer-events:auto}
 .eyebrow{font-size:13px;letter-spacing:.03em;opacity:.7;margin-bottom:clamp(14px,1.6vw,22px);display:flex;align-items:center;gap:12px}
 .eyebrow::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7;flex:none}
 h1{font-weight:500;font-size:clamp(38px,min(6.2vw,11vh),116px);line-height:.92;letter-spacing:-.045em;text-wrap:balance}
 h1 span{display:block}
-.aside{max-width:400px;justify-self:end;padding-bottom:.6em}
-.aside p{font-size:clamp(15px,1.1vw,17px)}
-.aside .price{color:var(--fg);margin-top:.9rem;font-size:1rem}
+.aside{max-width:420px;justify-self:end;padding:1.3rem 1.5rem;background:color-mix(in srgb,var(--card) 95%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:22px;box-shadow:0 16px 45px rgba(0,0,0,0.07)}
+.aside p{font-size:clamp(13.5px,1vw,15px);line-height:1.45}
+.aside .price{color:var(--fg);margin-top:.7rem;font-size:.9rem}
 .price s,.was{opacity:.5}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1.4rem}
-.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;padding:1.2rem;background:var(--card);box-shadow:0 4px 20px rgba(45,102,59,0.06);backdrop-filter:blur(8px)}
-.card .k{font-size:.85rem;letter-spacing:.04em;color:var(--mute)}
-.card .was{text-decoration:line-through;margin-top:.7rem;font-size:1rem}
-.card .now{font-size:2.5rem;font-weight:500;letter-spacing:-.04em;line-height:1.05}
-.card .off{align-self:flex-start;margin:.5rem 0 .9rem;padding:.2rem .6rem;border-radius:99px;background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--acc2);font-size:.8rem}
-.card ul{list-style:none;padding:0;margin-bottom:1.2rem;display:grid;gap:.45rem;font-size:.92rem;color:var(--mute)}
-.card ul li::before{content:"✓";color:var(--acc);margin-right:.5rem}
-.card .btn{margin-top:auto;justify-content:center}
-.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
-.badges span{padding:.35rem .8rem;border:1px solid var(--line);border-radius:99px;font-size:.85rem}
-.foot{margin-top:1.2rem;font-size:.82rem;color:var(--mute)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:.8rem}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;padding:1rem;background:var(--card);box-shadow:0 4px 20px rgba(45,102,59,0.06);backdrop-filter:blur(8px)}
+.card .k{font-size:.82rem;letter-spacing:.04em;color:var(--mute)}
+.card .was{text-decoration:line-through;margin-top:.4rem;font-size:.85rem}
+.card .now{font-size:1.8rem;font-weight:600;letter-spacing:-.04em;line-height:1.05}
+.card .off{align-self:flex-start;margin:.3rem 0 .6rem;padding:.15rem .5rem;border-radius:99px;background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--acc2);font-size:.72rem}
+.card ul{list-style:none;padding:0;margin-bottom:.8rem;display:grid;gap:.35rem;font-size:.78rem;color:var(--mute)}
+.card ul li::before{content:"✓";color:var(--acc);margin-right:.4rem}
+.card .btn{margin-top:auto;justify-content:center;height:38px;font-size:13px}
+.badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
+.badges span{padding:.25rem .7rem;border:1px solid var(--line);border-radius:99px;font-size:.78rem}
+.foot{margin-top:.8rem;font-size:.72rem;color:var(--mute)}
 
 /* ==========================================================================
    Full Footer Section (referenced from Digital Marketing Course (3).html)
@@ -255,21 +258,26 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     align-items: center !important;
     justify-content: flex-end !important;
     text-align: center !important;
-    padding: max(220px, 32vh) var(--pad) 4.5rem !important;
+    padding: max(220px, 32vh) var(--pad) 3.5rem !important;
+    max-width: 100% !important;
   }
 
-  /* Centered block with smooth ambient gradient */
+  /* Centered block with frosted card background */
   .sec .blk, .sec.L .blk, .sec .blk.w, .sec.L .blk.w {
-    max-width: 520px !important;
+    max-width: 480px !important;
     width: 100% !important;
     margin: 0 auto !important;
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    background: linear-gradient(to top, var(--bg) 85%, color-mix(in srgb, var(--bg) 60%, transparent) 95%, transparent) !important;
-    border-radius: 24px 24px 0 0 !important;
-    padding: 2.8rem var(--pad) 1.5rem !important;
+    background: color-mix(in srgb, var(--card) 95%, transparent) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 24px !important;
+    padding: 1.8rem clamp(1.2rem, 3.2vw, 2rem) 1.5rem !important;
+    box-shadow: 0 16px 45px rgba(0,0,0,0.08), 0 0 35px color-mix(in srgb, var(--acc) 8%, transparent) !important;
     position: relative !important;
     z-index: 3 !important;
     box-sizing: border-box !important;
@@ -472,102 +480,133 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec" id="why">
     <div class="blk">
+      <div class="card-badge">Practical Skills</div>
       <h2><span class="line"><span class="l">Skills employers</span></span><span class="line"><span class="l acc" style="--d:.1s">actually hire for.</span></span></h2>
-      <p class="rv">Our experiential learning approach bridges the gap between academic education and what the industry needs, so you finish ready to work.</p>
+      <p class="rv rv-lead">Bridging college and corporate through immersive, tool-first marketing training.</p>
       <ul class="rows">
-        <li class="rv" style="--i:1"><h3>Industry-aligned syllabus</h3><p>Topics chosen to match how digital marketing is practised today.</p></li>
-        <li class="rv" style="--i:2"><h3>Hands-on practice</h3><p>You learn each skill by using it on real tasks.</p></li>
-        <li class="rv" style="--i:3"><h3>Career readiness</h3><p>Build the knowledge and confidence to start your career.</p></li>
+        <li class="rv" style="--i:1"><h3>Live Ad Budgets &amp; Campaigns</h3><p>Manage real client budgets across Meta &amp; Google Ads.</p></li>
+        <li class="rv" style="--i:2"><h3>AI-Assisted Workflow</h3><p>Use generative AI for keyword research, copy, and SEO ranking.</p></li>
+        <li class="rv" style="--i:3"><h3>Verified Portfolio &amp; Placement</h3><p>Build job-ready case studies with dedicated interview prep.</p></li>
       </ul>
-      <div class="ctas rv" style="--i:4"><a class="btn" href="#application/forms">Enroll now</a></div>
+      <div class="ctas rv" style="--i:4"><a class="btn" href="#application/forms">Enroll now &rarr;</a></div>
     </div>
   </section>
 
   <section class="sec L" id="curriculum">
     <div class="blk w">
+      <div class="card-badge">Comprehensive Curriculum</div>
       <h2><span class="line"><span class="l">Everything you need,</span></span><span class="line"><span class="l acc" style="--d:.1s">in one course.</span></span></h2>
       <ul class="topics">
-        <li class="rv" style="--i:0"><h3>AI SEO</h3><p>Rank higher with AI-assisted research and optimisation.</p></li>
-        <li class="rv" style="--i:1"><h3>Web Marketing</h3><p>Plan and run campaigns across digital channels.</p></li>
-        <li class="rv" style="--i:2"><h3>Content Creation</h3><p>Write, design and publish content that performs.</p></li>
-        <li class="rv" style="--i:3"><h3>Paid Ads</h3><p>Launch and optimise paid campaigns.</p></li>
-        <li class="rv" style="--i:4"><h3>Web Analytics</h3><p>Track results and turn data into decisions.</p></li>
-        <li class="rv" style="--i:5"><h3>Lead Generation</h3><p>Build funnels that turn visitors into enquiries.</p></li>
-        <li class="rv" style="--i:6"><h3>Software Marketing</h3><p>Position and promote software products.</p></li>
-        <li class="rv" style="--i:7"><h3>And more</h3><p>Additional topics across digital marketing.</p></li>
+        <li class="rv" style="--i:0"><h3>AI SEO</h3><p>Keywords &amp; rank optimisation</p></li>
+        <li class="rv" style="--i:1"><h3>Paid Media</h3><p>Meta &amp; Google Ads ROI</p></li>
+        <li class="rv" style="--i:2"><h3>Content Strategy</h3><p>Copywriting &amp; creative design</p></li>
+        <li class="rv" style="--i:3"><h3>Web Analytics</h3><p>GA4 tracking &amp; insights</p></li>
+        <li class="rv" style="--i:4"><h3>Lead Funnels</h3><p>Landing pages &amp; conversion</p></li>
+        <li class="rv" style="--i:5"><h3>Automation</h3><p>Email sequences &amp; CRM</p></li>
       </ul>
-      <div class="ctas rv" style="--i:8"><a class="btn" href="#application/forms">Enroll now</a></div>
+      <div class="ctas rv" style="--i:6"><a class="btn" href="#application/forms">Enroll now &rarr;</a></div>
     </div>
   </section>
 
   <section class="sec" id="learn">
     <div class="blk">
+      <div class="card-badge">How You Learn</div>
       <h2><span class="line"><span class="l">Learn it by</span></span><span class="line"><span class="l acc" style="--d:.1s">doing it.</span></span></h2>
       <ol class="rows steps">
-        <li class="rv" style="--i:0"><h3>Learn the concept</h3><p>Clear lessons on each topic.</p></li>
-        <li class="rv" style="--i:1"><h3>Practise with tools</h3><p>Apply it with the tools marketers use.</p></li>
-        <li class="rv" style="--i:2"><h3>Build real work</h3><p>Create campaigns and content you can show.</p></li>
-        <li class="rv" style="--i:3"><h3>Launch your career</h3><p>Step into the industry with confidence.</p></li>
+        <li class="rv" style="--i:0"><h3>Core Playbooks</h3><p>Concise lessons on proven growth frameworks.</p></li>
+        <li class="rv" style="--i:1"><h3>Hands-on Labs</h3><p>Live practice inside industry-standard marketing tools.</p></li>
+        <li class="rv" style="--i:2"><h3>Proof of Work</h3><p>Deploy live campaigns to build verified case studies.</p></li>
+        <li class="rv" style="--i:3"><h3>Career Launch</h3><p>Resume review, mock interviews, and placement rounds.</p></li>
       </ol>
-      <div class="ctas rv" style="--i:4"><a class="btn" href="#application/forms">Enroll now</a></div>
+      <div class="ctas rv" style="--i:4"><a class="btn" href="#application/forms">Enroll now &rarr;</a></div>
     </div>
   </section>
 
   <section class="sec L" id="pricing">
     <div class="blk w">
+      <div class="card-badge">Subsidized Pricing</div>
       <h2><span class="line"><span class="l">Choose how</span></span><span class="line"><span class="l acc" style="--d:.1s">you learn.</span></span></h2>
       <div class="cards">
-        <div class="card rv" style="--i:0"><span class="k">Online</span><span class="was">₹10,000</span><span class="now">₹4,999</span><span class="off">50% off</span>
-          <ul><li>All topics covered</li><li>Learn from anywhere</li><li>Hands-on practice</li></ul>
-          <a class="btn" href="#application/forms" data-mode="Online">Enroll online</a></div>
-        <div class="card rv" style="--i:1"><span class="k">Offline</span><span class="was">₹50,000</span><span class="now">₹14,999</span><span class="off">70% off</span>
-          <ul><li>All topics covered</li><li>Classroom training</li><li>Hands-on practice</li></ul>
-          <a class="btn" href="#application/forms" data-mode="Offline">Enroll offline</a></div>
+        <div class="card rv" style="--i:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem">
+            <span class="k" style="font-weight:700">Online Batch</span>
+            <span class="off">50% off</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin:0.2rem 0 0.5rem">
+            <span class="now">₹4,999</span>
+            <span class="was">₹10,000</span>
+          </div>
+          <ul>
+            <li>Live interactive sessions</li>
+            <li>All 6 modules &amp; AI tools</li>
+            <li>TN Skills accredited certificate</li>
+          </ul>
+          <a class="btn" href="#application/forms" data-mode="Online">Enroll online &rarr;</a>
+        </div>
+        <div class="card rv" style="--i:1;border-color:color-mix(in srgb,var(--acc) 38%,transparent)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem">
+            <span class="k" style="font-weight:700;color:var(--acc)">Offline Classroom</span>
+            <span class="off">70% off</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin:0.2rem 0 0.5rem">
+            <span class="now" style="color:var(--acc)">₹14,999</span>
+            <span class="was">₹50,000</span>
+          </div>
+          <ul>
+            <li>In-person labs (Maduravoyal)</li>
+            <li>1-on-1 mentor guidance</li>
+            <li>Direct placement assistance</li>
+          </ul>
+          <a class="btn" href="#application/forms" data-mode="Offline">Enroll offline &rarr;</a>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="sec" id="company">
     <div class="blk">
+      <div class="card-badge">Government Partner</div>
       <h2><span class="line"><span class="l">About</span></span><span class="line"><span class="l acc" style="--d:.1s">Plant Green Inertia.</span></span></h2>
-      <p class="rv">Plant Green Inertia Pvt. Ltd. is an Official Training Partner of TN Skills, Tamil Nadu Skill Development Corporation (TNSDC), dedicated to delivering industry-aligned skill development programs that enhance students’ knowledge, practical competencies, and career readiness. Our experiential learning approach bridges the gap between academic education and industry requirements, empowering learners with future-ready skills.</p>
-      <div class="badges rv" style="--i:1"><span>Official Training Partner</span><span>TN Skills</span><span>TNSDC</span></div>
-      <div class="ctas rv" style="--i:2"><a class="btn" href="#application/forms">Enroll now</a></div>
+      <p class="rv rv-lead">Official Training Partner of TN Skills, Tamil Nadu Skill Development Corporation (TNSDC). Empowering students and graduates with practical, high-demand skills to launch successful careers in digital marketing and tech.</p>
+      <div class="badges rv" style="--i:1">
+        <span>TN Skills Official Partner</span>
+        <span>TNSDC Accredited</span>
+        <span>Chennai HQ</span>
+      </div>
+      <div class="ctas rv" style="--i:2"><a class="btn" href="#application/forms">Enroll now &rarr;</a></div>
     </div>
   </section>
 
   <!-- Section 7: Concise Course Info in Form Section (Short & High Impact with Background Card) -->
   <section class="sec L" id="enroll">
-    <div class="blk" style="max-width:28rem;background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:24px;padding:clamp(1.6rem,3.2vw,2.2rem);box-shadow:0 20px 50px rgba(0,0,0,0.1),0 0 35px color-mix(in srgb,var(--acc) 10%,transparent)">
-      <div class="app-badge" style="display:inline-flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--acc) 14%,transparent);border:1px solid color-mix(in srgb,var(--acc) 35%,transparent);color:var(--acc);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:99px;margin-bottom:0.75rem">
-        TN Skills &amp; TNSDC Accredited
-      </div>
-      <h2 style="font-size:clamp(2.4rem,4.2vw,3.3rem);line-height:0.95;margin-bottom:0.6rem;letter-spacing:-0.035em">
+    <div class="blk">
+      <div class="card-badge">TN Skills &amp; TNSDC Accredited</div>
+      <h2>
         <span class="line"><span class="l">Next cohort</span></span>
         <span class="line"><span class="l acc" style="--d:.1s">now open.</span></span>
       </h2>
-      <p class="rv" style="font-size:0.84rem;color:var(--mute);line-height:1.45;margin-bottom:0.75rem">
+      <p class="rv rv-lead">
         Tamil Nadu's premier government-recognized digital marketing cohort.
       </p>
       
       <!-- Compact 2-Metric Highlight Grid -->
-      <div class="rv" style="--i:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0.75rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:1rem">
+      <div class="rv" style="--i:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0.65rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:0.9rem">
         <div>
-          <b style="display:block;font-size:0.92rem;color:var(--fg);font-weight:700">100+ Live Hours</b>
+          <b style="display:block;font-size:0.9rem;color:var(--fg);font-weight:700">100+ Live Hours</b>
           <span style="font-size:0.72rem;color:var(--mute);line-height:1.3">Hands-on AI &amp; Ads Labs</span>
         </div>
         <div style="border-left:1px solid var(--line);padding-left:10px">
-          <b style="display:block;font-size:0.92rem;color:var(--acc);font-weight:700">From ₹4,999</b>
+          <b style="display:block;font-size:0.9rem;color:var(--acc);font-weight:700">From ₹4,999</b>
           <span style="font-size:0.72rem;color:var(--mute);line-height:1.3">Up to 70% Subsidy</span>
         </div>
       </div>
 
       <div class="ctas rv" style="--i:2;margin-top:0">
-        <a class="btn" href="#application/forms" id="btn-goto-application" style="height:44px;padding:0 24px;font-size:13.5px;box-shadow:0 4px 18px color-mix(in srgb,var(--acc) 30%,transparent);width:100%;justify-content:center">
+        <a class="btn" href="#application/forms" id="btn-goto-application" style="width:100%;justify-content:center">
           Open Application Form &rarr;
         </a>
       </div>
-      <p class="foot" style="margin-top:0.8rem;font-size:0.7rem;color:var(--mute);text-align:center">
+      <p class="foot" style="margin-top:0.75rem;text-align:center">
         © Plant Green Inertia · Official Training Partner of TN Skills, TNSDC
       </p>
     </div>
@@ -1055,7 +1094,12 @@ function start(){
         if(W < 900) T={x:W/2, y:Math.max(120, Math.min(H*0.20, (top+bot)/2)), s:Math.min(H*0.20, (W*0.78)/asp0)};
         else T={x:W/2, y:(top+bot)/2, s:rw/asp0};
       }
-      else if(W>=900)T={x:W*(side==="R"?.74:.26),y:H*.52,s:Math.min(H*.66,W*.4/ap)};
+      else if(W>=900){
+        var maxW = Math.min(W, 1240);
+        var leftEdge = (W - maxW) / 2;
+        var pX = side === "R" ? (leftEdge + maxW * 0.77) : (leftEdge + maxW * 0.23);
+        T = { x: pX, y: H * 0.50, s: Math.min(H * 0.53, maxW * 0.31 / ap) };
+      }
       else T={x:W/2, y:Math.max(130, H*0.19), s:Math.min(H*0.22, W*0.64/ap)};
       secTargets.push(T);
     }
