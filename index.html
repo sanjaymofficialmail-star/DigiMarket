@@ -243,19 +243,13 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 .app-success-box{display:none;text-align:center;padding:0.8rem 0}
 
 @media(max-width:1023px){
-  .hc{grid-template-columns:1fr;gap:24px}
-  .aside{justify-self:center;max-width:520px;padding:0;text-align:center}
-  h1{font-size:clamp(38px,min(9.5vw,9vh),92px)}
-}
-
-@media(max-width:899px){
-  /* Fix Mobile Touch Scrolling - Ensure pointer events and pan-y are explicitly active */
+  /* Fix Touch Scrolling & Interactions */
   .sec, .sec.L, .sec > *, main, .blk, .blk *, #application-portal, #application-portal * {
     pointer-events: auto !important;
     touch-action: pan-y !important;
   }
 
-  /* Center All Sections and Add Ample Top Spacing For 3D Particles */
+  /* Center All Sections and Add Top Spacing For 3D Particles */
   .sec, .sec.L, .sec:not(.hero) {
     min-height: 100svh !important;
     display: flex !important;
@@ -263,13 +257,13 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     align-items: center !important;
     justify-content: flex-end !important;
     text-align: center !important;
-    padding: max(220px, 32vh) var(--pad) 3.5rem !important;
+    padding: max(170px, 26vh) var(--pad) 3rem !important;
     max-width: 100% !important;
   }
 
   /* Centered block with frosted card background */
   .sec .blk, .sec.L .blk, .sec .blk.w, .sec.L .blk.w {
-    max-width: 480px !important;
+    max-width: 520px !important;
     width: 100% !important;
     margin: 0 auto !important;
     text-align: center !important;
@@ -307,7 +301,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     margin-left: auto !important;
     margin-right: auto !important;
     width: 100% !important;
-    max-width: 440px !important;
+    max-width: 460px !important;
     padding: 0 !important;
   }
   .rows li, .topics li {
@@ -344,7 +338,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     justify-content: center !important;
     align-items: center !important;
     gap: 16px !important;
-    margin: 1.6rem auto 0 !important;
+    margin: 1.4rem auto 0 !important;
     width: 100% !important;
   }
   .ctas a.btn, .ctas button.btn, .ctas a.txt {
@@ -354,8 +348,9 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
   /* Center Cards in Pricing & Enroll */
   .cards {
     grid-template-columns: 1fr !important;
-    max-width: 400px;
+    max-width: 420px;
     margin: 1.4rem auto 0 !important;
+    gap: 14px !important;
   }
   .card {
     text-align: center !important;
@@ -376,7 +371,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     justify-content: center !important;
   }
 
-  /* Center Hero Content with Black Card (matching other sections) */
+  /* Responsive Hero Content Container: Beautiful Frosted Card placed under 3D Particle Logo */
   .hero {
     min-height: 100svh !important;
     display: flex !important;
@@ -384,7 +379,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     justify-content: flex-end !important;
     align-items: center !important;
     text-align: center !important;
-    padding: max(220px, 32vh) var(--pad) 3.5rem !important;
+    padding: max(160px, 24vh) var(--pad) 2.5rem !important;
     box-sizing: border-box !important;
   }
   .hero .sp {
@@ -398,34 +393,55 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    max-width: 520px !important;
+    max-width: 540px !important;
     width: 100% !important;
     margin: 0 auto !important;
-    background: linear-gradient(to top, var(--bg) 85%, color-mix(in srgb, var(--bg) 60%, transparent) 95%, transparent) !important;
-    border-radius: 24px 24px 0 0 !important;
-    padding: 2.8rem var(--pad) 1.5rem !important;
+    background: color-mix(in srgb, var(--card) 95%, transparent) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 24px !important;
+    padding: 2rem clamp(1.2rem, 3.2vw, 2.2rem) 1.6rem !important;
+    box-shadow: 0 16px 45px rgba(0,0,0,0.08), 0 0 35px color-mix(in srgb, var(--acc) 8%, transparent) !important;
     position: relative !important;
     z-index: 3 !important;
     box-sizing: border-box !important;
+    gap: 12px !important;
+  }
+  .hero-left-col {
+    max-width: 100% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
   }
   .hero h1 {
+    font-size: clamp(28px, 4.8vw, 44px) !important;
+    line-height: 1.05 !important;
+    margin-bottom: 0.35rem !important;
     text-align: center !important;
-  }
-  .hero .eyebrow {
-    justify-content: center !important;
-    text-align: center !important;
-  }
-  .hero .eyebrow::before {
-    display: none;
   }
   .hero .aside {
     text-align: center !important;
-    max-width: 480px;
+    max-width: 100% !important;
     margin: 0 auto !important;
     padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .hero .aside p {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
   }
   .hero .price {
     text-align: center !important;
+    margin-top: 0.4rem !important;
+    font-size: 0.92rem !important;
+  }
+  .hero .ctas {
+    margin-top: 0.8rem !important;
+    justify-content: center !important;
   }
 }
 @media(max-width:767px){
@@ -443,10 +459,150 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
   .pay-row{font-size:0.76rem !important}
   .cards{grid-template-columns:1fr}.topics{grid-template-columns:1fr}.topics li:nth-last-child(2){border-bottom:0}h1{font-size:clamp(34px,min(12vw,7vh),58px)}
 }
-@media(prefers-reduced-motion:reduce){.l,.rv{transition:none;transform:none;opacity:1}html{scroll-behavior:auto}}
+/* Demo Environment Floating Banner & Inspector Styles */
+.demo-indicator-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(13, 27, 16, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.35);
+  padding: 8px var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: #e2f0d9;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  animation: slideDownDemo 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slideDownDemo {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+body.has-demo-bar header {
+  top: calc(env(safe-area-inset-top, 0px) + 38px) !important;
+}
+body.has-demo-bar #prog {
+  top: calc(env(safe-area-inset-top, 0px) + 38px) !important;
+}
+.demo-indicator-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(52, 211, 153, 0.16);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #34d399;
+  padding: 2.5px 8px;
+  border-radius: 99px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.demo-pulse-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: demoPulse 1.8s infinite;
+  display: inline-block;
+}
+@keyframes demoPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+.demo-text {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.demo-table-tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: #34d399;
+  font-weight: 600;
+}
+.demo-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-btn-inspect, .demo-btn-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 99px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.demo-btn-inspect {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+.demo-btn-inspect:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.demo-btn-live {
+  background: var(--acc);
+  border: 1px solid color-mix(in srgb, var(--acc) 60%, #fff);
+  color: #ffffff;
+}
+.demo-btn-live:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+.demo-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: color-mix(in srgb, var(--acc) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--acc) 32%, transparent);
+  color: var(--acc) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  padding: 3px 10px !important;
+  border-radius: 99px !important;
+  opacity: 0.9 !important;
+  transition: all 0.2s ease !important;
+}
+.demo-nav-pill:hover {
+  opacity: 1 !important;
+  background: color-mix(in srgb, var(--acc) 22%, transparent);
+  transform: translateY(-1px);
+}
+.demo-nav-pill.active {
+  background: #34d399 !important;
+  color: #0d2818 !important;
+  border-color: #34d399 !important;
+  font-weight: 700 !important;
+}
+
 </style>
 </head>
 <body>
+
+  
+
 <div id="prog"></div>
 <!-- Full-Screen Interactive Dynamic Dot Matrix Shader Background (Both Landing Page & Form) -->
 <canvas id="gold-canvas" aria-hidden="true"></canvas>
@@ -461,7 +617,7 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     <li><a href="#curriculum">Course</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#company">About</a></li>
-
+    
     <li class="k"><a class="pill" href="#application/forms">Enroll now</a></li>
   </ul>
 </header>
@@ -472,21 +628,23 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     <div class="sp"></div>
     <div class="hc" id="hcontent">
       <div class="hero-left-col">
-        <h1><span>Master digital marketing.</span><span class="acc">Get career-ready.</span></h1>
+        <h1><span id="hero-title-main">Master digital marketing.</span><span class="acc" id="hero-title-acc">Get career-ready.</span></h1>
       </div>
       <div class="aside">
-        <p>Industry-aligned training in AI SEO, paid ads, analytics, lead generation and more, taught through hands-on practice.</p>
-        <p class="price">Online <s>₹10,000</s> <b>₹4,999</b> · Offline <s>₹50,000</s> <b>₹14,999</b></p>
-        <div class="ctas"><a class="btn" href="#application/forms">Enroll now</a><a class="txt" href="#curriculum">View course</a></div>
+        <p id="hero-aside-desc">Industry-aligned training in AI SEO, paid ads, analytics, lead generation and more, taught through hands-on practice.</p>
+        <p class="price" id="hero-price-line">Online <s id="hero-price-online-was">₹10,000</s> <b id="hero-price-online">₹4,999</b> · Offline <s id="hero-price-offline-was">₹50,000</s> <b id="hero-price-offline">₹14,999</b></p>
+        <div class="ctas"><a class="btn" href="#application/forms" id="hero-primary-cta">Enroll now</a><a class="txt" href="#curriculum" id="hero-secondary-cta">View course</a></div>
       </div>
     </div>
   </section>
 
+  
+
   <section class="sec" id="why">
     <div class="blk">
-      <h2><span class="line"><span class="l">Skills employers</span></span><span class="line"><span class="l acc" style="--d:.1s">actually hire for.</span></span></h2>
-      <p class="rv rv-lead">Bridging college and corporate through immersive, tool-first marketing training.</p>
-      <ul class="rows">
+      <h2><span class="line"><span class="l" id="why-title-main">Skills employers</span></span><span class="line"><span class="l acc" id="why-title-acc" style="--d:.1s">actually hire for.</span></span></h2>
+      <p class="rv rv-lead" id="why-lead">Bridging college and corporate through immersive, tool-first marketing training.</p>
+      <ul class="rows" id="why-features-list">
         <li class="rv" style="--i:1"><h3>Live Ad Budgets &amp; Campaigns</h3><p>Manage real client budgets across Meta &amp; Google Ads.</p></li>
         <li class="rv" style="--i:2"><h3>AI-Assisted Workflow</h3><p>Use generative AI for keyword research, copy, and SEO ranking.</p></li>
         <li class="rv" style="--i:3"><h3>Verified Portfolio &amp; Placement</h3><p>Build job-ready case studies with dedicated interview prep.</p></li>
@@ -497,8 +655,8 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec L" id="curriculum">
     <div class="blk w">
-      <h2><span class="line"><span class="l">Everything you need,</span></span><span class="line"><span class="l acc" style="--d:.1s">in one course.</span></span></h2>
-      <ul class="topics">
+      <h2><span class="line"><span class="l" id="curriculum-title-main">Everything you need,</span></span><span class="line"><span class="l acc" id="curriculum-title-acc" style="--d:.1s">in one course.</span></span></h2>
+      <ul class="topics" id="curriculum-topics-list">
         <li class="rv" style="--i:0"><h3>AI SEO</h3><p>Keywords &amp; rank optimisation</p></li>
         <li class="rv" style="--i:1"><h3>Paid Media</h3><p>Meta &amp; Google Ads ROI</p></li>
         <li class="rv" style="--i:2"><h3>Content Strategy</h3><p>Copywriting &amp; creative design</p></li>
@@ -512,8 +670,8 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec" id="learn">
     <div class="blk">
-      <h2><span class="line"><span class="l">Learn it by</span></span><span class="line"><span class="l acc" style="--d:.1s">doing it.</span></span></h2>
-      <ol class="rows steps">
+      <h2><span class="line"><span class="l" id="learn-title-main">Learn it by</span></span><span class="line"><span class="l acc" id="learn-title-acc" style="--d:.1s">doing it.</span></span></h2>
+      <ol class="rows steps" id="learn-steps-list">
         <li class="rv" style="--i:0"><h3>Core Playbooks</h3><p>Concise lessons on proven growth frameworks.</p></li>
         <li class="rv" style="--i:1"><h3>Hands-on Labs</h3><p>Live practice inside industry-standard marketing tools.</p></li>
         <li class="rv" style="--i:2"><h3>Proof of Work</h3><p>Deploy live campaigns to build verified case studies.</p></li>
@@ -525,39 +683,39 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec L" id="pricing">
     <div class="blk w">
-      <h2><span class="line"><span class="l">Choose how</span></span><span class="line"><span class="l acc" style="--d:.1s">you learn.</span></span></h2>
-      <div class="cards">
+      <h2><span class="line"><span class="l" id="pricing-title-main">Choose how</span></span><span class="line"><span class="l acc" id="pricing-title-acc" style="--d:.1s">you learn.</span></span></h2>
+      <div class="cards" id="pricing-cards-container">
         <div class="card rv" style="--i:0">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem">
-            <span class="k" style="font-weight:700">Online Batch</span>
-            <span class="off">50% off</span>
+            <span class="k" id="pricing-online-name" style="font-weight:700">Online Batch</span>
+            <span class="off" id="pricing-online-off">50% off</span>
           </div>
           <div style="display:flex;align-items:baseline;gap:6px;margin:0.2rem 0 0.5rem">
-            <span class="now">₹4,999</span>
-            <span class="was">₹10,000</span>
+            <span class="now" id="pricing-online-now">₹4,999</span>
+            <span class="was" id="pricing-online-was">₹10,000</span>
           </div>
-          <ul>
+          <ul id="pricing-online-ul">
             <li>Live interactive sessions</li>
             <li>All 6 modules &amp; AI tools</li>
             <li>TN Skills accredited certificate</li>
           </ul>
-          <a class="btn" href="#application/forms" data-mode="Online">Enroll online &rarr;</a>
+          <a class="btn" href="#application/forms" id="pricing-online-btn" data-mode="Online">Enroll online &rarr;</a>
         </div>
         <div class="card rv" style="--i:1;border-color:color-mix(in srgb,var(--acc) 38%,transparent)">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem">
-            <span class="k" style="font-weight:700;color:var(--acc)">Offline Classroom</span>
-            <span class="off">70% off</span>
+            <span class="k" id="pricing-offline-name" style="font-weight:700;color:var(--acc)">Offline Classroom</span>
+            <span class="off" id="pricing-offline-off">70% off</span>
           </div>
           <div style="display:flex;align-items:baseline;gap:6px;margin:0.2rem 0 0.5rem">
-            <span class="now" style="color:var(--acc)">₹14,999</span>
-            <span class="was">₹50,000</span>
+            <span class="now" id="pricing-offline-now" style="color:var(--acc)">₹14,999</span>
+            <span class="was" id="pricing-offline-was">₹50,000</span>
           </div>
-          <ul>
+          <ul id="pricing-offline-ul">
             <li>In-person labs (Maduravoyal)</li>
             <li>1-on-1 mentor guidance</li>
             <li>Direct placement assistance</li>
           </ul>
-          <a class="btn" href="#application/forms" data-mode="Offline">Enroll offline &rarr;</a>
+          <a class="btn" href="#application/forms" id="pricing-offline-btn" data-mode="Offline">Enroll offline &rarr;</a>
         </div>
       </div>
     </div>
@@ -565,9 +723,9 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
 
   <section class="sec" id="company">
     <div class="blk">
-      <h2><span class="line"><span class="l">About</span></span><span class="line"><span class="l acc" style="--d:.1s">Plant Green Inertia.</span></span></h2>
-      <p class="rv rv-lead">Official Training Partner of TN Skills, Tamil Nadu Skill Development Corporation (TNSDC). Empowering students and graduates with practical, high-demand skills to launch successful careers in digital marketing and tech.</p>
-      <div class="badges rv" style="--i:1">
+      <h2><span class="line"><span class="l" id="about-title-main">About</span></span><span class="line"><span class="l acc" id="about-title-acc" style="--d:.1s">Plant Green Inertia.</span></span></h2>
+      <p class="rv rv-lead" id="about-lead">Official Training Partner of TN Skills, Tamil Nadu Skill Development Corporation (TNSDC). Empowering students and graduates with practical, high-demand skills to launch successful careers in digital marketing and tech.</p>
+      <div class="badges rv" id="about-badges-container" style="--i:1">
         <span>TN Skills Official Partner</span>
         <span>TNSDC Accredited</span>
         <span>Chennai HQ</span>
@@ -580,22 +738,22 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
   <section class="sec L" id="enroll">
     <div class="blk">
       <h2>
-        <span class="line"><span class="l">Next cohort</span></span>
-        <span class="line"><span class="l acc" style="--d:.1s">now open.</span></span>
+        <span class="line"><span class="l" id="next-cohort-title-main">Next cohort</span></span>
+        <span class="line"><span class="l acc" id="next-cohort-title-acc" style="--d:.1s">now open.</span></span>
       </h2>
-      <p class="rv rv-lead">
+      <p class="rv rv-lead" id="next-cohort-lead">
         Tamil Nadu's premier government-recognized digital marketing cohort.
       </p>
       
       <!-- Compact 2-Metric Highlight Grid -->
       <div class="rv" style="--i:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0.65rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:0.9rem">
         <div>
-          <b style="display:block;font-size:0.9rem;color:var(--fg);font-weight:700">100+ Live Hours</b>
-          <span style="font-size:0.72rem;color:var(--mute);line-height:1.3">Hands-on AI &amp; Ads Labs</span>
+          <b id="next-cohort-metric-1-val" style="display:block;font-size:0.9rem;color:var(--fg);font-weight:700">100+ Live Hours</b>
+          <span id="next-cohort-metric-1-label" style="font-size:0.72rem;color:var(--mute);line-height:1.3">Hands-on AI &amp; Ads Labs</span>
         </div>
         <div style="border-left:1px solid var(--line);padding-left:10px">
-          <b style="display:block;font-size:0.9rem;color:var(--acc);font-weight:700">From ₹4,999</b>
-          <span style="font-size:0.72rem;color:var(--mute);line-height:1.3">Up to 70% Subsidy</span>
+          <b id="next-cohort-metric-2-val" style="display:block;font-size:0.9rem;color:var(--acc);font-weight:700">From ₹4,999</b>
+          <span id="next-cohort-metric-2-label" style="font-size:0.72rem;color:var(--mute);line-height:1.3">Up to 70% Subsidy</span>
         </div>
       </div>
 
@@ -616,28 +774,29 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
   <div class="fgrid">
     <div class="fbrand">
       <a class="logo" href="#top" aria-label="Plant Green Inertia"><img src="/logo_clean.png" alt="Plant Green Inertia" class="site-logo-img footer-logo-img" /></a>
-      <p>The World's First Experiential Training Company, bridging college and corporate through immersive learning.</p>
+      <p id="footer-brand-pitch">The World's First Experiential Training Company, bridging college and corporate through immersive learning.</p>
       <a class="btn" href="#application/forms">Enroll now</a>
     </div>
     <div class="fcol">
       <h4>Office</h4>
-      <p class="f-addr">No: 4, Alapakkam Main Road, Maduravoyal, Chennai - 600095</p>
+      <p class="f-addr" id="footer-office-address">No: 4, Alapakkam Main Road, Maduravoyal, Chennai - 600095</p>
     </div>
     <div class="fcol">
       <h4>Support</h4>
       <ul>
-        <li><a href="tel:9345029705">9345029705</a></li>
-        <li><a href="tel:9345886690">9345886690</a></li>
-        <li><a href="mailto:plantgreeninertia@gmail.com">plantgreeninertia@gmail.com</a></li>
+        <li><a id="footer-phone-1" href="tel:9345029705">9345029705</a></li>
+        <li><a id="footer-phone-2" href="tel:9345886690">9345886690</a></li>
+        <li><a id="footer-email" href="mailto:plantgreeninertia@gmail.com">plantgreeninertia@gmail.com</a></li>
+        
       </ul>
     </div>
     <div class="fcol">
       <h4>Follow Us</h4>
       <ul class="f-socials">
-        <li><a href="https://www.instagram.com/pginertia?stkn=MWZ6NHE1NHp1dWVvcQ==" target="_blank" rel="noopener">Instagram ↗</a></li>
-        <li><a href="https://youtube.com/@plantgreeninertia" target="_blank" rel="noopener">YouTube ↗</a></li>
-        <li><a href="https://www.linkedin.com/company/plantgreeninertia/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-        <li><a href="https://wa.me/919345029705" target="_blank" rel="noopener">WhatsApp ↗</a></li>
+        <li><a id="footer-social-instagram" href="https://www.instagram.com/pginertia?stkn=MWZ6NHE1NHp1dWVvcQ==" target="_blank" rel="noopener">Instagram ↗</a></li>
+        <li><a id="footer-social-youtube" href="https://youtube.com/@plantgreeninertia" target="_blank" rel="noopener">YouTube ↗</a></li>
+        <li><a id="footer-social-linkedin" href="https://www.linkedin.com/company/plantgreeninertia/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a id="footer-social-whatsapp" href="https://wa.me/919345029705" target="_blank" rel="noopener">WhatsApp ↗</a></li>
       </ul>
     </div>
   </div>
@@ -646,6 +805,8 @@ select.app-input option{background:var(--optbg);color:var(--fg)}
     <a href="#top">Back to top ↑</a>
   </div>
 </footer>
+
+
 
 <!-- ==========================================================================
      NEW SECTION: Fullpage Dedicated Application Portal at #application/forms
@@ -914,6 +1075,43 @@ function setCss(th){
 }
 setCss(BRAND_THEME);
 
+window.applyDynamicThemeColors = function(th){
+  if(!th) return;
+  if(th.acc) BRAND_THEME.acc = th.acc;
+  if(th.acc2) BRAND_THEME.acc2 = th.acc2;
+  if(th.bg) BRAND_THEME.bg = th.bg;
+  if(th.fg) BRAND_THEME.fg = th.fg;
+  if(th.card) BRAND_THEME.card = th.card;
+  if(th.line) BRAND_THEME.line = th.line;
+  setCss(BRAND_THEME);
+
+  var p = th.particles || th;
+  if(p){
+    if(p.primary) BRAND_THEME.p.acc = p.primary;
+    if(p.secondary && p.accent){
+      BRAND_THEME.p.a = [p.accent, p.primary];
+      BRAND_THEME.p.b = [p.primary, p.secondary];
+    }
+    if(p.dust_colors && Array.isArray(p.dust_colors) && typeof DC !== 'undefined'){
+      var dpal = p.dust_colors.map(hx);
+      for(var i=0;i<DC.length/3;i++){
+        var c = dpal[Math.floor(Math.random()*dpal.length)];
+        var q = 0.9 + Math.random()*0.1;
+        DC[i*3]=Math.min(1, c[0]*q);
+        DC[i*3+1]=Math.min(1, c[1]*q);
+        DC[i*3+2]=Math.min(1, c[2]*q);
+      }
+      if(typeof dust !== 'undefined' && dust && dust.geo && dust.geo.attributes && dust.geo.attributes.aCol){
+        dust.col.set(DC);
+        dust.geo.attributes.aCol.needsUpdate = true;
+      }
+    }
+    if(window.updateGoldShaderTheme && (p.shader_colors || p.dust_colors)){
+      window.updateGoldShaderTheme(p.shader_colors || p.dust_colors);
+    }
+  }
+};
+
 function fillDust(DC){
   var pal = [hx("#2d663b"), hx("#201b18"), hx("#1a5c2a"), hx("#201b18"), hx("#ffffff")];
   for(var i=0;i<DC.length/3;i++){
@@ -1099,10 +1297,15 @@ function start(){
     for(var s=0;s<secs.length;s++){
       var side=SIDE[s],ap=shapes[MAP[s]].asp,T;
       if(s===0){
-        if(W < 900) T={x:W/2, y:Math.max(120, Math.min(H*0.20, (top+bot)/2)), s:Math.min(H*0.20, (W*0.75)/asp0)};
-        else T={x:W/2, y:(top+bot)/2, s:Math.min(H*0.36, Math.min(270, (W*0.38)/asp0))};
+        if(W < 1024) {
+          var logoMaxH = Math.min(130, Math.min(bh * 0.75, (W * 0.70) / asp0));
+          var logoY = Math.max(90, Math.min(top + bh * 0.45, hc.offsetTop - logoMaxH * 0.55 - 10));
+          T = { x: W / 2, y: logoY, s: logoMaxH };
+        } else {
+          T = { x: W / 2, y: (top + bot) / 2, s: Math.min(H * 0.34, Math.min(260, (W * 0.36) / asp0)) };
+        }
       }
-      else if(W>=900){
+      else if(W >= 1024){
         var maxW = Math.min(W, 1200);
         var cardW = (s === 4 || s === 3) ? 520 : 470;
         if(side === "R"){
@@ -1121,7 +1324,9 @@ function start(){
           T = { x: safeCenter, y: H * 0.50, s: Math.min(sMax, Math.min(270, 360 / ap)) };
         }
       }
-      else T={x:W/2, y:Math.max(130, H*0.19), s:Math.min(H*0.22, Math.min(220, (W*0.68)/ap))};
+      else {
+        T = { x: W / 2, y: Math.max(120, H * 0.18), s: Math.min(H * 0.18, Math.min(180, (W * 0.60) / ap)) };
+      }
       secTargets.push(T);
     }
     if(!cur.init){cur.x=secTargets[0].x;cur.y=secTargets[0].y;cur.s=secTargets[0].s;cur.init=true}
@@ -1317,6 +1522,16 @@ if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('800 10
     sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
 
+  var isDemo = window.IS_DEMO_MODE === true ||
+               window.location.pathname === '/demo' ||
+               window.location.pathname.startsWith('/demo/') ||
+               window.location.hash === '#demo' ||
+               window.location.search.indexOf('demo=true') !== -1 ||
+               window.location.search.indexOf('source=temp') !== -1;
+  var targetTable = isDemo ? 'pgi_website_content_temp' : 'pgi_website_content';
+
+  var onlineFeeAmount = 4999;
+  var offlineFeeAmount = 14999;
   var selectedMode = 'Online';
   var feeAmount = 4999;
   var currentStep = 1;
@@ -1467,15 +1682,15 @@ if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('800 10
   function setMode(mode) {
     selectedMode = mode;
     if (mode === 'Online') {
-      feeAmount = 4999;
+      feeAmount = onlineFeeAmount;
       if (btnOnline) btnOnline.classList.add('active');
       if (btnOffline) btnOffline.classList.remove('active');
-      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹4,999';
+      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹' + Number(feeAmount).toLocaleString('en-IN');
     } else {
-      feeAmount = 14999;
+      feeAmount = offlineFeeAmount;
       if (btnOffline) btnOffline.classList.add('active');
       if (btnOnline) btnOnline.classList.remove('active');
-      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹14,999';
+      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹' + Number(feeAmount).toLocaleString('en-IN');
     }
     updateGPayButton();
   }
@@ -1660,6 +1875,291 @@ if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('800 10
       if (appSuccessBox) appSuccessBox.style.display = 'block';
     });
   }
+
+  // ============================================================================
+  // Dynamic Content Hydration from Supabase (pgi_website_content / pgi_website_content_temp)
+  // ============================================================================
+  function escapeHtml(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function hydrateWebsiteContent(data) {
+    if (!data) return;
+
+    // 0. Dynamic Theme & Particle Colors from Database
+    var th = data.theme_colors || (data.content_json && data.content_json.theme_colors);
+    if (th && window.applyDynamicThemeColors) {
+      window.applyDynamicThemeColors(th);
+    }
+
+    var cJson = data.content_json || {};
+    var heroData = data.hero || cJson.hero;
+    var whyData = data.why || cJson.why;
+    var curData = (Array.isArray(data.curriculum) && data.curriculum.length) ? data.curriculum : cJson.curriculum;
+    var stepData = (Array.isArray(data.learning_steps) && data.learning_steps.length) ? data.learning_steps : cJson.learning_steps;
+    var priceData = data.pricing || cJson.pricing;
+    var aboutData = data.about || cJson.about;
+    var nextCohortData = data.next_cohort || cJson.next_cohort;
+    var contactData = data.contact || cJson.contact;
+
+    // 1. Hero Section
+    if (heroData) {
+      var h = heroData;
+      var elMain = document.getElementById('hero-title-main');
+      var elAcc = document.getElementById('hero-title-acc');
+      var elAsideDesc = document.getElementById('hero-aside-desc');
+      var elPriceOnline = document.getElementById('hero-price-online');
+      var elPriceOnlineWas = document.getElementById('hero-price-online-was');
+      var elPriceOffline = document.getElementById('hero-price-offline');
+      var elPriceOfflineWas = document.getElementById('hero-price-offline-was');
+      var elPrimaryCta = document.getElementById('hero-primary-cta');
+      var elSecCta = document.getElementById('hero-secondary-cta');
+
+      if (elMain && h.title_main) elMain.textContent = h.title_main;
+      if (elAcc && h.title_acc) elAcc.textContent = h.title_acc;
+      if (elAsideDesc && h.aside_desc) elAsideDesc.textContent = h.aside_desc;
+      if (elPriceOnline && h.price_online) elPriceOnline.textContent = h.price_online;
+      if (elPriceOnlineWas && h.price_online_was) elPriceOnlineWas.textContent = h.price_online_was;
+      if (elPriceOffline && h.price_offline) elPriceOffline.textContent = h.price_offline;
+      if (elPriceOfflineWas && h.price_offline_was) elPriceOfflineWas.textContent = h.price_offline_was;
+      if (elPrimaryCta && h.primary_cta) elPrimaryCta.textContent = h.primary_cta;
+      if (elSecCta && h.secondary_cta) elSecCta.textContent = h.secondary_cta;
+    }
+
+    // 2. Why Section
+    if (whyData) {
+      var w = whyData;
+      var elWhyMain = document.getElementById('why-title-main');
+      var elWhyAcc = document.getElementById('why-title-acc');
+      var elWhyLead = document.getElementById('why-lead');
+      var elWhyFeatures = document.getElementById('why-features-list');
+
+      if (elWhyMain && w.title_main) elWhyMain.textContent = w.title_main;
+      if (elWhyAcc && w.title_acc) elWhyAcc.textContent = w.title_acc;
+      if (elWhyLead && w.lead) elWhyLead.textContent = w.lead;
+      if (elWhyFeatures && Array.isArray(w.features) && w.features.length) {
+        elWhyFeatures.innerHTML = w.features.map(function(f, i){
+          return '<li class="rv" style="--i:' + (i + 1) + '">' +
+                 '<h3>' + escapeHtml(f.title || '') + '</h3>' +
+                 '<p>' + escapeHtml(f.desc || '') + '</p>' +
+                 '</li>';
+        }).join('');
+      }
+    }
+
+    // 3. Curriculum Section
+    if (Array.isArray(curData) && curData.length) {
+      var elCurriculumList = document.getElementById('curriculum-topics-list');
+      if (elCurriculumList) {
+        elCurriculumList.innerHTML = curData.map(function(c, i){
+          return '<li class="rv" style="--i:' + i + '">' +
+                 '<h3>' + escapeHtml(c.title || '') + '</h3>' +
+                 '<p>' + escapeHtml(c.desc || '') + '</p>' +
+                 '</li>';
+        }).join('');
+      }
+    }
+
+    // 4. Learning Steps Section
+    if (Array.isArray(stepData) && stepData.length) {
+      var elStepsList = document.getElementById('learn-steps-list');
+      if (elStepsList) {
+        elStepsList.innerHTML = stepData.map(function(s, i){
+          return '<li class="rv" style="--i:' + i + '">' +
+                 '<h3>' + escapeHtml(s.title || '') + '</h3>' +
+                 '<p>' + escapeHtml(s.desc || '') + '</p>' +
+                 '</li>';
+        }).join('');
+      }
+    }
+
+    // 5. Pricing Section & Application Form Fees
+    if (priceData) {
+      var pr = priceData;
+      var elPrMain = document.getElementById('pricing-title-main');
+      var elPrAcc = document.getElementById('pricing-title-acc');
+      if (elPrMain && pr.title_main) elPrMain.textContent = pr.title_main;
+      if (elPrAcc && pr.title_acc) elPrAcc.textContent = pr.title_acc;
+
+      if (pr.online) {
+        var on = pr.online;
+        var elOnName = document.getElementById('pricing-online-name');
+        var elOnOff = document.getElementById('pricing-online-off');
+        var elOnNow = document.getElementById('pricing-online-now');
+        var elOnWas = document.getElementById('pricing-online-was');
+        var elOnUl = document.getElementById('pricing-online-ul');
+        var elOnBtn = document.getElementById('pricing-online-btn');
+        var btnModeOnlinePrice = document.querySelector('#btn-mode-online .m-price');
+        var btnModeOnlineTag = document.querySelector('#btn-mode-online .m-tag');
+
+        if (elOnName && on.name) elOnName.textContent = on.name;
+        if (elOnOff && on.discount) elOnOff.textContent = on.discount;
+        if (elOnNow && on.price) elOnNow.textContent = on.price;
+        if (elOnWas && on.was) elOnWas.textContent = on.was;
+        if (elOnUl && Array.isArray(on.features)) {
+          elOnUl.innerHTML = on.features.map(function(f){ return '<li>' + escapeHtml(f) + '</li>'; }).join('');
+        }
+        if (elOnBtn && on.cta) elOnBtn.innerHTML = escapeHtml(on.cta) + ' &rarr;';
+        if (on.price_num) {
+          onlineFeeAmount = Number(on.price_num);
+          if (btnModeOnlinePrice) btnModeOnlinePrice.textContent = '₹' + onlineFeeAmount.toLocaleString('en-IN');
+        }
+        if (btnModeOnlineTag && on.discount) {
+          btnModeOnlineTag.textContent = 'Online Batch (' + on.discount + ')';
+        }
+      }
+
+      if (pr.offline) {
+        var off = pr.offline;
+        var elOffName = document.getElementById('pricing-offline-name');
+        var elOffDiscount = document.getElementById('pricing-offline-off');
+        var elOffNow = document.getElementById('pricing-offline-now');
+        var elOffWas = document.getElementById('pricing-offline-was');
+        var elOffUl = document.getElementById('pricing-offline-ul');
+        var elOffBtn = document.getElementById('pricing-offline-btn');
+        var btnModeOfflinePrice = document.querySelector('#btn-mode-offline .m-price');
+        var btnModeOfflineTag = document.querySelector('#btn-mode-offline .m-tag');
+
+        if (elOffName && off.name) elOffName.textContent = off.name;
+        if (elOffDiscount && off.discount) elOffDiscount.textContent = off.discount;
+        if (elOffNow && off.price) elOffNow.textContent = off.price;
+        if (elOffWas && off.was) elOffWas.textContent = off.was;
+        if (elOffUl && Array.isArray(off.features)) {
+          elOffUl.innerHTML = off.features.map(function(f){ return '<li>' + escapeHtml(f) + '</li>'; }).join('');
+        }
+        if (elOffBtn && off.cta) elOffBtn.innerHTML = escapeHtml(off.cta) + ' &rarr;';
+        if (off.price_num) {
+          offlineFeeAmount = Number(off.price_num);
+          if (btnModeOfflinePrice) btnModeOfflinePrice.textContent = '₹' + offlineFeeAmount.toLocaleString('en-IN');
+        }
+        if (btnModeOfflineTag && off.discount) {
+          btnModeOfflineTag.textContent = 'Offline Classroom (' + off.discount + ')';
+        }
+      }
+
+      // Re-apply current mode fee amounts
+      feeAmount = (selectedMode === 'Online') ? onlineFeeAmount : offlineFeeAmount;
+      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹' + Number(feeAmount).toLocaleString('en-IN');
+      updateGPayButton();
+    }
+
+    // 6. About Section
+    if (aboutData) {
+      var ab = aboutData;
+      var elAbMain = document.getElementById('about-title-main');
+      var elAbAcc = document.getElementById('about-title-acc');
+      var elAbLead = document.getElementById('about-lead');
+      var elAbBadges = document.getElementById('about-badges-container');
+
+      if (elAbMain && ab.title_main) elAbMain.textContent = ab.title_main;
+      if (elAbAcc && ab.title_acc) elAbAcc.textContent = ab.title_acc;
+      if (elAbLead && ab.lead) elAbLead.textContent = ab.lead;
+      if (elAbBadges && Array.isArray(ab.badges)) {
+        elAbBadges.innerHTML = ab.badges.map(function(b){ return '<span>' + escapeHtml(b) + '</span>'; }).join('');
+      }
+    }
+
+    // 7. Next Cohort Section
+    if (nextCohortData) {
+      var nc = nextCohortData;
+      var elNcMain = document.getElementById('next-cohort-title-main');
+      var elNcAcc = document.getElementById('next-cohort-title-acc');
+      var elNcLead = document.getElementById('next-cohort-lead');
+      var elNcM1Val = document.getElementById('next-cohort-metric-1-val');
+      var elNcM1Lbl = document.getElementById('next-cohort-metric-1-label');
+      var elNcM2Val = document.getElementById('next-cohort-metric-2-val');
+      var elNcM2Lbl = document.getElementById('next-cohort-metric-2-label');
+
+      if (elNcMain && nc.title_main) elNcMain.textContent = nc.title_main;
+      if (elNcAcc && nc.title_acc) elNcAcc.textContent = nc.title_acc;
+      if (elNcLead && nc.lead) elNcLead.textContent = nc.lead;
+      if (elNcM1Val && nc.metric_1_val) elNcM1Val.textContent = nc.metric_1_val;
+      if (elNcM1Lbl && nc.metric_1_label) elNcM1Lbl.textContent = nc.metric_1_label;
+      if (elNcM2Val && nc.metric_2_val) elNcM2Val.textContent = nc.metric_2_val;
+      if (elNcM2Lbl && nc.metric_2_label) elNcM2Lbl.textContent = nc.metric_2_label;
+    }
+
+    // 8. Contact & Structured Footer
+    if (contactData) {
+      var c = contactData;
+      var elFBrand = document.getElementById('footer-brand-pitch');
+      var elFAddr = document.getElementById('footer-office-address');
+      var elFP1 = document.getElementById('footer-phone-1');
+      var elFP2 = document.getElementById('footer-phone-2');
+      var elFEmail = document.getElementById('footer-email');
+      var elFSocIg = document.getElementById('footer-social-instagram');
+      var elFSocYt = document.getElementById('footer-social-youtube');
+      var elFSocLi = document.getElementById('footer-social-linkedin');
+      var elFSocWa = document.getElementById('footer-social-whatsapp');
+
+      if (elFBrand && c.brand_pitch) elFBrand.textContent = c.brand_pitch;
+      if (elFAddr && (c.office_address || c.address)) elFAddr.textContent = (c.office_address || c.address);
+      if (elFP1 && c.phone_1) { elFP1.textContent = c.phone_1; elFP1.href = 'tel:' + c.phone_1; }
+      if (elFP2 && c.phone_2) { elFP2.textContent = c.phone_2; elFP2.href = 'tel:' + c.phone_2; }
+      if (elFEmail && c.email) { elFEmail.textContent = c.email; elFEmail.href = 'mailto:' + c.email; }
+      if (elFSocIg && c.instagram) elFSocIg.href = c.instagram;
+      if (elFSocYt && c.youtube) elFSocYt.href = c.youtube;
+      if (elFSocLi && c.linkedin) elFSocLi.href = c.linkedin;
+      if (elFSocWa && c.whatsapp) {
+        var waDigits = String(c.whatsapp).replace(/[^0-9]/g, '');
+        elFSocWa.href = 'https://wa.me/' + waDigits;
+      }
+    }
+
+    // Update inspector data
+    updateDemoInspector(data);
+
+    // Update 3D canvas particles to accommodate any shifted section heights
+    if (window.relayoutStage) {
+      setTimeout(window.relayoutStage, 60);
+    }
+  }
+
+  function updateDemoInspector(data) {
+    var jsonEl = document.getElementById('demo-json-viewer');
+    if (jsonEl && data) {
+      jsonEl.textContent = JSON.stringify(data, null, 2);
+    }
+    var syncEl = document.getElementById('demo-sync-time');
+    if (syncEl) {
+      var d = data.updated_at ? new Date(data.updated_at) : new Date();
+      syncEl.textContent = d.toLocaleTimeString() + ' (' + d.toLocaleDateString() + ')';
+    }
+  }
+
+  // Load content from Supabase
+  async function loadWebsiteContent() {
+    if (!sb) return;
+    try {
+      var res = await sb.from(targetTable).select('*').limit(1).single();
+      if (res && res.data) {
+        window.__ACTIVE_CONTENT = res.data;
+        hydrateWebsiteContent(res.data);
+      }
+    } catch (err) {
+      console.warn('Supabase content hydration notice for ' + targetTable + ':', err);
+    }
+  }
+
+  // Setup Realtime Database Subscription for instant updates
+  if (sb && sb.channel) {
+    try {
+      sb.channel('db-content-watch-' + targetTable)
+        .on('postgres_changes', { event: '*', schema: 'public', table: targetTable }, function(payload) {
+          if (payload && payload.new) {
+            window.__ACTIVE_CONTENT = payload.new;
+            hydrateWebsiteContent(payload.new);
+          }
+        })
+        .subscribe();
+    } catch (chanErr) {
+      console.warn('Realtime channel error:', chanErr);
+    }
+  }
+
+  // Trigger content loading
+  loadWebsiteContent();
 
   // WebGL Shader for Application Portal (#application-portal) — Dynamic Theme Palettes
   function initGoldDotsShader() {
