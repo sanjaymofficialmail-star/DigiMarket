@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>window.IS_DEMO_MODE = true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Marketing Course – Plant Green Inertia Pvt. Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<!-- Supabase JS Client & Canvas Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#ffffff;
+  --bgt:rgba(255,255,255,0);
+  --fg:#201b18;
+  --mute:rgba(32,27,24,.72);
+  --line:rgba(45,102,59,.16);
+  --acc:#2d663b;
+  --acc2:#1f5e30;
+  --onacc:#ffffff;
+  --card:#ffffff;
+  --field:rgba(45,102,59,.04);
+  --optbg:#ffffff;
+  --pad:clamp(20px,3.2vw,48px);
+  --head:'Geist','Helvetica Neue',Arial,sans-serif;
+  --serif:'Instrument Serif','Times New Roman',serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg);scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);transition:background .3s;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+body{background:var(--bg);color:var(--fg);font-family:var(--head);-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .3s,color .3s;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:9}
+a{color:inherit}
+#stage{position:fixed;inset:0;z-index:1;pointer-events:none}
+#stage canvas{display:block;width:100%;height:100%}
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:8;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px var(--pad) 24px;background:linear-gradient(var(--bg) 62%,var(--bgt));transition:background .3s}
+.logo{display:inline-flex;align-items:center;text-decoration:none;transition:opacity .2s}
+.logo:hover{opacity:0.9}
+.site-logo-img{height:34px;width:auto;max-width:170px;object-fit:contain;display:block}
+.footer-logo-img{height:42px;max-width:200px}
+.links{display:flex;align-items:center;gap:clamp(16px,2.2vw,32px);list-style:none;padding:0}
+.links a{text-decoration:none;font-size:13.5px;opacity:.75;transition:opacity .2s,color .2s}
+.links a:hover{opacity:1}
+.links .pill{opacity:1;padding:8px 18px;border-radius:99px;background:var(--acc);color:var(--onacc);font-weight:600;transition:transform .2s,background .3s,color .3s}
+.links .pill:hover{transform:translateY(-1px);filter:brightness(1.1)}
+
+
+#prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:2px;z-index:9;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:background .3s}
+main{position:relative;z-index:3}
+.sec{position:relative;min-height:100svh;display:flex;align-items:center;padding:6rem var(--pad) 4rem;pointer-events:none;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box}
+.sec.hero{max-width:100% !important;margin:0 !important;padding:0 !important}
+.sec>*{pointer-events:auto}
+.sec.L{justify-content:flex-end}
+.blk{max-width:29.5rem;width:100%;background:color-mix(in srgb,var(--card) 95%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:24px;padding:clamp(1.4rem,2.8vw,2.1rem);box-shadow:0 20px 50px rgba(0,0,0,0.08),0 0 35px color-mix(in srgb,var(--acc) 8%,transparent);box-sizing:border-box;position:relative;z-index:3}
+.blk.w{max-width:32.5rem}
+.card-badge{display:inline-flex;align-items:center;gap:5px;background:color-mix(in srgb,var(--acc) 12%,transparent);border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);color:var(--acc);font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:2.5px 8px;border-radius:99px;margin-bottom:0.65rem}
+h2{font-weight:600;font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:.96;letter-spacing:-.035em;margin-bottom:.65rem}
+.acc{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--acc2);transition:color .3s}
+.line{display:block;overflow:hidden;padding-bottom:.08em}
+.l{display:block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.in .l{transform:none}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .8s,transform .8s;transition-delay:calc(.15s + var(--i,0)*80ms)}
+.in .rv{opacity:1;transform:none}
+p{color:var(--mute);line-height:1.45;font-size:.84rem}
+.rv-lead{font-size:.84rem;color:var(--mute);line-height:1.45;margin-bottom:.75rem}
+.rows,.steps,.topics{list-style:none;padding:0;margin-top:.7rem}
+.rows li,.steps li,.topics li{padding:.5rem 0;border-top:1px solid var(--line)}
+.rows li:last-child,.steps li:last-child{border-bottom:1px solid var(--line)}
+h3{font-weight:600;font-size:.92rem;letter-spacing:-.015em;margin-bottom:.12rem;color:var(--fg)}
+.rows p,.steps p,.topics p{font-size:.76rem;line-height:1.35;color:var(--mute)}
+.topics{display:grid;grid-template-columns:1fr 1fr;gap:0 1.1rem}
+.topics li:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
+.steps{counter-reset:s}
+.steps li{display:grid;grid-template-columns:1.8rem 1fr;gap:0 .5rem}
+.steps li::before{counter-increment:s;content:counter(s);grid-row:span 2;font-family:var(--serif);font-style:italic;font-size:1.5rem;line-height:1;color:var(--acc2)}
+.btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 20px;border:0;border-radius:99px;background:var(--acc);color:var(--onacc);text-decoration:none;font:600 13.5px var(--head);cursor:pointer;box-shadow:0 4px 18px color-mix(in srgb,var(--acc) 30%,transparent);transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.txt{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:13.5px;font-weight:500;padding:4px 0;border-bottom:1px solid color-mix(in srgb,var(--fg) 30%,transparent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:.9rem}
+.hero{flex-direction:column;align-items:stretch;justify-content:flex-start;padding:0;overflow:visible;min-height:100svh}
+.bd{position:absolute;left:50%;transform:translate(-50%,-50%);z-index:0;white-space:nowrap;pointer-events:none;user-select:none;font-weight:600;letter-spacing:-.06em;line-height:.8;color:color-mix(in srgb,var(--fg) 5%,transparent)}
+.sp{flex:1 1 auto;min-height:0}
+.hc{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:end;gap:clamp(20px,3vw,56px);padding:0 var(--pad) clamp(24px,3vw,44px);pointer-events:none;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box}
+.hc a{pointer-events:auto}
+.eyebrow-badge, .eyebrow{display:inline-flex !important;align-items:center !important;gap:6px !important;background:color-mix(in srgb,var(--acc) 14%,transparent) !important;border:1px solid color-mix(in srgb,var(--acc) 38%,transparent) !important;color:var(--acc) !important;font-size:0.64rem !important;font-weight:600 !important;text-transform:uppercase !important;letter-spacing:.05em !important;padding:3.5px 10px !important;border-radius:99px !important;margin-bottom:clamp(10px,1.2vw,16px) !important;opacity:1 !important;visibility:visible !important;box-shadow:0 2px 10px color-mix(in srgb,var(--acc) 10%,transparent) !important;backdrop-filter:blur(12px) !important;-webkit-backdrop-filter:blur(12px) !important}
+.eyebrow-badge .partner-dot, .eyebrow::before{content:"" !important;width:5px !important;height:5px !important;border-radius:50% !important;background:var(--acc) !important;box-shadow:0 0 5px var(--acc) !important;flex:none !important}
+.header-partner-badge{display:inline-flex;align-items:center;gap:5px;background:color-mix(in srgb,var(--acc) 10%,transparent);border:1px solid color-mix(in srgb,var(--acc) 28%,transparent);color:var(--acc);padding:3px 8px;border-radius:99px;font-size:10px;font-weight:500;letter-spacing:0.01em;white-space:nowrap;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.header-partner-badge .partner-dot{width:5px;height:5px;border-radius:50%;background:var(--acc);box-shadow:0 0 5px var(--acc);flex-shrink:0}
+@media(max-width:860px){.header-partner-badge{display:none}}
+.hero-left-col{max-width:640px;background:none !important;border:none !important;box-shadow:none !important;padding:0 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+h1{font-weight:600;font-size:clamp(34px,min(4.8vw,8.5vh),82px);line-height:.96;letter-spacing:-.04em;text-wrap:balance;margin-bottom:0.2rem}
+h1 span{display:block}
+.aside{max-width:420px;justify-self:end;padding:1.3rem 1.5rem;background:color-mix(in srgb,var(--card) 95%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:22px;box-shadow:0 16px 45px rgba(0,0,0,0.07)}
+.aside p{font-size:clamp(13.5px,1vw,15px);line-height:1.45}
+.aside .price{color:var(--fg);margin-top:.7rem;font-size:.9rem}
+.price s,.was{opacity:.5}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:.8rem}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;padding:1rem;background:var(--card);box-shadow:0 4px 20px rgba(45,102,59,0.06);backdrop-filter:blur(8px)}
+.card .k{font-size:.82rem;letter-spacing:.04em;color:var(--mute)}
+.card .was{text-decoration:line-through;margin-top:.4rem;font-size:.85rem}
+.card .now{font-size:1.8rem;font-weight:600;letter-spacing:-.04em;line-height:1.05}
+.card .off{align-self:flex-start;margin:.3rem 0 .6rem;padding:.15rem .5rem;border-radius:99px;background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--acc2);font-size:.72rem}
+.card ul{list-style:none;padding:0;margin-bottom:.8rem;display:grid;gap:.35rem;font-size:.78rem;color:var(--mute)}
+.card ul li::before{content:"✓";color:var(--acc);margin-right:.4rem}
+.card .btn{margin-top:auto;justify-content:center;height:38px;font-size:13px}
+.badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
+.badges span{padding:.25rem .7rem;border:1px solid var(--line);border-radius:99px;font-size:.78rem}
+.foot{margin-top:.8rem;font-size:.72rem;color:var(--mute)}
+
+/* ==========================================================================
+   Full Footer Section (referenced from Digital Marketing Course (3).html)
+   ========================================================================== */
+footer{position:relative;z-index:3;background:var(--bg);border-top:1px solid var(--line);padding:4rem var(--pad) 4.5rem;transition:background .3s}
+.fgrid{display:grid;grid-template-columns:1.5fr 1.1fr 1fr 1.2fr;gap:2.5rem}
+.fbrand p{margin:1.1rem 0 1.4rem;max-width:26rem;font-size:.95rem;line-height:1.6;color:var(--mute)}
+footer h4{font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);margin-bottom:1rem}
+footer ul{list-style:none;padding:0;display:grid;gap:.7rem}
+footer a{text-decoration:none;font-size:.92rem;color:var(--mute);transition:color .2s ease}
+footer a:hover,footer a:focus-visible{color:var(--acc)}
+footer .f-addr{font-size:.92rem;line-height:1.6;color:var(--mute)}
+.fbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem 2rem;margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--mute)}
+.fbar a{color:var(--fg);text-decoration:none}
+.fbar a:hover{color:var(--acc)}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr;gap:2rem}.fbrand{grid-column:1/-1}}
+@media(max-width:520px){.fgrid{grid-template-columns:1fr;gap:1.8rem}}
+
+/* Body class to force-hide landing page when application portal is open */
+body.in-application-portal {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+}
+body.in-application-portal html {
+  overflow-y: auto !important;
+  height: auto !important;
+  touch-action: pan-y !important;
+}
+body.in-application-portal main,
+body.in-application-portal footer,
+body.in-application-portal header,
+body.in-application-portal #prog {
+  display: none !important;
+}
+body.in-application-portal #stage {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.in-application-portal #application-portal {
+  display: block !important;
+  position: relative !important;
+  min-height: 100vh !important;
+  overflow: visible !important;
+}
+
+/* ==========================================================================
+   Dedicated Multi-Step Application Portal (#application-portal)
+   Routes to #application/forms as a separate page view
+   ========================================================================== */
+/* Full-Screen Interactive Dynamic Dot Matrix Shader Background (Both Landing Page & Form) */
+#gold-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.38;transition:opacity .5s ease}
+#gold-vignette{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at center,transparent 25%,color-mix(in srgb,var(--bg) 25%,transparent) 70%,color-mix(in srgb,var(--bg) 55%,transparent) 100%);pointer-events:none;transition:background .5s ease}
+
+#application-portal{display:none;position:relative !important;width:100% !important;min-height:100vh !important;z-index:99;background:radial-gradient(circle at center,color-mix(in srgb,var(--bg) 10%,transparent) 0%,color-mix(in srgb,var(--bg) 35%,transparent) 100%);color:var(--fg);padding:5.2rem clamp(1rem,3.2vw,2rem) 4rem !important;transition:background .5s ease;box-sizing:border-box !important;overflow:visible !important;touch-action:pan-y !important;-webkit-overflow-scrolling:touch !important}
+
+/* Concentric Expanding Particle Wave Rings Canvas (Particles, Not Lines) */
+#particle-waves-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+
+.app-back-btn{position:fixed;top:1.2rem;left:clamp(1rem,3vw,2.5rem);z-index:120;display:inline-flex;align-items:center;gap:0.45rem;background:var(--card);border:1px solid var(--line);color:var(--fg);padding:0.55rem 1.15rem;border-radius:99px;font-size:0.82rem;font-weight:600;text-decoration:none;cursor:pointer;backdrop-filter:blur(12px);transition:all .2s ease}
+.app-back-btn:hover{border-color:var(--acc);color:var(--acc);transform:translateX(-2px)}
+
+
+@keyframes modalCardEntrance{
+  0%{opacity:0;transform:scale(0.92) translateY(22px);filter:blur(8px)}
+  100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}
+}
+
+.app-modal-card{position:relative;z-index:3;background:var(--card);backdrop-filter:blur(24px);border-radius:20px;padding:clamp(1.4rem,3.2vw,2.3rem);width:100%;max-width:520px;box-shadow:0 24px 70px rgba(0,0,0,0.55),0 0 45px color-mix(in srgb,var(--acc) 22%,transparent);border:1px solid var(--line);display:flex;flex-direction:column;margin:0 auto !important;animation:modalCardEntrance 0.6s cubic-bezier(.16,1,.3,1) forwards}
+
+.app-header{text-align:center;margin-bottom:1.3rem}
+.app-badge{display:inline-flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--acc) 14%,transparent);border:1px solid color-mix(in srgb,var(--acc) 35%,transparent);color:var(--acc);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:99px;margin-bottom:0.6rem}
+.app-title{font-size:clamp(1.35rem,2.4vw,1.75rem);font-weight:700;letter-spacing:-0.03em;color:var(--fg);margin-bottom:0.3rem}
+.app-title span{color:var(--acc)}
+.app-subtitle{font-size:0.84rem;color:var(--mute);line-height:1.45}
+
+/* Stepper Progress Indicator (3 Steps) */
+.stepper-bar{display:flex;align-items:center;justify-content:space-between;margin:1.1rem 0 1.6rem;position:relative}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2;cursor:default}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--field);border:1px solid var(--line);color:var(--mute);font-size:0.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .25s ease}
+.step-title{font-size:0.72rem;font-weight:600;color:var(--mute);transition:color .25s ease}
+.step-item.active .step-num{background:var(--acc);border-color:var(--acc);color:var(--onacc);box-shadow:0 0 14px color-mix(in srgb,var(--acc) 45%,transparent)}
+.step-item.active .step-title{color:var(--acc)}
+.step-item.done .step-num{background:color-mix(in srgb,var(--acc) 22%,transparent);border-color:var(--acc);color:var(--acc)}
+.step-line{flex:1;height:2px;background:var(--line);margin:0 8px;margin-bottom:16px;transition:background .25s ease}
+.step-line.active{background:var(--acc)}
+
+/* Balanced, Spaced Fields with Compact Heights */
+.form-step-pane{display:none}
+.form-step-pane.active{display:block}
+.app-field-group{display:flex;flex-direction:column;gap:7px;margin-bottom:1.15rem}
+.app-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.15rem}
+.app-label{font-size:0.78rem;color:var(--fg);opacity:.85;font-weight:500;display:flex;justify-content:space-between;letter-spacing:0.01em}
+.app-input{width:100%;height:40px;padding:0 0.95rem;border:1px solid var(--line);border-radius:9px;background:var(--field);color:var(--fg);font:400 0.88rem var(--head);outline:none;transition:border-color .2s,box-shadow .2s}
+.app-input:focus{border-color:var(--acc);box-shadow:0 0 10px color-mix(in srgb,var(--acc) 25%,transparent)}
+select.app-input option{background:var(--optbg);color:var(--fg)}
+
+.mode-toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem;background:var(--field);padding:4px;border-radius:12px;border:1px solid var(--line)}
+.mode-toggle-btn{padding:10px 12px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--mute);font-weight:600;font-size:0.82rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s ease;font-family:inherit}
+.mode-toggle-btn.active{background:color-mix(in srgb,var(--acc) 16%,transparent);border-color:var(--acc);color:var(--acc);box-shadow:0 0 14px color-mix(in srgb,var(--acc) 22%,transparent)}
+.mode-toggle-btn .m-price{font-size:1.06rem;font-weight:700;color:var(--fg)}
+.mode-toggle-btn.active .m-price{color:var(--acc)}
+.mode-toggle-btn .m-tag{font-size:0.7rem;opacity:0.85}
+
+.gpay-top-btn{display:flex;align-items:center;gap:12px;background:#0d111b;border:1.5px solid color-mix(in srgb,#4285F4 60%,var(--acc));border-radius:12px;padding:10px 14px;margin-bottom:1.1rem;text-decoration:none;color:#ffffff;cursor:pointer;transition:all .22s cubic-bezier(.16,1,.3,1);box-shadow:0 4px 18px rgba(66,133,244,0.22),0 0 10px color-mix(in srgb,var(--acc) 18%,transparent)}
+.gpay-top-btn:hover{transform:translateY(-2px);border-color:#4285F4;background:#131826;box-shadow:0 6px 24px rgba(66,133,244,0.36),0 0 16px color-mix(in srgb,var(--acc) 30%,transparent)}
+.gpay-icon-wrap{width:36px;height:36px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
+.gpay-btn-labels{display:flex;flex-direction:column;gap:2px;flex:1;text-align:left}
+.gpay-main-text{font-size:0.9rem;font-weight:700;color:#ffffff;letter-spacing:-0.01em;display:flex;align-items:center;gap:6px}
+.gpay-fast-badge{background:#34A853;color:#ffffff;font-size:0.62rem;font-weight:700;padding:1px 6px;border-radius:99px;text-transform:uppercase;letter-spacing:.06em}
+.gpay-sub-text{font-size:0.74rem;color:rgba(255,255,255,0.72)}
+.gpay-arrow-badge{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.1);color:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s ease,background .2s ease}
+.gpay-top-btn:hover .gpay-arrow-badge{background:#4285F4;transform:translate(2px,-2px)}
+
+.payment-info-box{background:color-mix(in srgb,var(--acc) 7%,transparent);border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);border-radius:12px;padding:0.95rem 1.15rem;margin-bottom:1.25rem;display:grid;gap:0.55rem}
+.pay-row{display:flex;justify-content:space-between;align-items:center;font-size:0.8rem}
+.pay-copy-badge{display:inline-flex;align-items:center;gap:4px;background:color-mix(in srgb,var(--acc) 18%,transparent);border:1px solid color-mix(in srgb,var(--acc) 45%,transparent);color:var(--acc);padding:3px 8px;border-radius:6px;cursor:pointer;font-size:0.74rem;font-weight:600;font-family:monospace;transition:all .2s}
+.pay-copy-badge:hover{background:color-mix(in srgb,var(--acc) 32%,transparent)}
+.file-upload-zone{border:1px dashed color-mix(in srgb,var(--acc) 40%,transparent);border-radius:9px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--field);font-size:0.76rem;color:var(--mute);transition:all .2s;padding:0 0.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-upload-zone:hover{border-color:var(--acc);color:var(--fg)}
+
+.step-btn-row{display:flex;gap:12px;margin-top:1.4rem}
+.step-prev-btn{height:44px;padding:0 20px;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--fg);font:600 0.86rem var(--head);cursor:pointer;transition:all .2s ease}
+.step-prev-btn:hover{border-color:var(--acc);color:var(--acc)}
+.step-next-btn,.app-submit-btn{flex:1;height:44px;border:none;border-radius:10px;background:var(--acc);color:var(--onacc);font-weight:700;font-size:0.9rem;cursor:pointer;box-shadow:0 4px 20px color-mix(in srgb,var(--acc) 40%,transparent);transition:all .2s ease;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+.step-next-btn:hover,.app-submit-btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.app-submit-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.app-success-box{display:none;text-align:center;padding:0.8rem 0}
+
+@media(max-width:1023px){
+  /* Fix Touch Scrolling & Interactions */
+  .sec, .sec.L, .sec > *, main, .blk, .blk *, #application-portal, #application-portal * {
+    pointer-events: auto !important;
+    touch-action: pan-y !important;
+  }
+
+  /* Center All Sections and Add Top Spacing For 3D Particles */
+  .sec, .sec.L, .sec:not(.hero) {
+    min-height: 100svh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    text-align: center !important;
+    padding: max(170px, 26vh) var(--pad) 3rem !important;
+    max-width: 100% !important;
+  }
+
+  /* Centered block with frosted card background */
+  .sec .blk, .sec.L .blk, .sec .blk.w, .sec.L .blk.w {
+    max-width: 520px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    background: color-mix(in srgb, var(--card) 95%, transparent) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 24px !important;
+    padding: 1.8rem clamp(1.2rem, 3.2vw, 2rem) 1.5rem !important;
+    box-shadow: 0 16px 45px rgba(0,0,0,0.08), 0 0 35px color-mix(in srgb, var(--acc) 8%, transparent) !important;
+    position: relative !important;
+    z-index: 3 !important;
+    box-sizing: border-box !important;
+  }
+
+  .blk h2, .blk h3, .blk p, .blk div {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .blk h2 span.line, .blk h2 span.l {
+    display: block !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Center All List Rows, Steps, and Topics */
+  .rows, .steps, .topics {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    max-width: 460px !important;
+    padding: 0 !important;
+  }
+  .rows li, .topics li {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: .85rem 0 !important;
+  }
+  .steps li {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 1.1rem 0 !important;
+    grid-template-columns: none !important;
+  }
+  .steps li::before {
+    display: block !important;
+    margin: 0 auto 6px !important;
+    text-align: center !important;
+    grid-row: auto !important;
+  }
+  .topics p, .steps p, .rows p {
+    font-size: .88rem;
+    text-align: center !important;
+  }
+
+  /* Center All CTAs and Buttons */
+  .ctas {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin: 1.4rem auto 0 !important;
+    width: 100% !important;
+  }
+  .ctas a.btn, .ctas button.btn, .ctas a.txt {
+    margin: 0 !important;
+  }
+
+  /* Center Cards in Pricing & Enroll */
+  .cards {
+    grid-template-columns: 1fr !important;
+    max-width: 420px;
+    margin: 1.4rem auto 0 !important;
+    gap: 14px !important;
+  }
+  .card {
+    text-align: center !important;
+    align-items: center !important;
+  }
+  .card .off {
+    align-self: center !important;
+  }
+  .card ul {
+    text-align: left;
+    display: inline-grid;
+    margin: 0 auto 1.2rem;
+  }
+  .card .btn {
+    width: 100%;
+  }
+  .badges {
+    justify-content: center !important;
+  }
+
+  /* Responsive Hero Content Container: Beautiful Frosted Card placed under 3D Particle Logo */
+  .hero {
+    min-height: 100svh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: max(160px, 24vh) var(--pad) 2.5rem !important;
+    box-sizing: border-box !important;
+  }
+  .hero .sp {
+    display: none !important;
+  }
+  .hero .bd {
+    display: none !important;
+  }
+  .hero .hc {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    max-width: 540px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    background: color-mix(in srgb, var(--card) 95%, transparent) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 24px !important;
+    padding: 2rem clamp(1.2rem, 3.2vw, 2.2rem) 1.6rem !important;
+    box-shadow: 0 16px 45px rgba(0,0,0,0.08), 0 0 35px color-mix(in srgb, var(--acc) 8%, transparent) !important;
+    position: relative !important;
+    z-index: 3 !important;
+    box-sizing: border-box !important;
+    gap: 12px !important;
+  }
+  .hero-left-col {
+    max-width: 100% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 4.8vw, 44px) !important;
+    line-height: 1.05 !important;
+    margin-bottom: 0.35rem !important;
+    text-align: center !important;
+  }
+  .hero .aside {
+    text-align: center !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .hero .aside p {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+  }
+  .hero .price {
+    text-align: center !important;
+    margin-top: 0.4rem !important;
+    font-size: 0.92rem !important;
+  }
+  .hero .ctas {
+    margin-top: 0.8rem !important;
+    justify-content: center !important;
+  }
+}
+@media(max-width:767px){
+  .links li:not(.k){display:none}
+  .links{gap:10px !important}
+  .links .pill{padding:7px 14px !important;font-size:12.5px !important}
+  header{padding:14px var(--pad) 16px !important}
+}
+@media(max-width:580px){
+  .app-modal-card{padding:1.4rem 1.1rem !important;border-radius:16px !important}
+  .app-grid-2{grid-template-columns:1fr !important;gap:1.15rem !important}
+  .gpay-top-btn{padding:9px 12px !important}
+  .gpay-main-text{font-size:0.86rem !important}
+  .gpay-sub-text{font-size:0.71rem !important}
+  .pay-row{font-size:0.76rem !important}
+  .cards{grid-template-columns:1fr}.topics{grid-template-columns:1fr}.topics li:nth-last-child(2){border-bottom:0}h1{font-size:clamp(34px,min(12vw,7vh),58px)}
+}
+/* Demo Environment Floating Banner & Inspector Styles */
+.demo-indicator-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(13, 27, 16, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.35);
+  padding: 8px var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: #e2f0d9;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  animation: slideDownDemo 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slideDownDemo {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+body.has-demo-bar header {
+  top: calc(env(safe-area-inset-top, 0px) + 38px) !important;
+}
+body.has-demo-bar #prog {
+  top: calc(env(safe-area-inset-top, 0px) + 38px) !important;
+}
+.demo-indicator-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(52, 211, 153, 0.16);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #34d399;
+  padding: 2.5px 8px;
+  border-radius: 99px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.demo-pulse-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: demoPulse 1.8s infinite;
+  display: inline-block;
+}
+@keyframes demoPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+.demo-text {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.demo-table-tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: #34d399;
+  font-weight: 600;
+}
+.demo-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-btn-inspect, .demo-btn-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 99px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.demo-btn-inspect {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+.demo-btn-inspect:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.demo-btn-live {
+  background: var(--acc);
+  border: 1px solid color-mix(in srgb, var(--acc) 60%, #fff);
+  color: #ffffff;
+}
+.demo-btn-live:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+.demo-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: color-mix(in srgb, var(--acc) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--acc) 32%, transparent);
+  color: var(--acc) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  padding: 3px 10px !important;
+  border-radius: 99px !important;
+  opacity: 0.9 !important;
+  transition: all 0.2s ease !important;
+}
+.demo-nav-pill:hover {
+  opacity: 1 !important;
+  background: color-mix(in srgb, var(--acc) 22%, transparent);
+  transform: translateY(-1px);
+}
+.demo-nav-pill.active {
+  background: #34d399 !important;
+  color: #0d2818 !important;
+  border-color: #34d399 !important;
+  font-weight: 700 !important;
+}
+
+</style>
+</head>
+<body>
+
+  
+
+<div id="prog"></div>
+<!-- Full-Screen Interactive Dynamic Dot Matrix Shader Background (Both Landing Page & Form) -->
+<canvas id="gold-canvas" aria-hidden="true"></canvas>
+<div id="gold-vignette" aria-hidden="true"></div>
+<div id="stage" aria-hidden="true"></div>
+<img id="pgi-clean-logo" src="/logo_clean.png" alt="logo" style="display:none;" />
+
+<!-- Main Top Header -->
+<header id="nav">
+  <a class="logo" href="#top" aria-label="Plant Green Inertia Pvt. Ltd."><img src="/logo_clean.png" alt="Plant Green Inertia" class="site-logo-img" /></a>
+  <ul class="links">
+    <li><a href="#curriculum">Course</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#company">About</a></li>
+    
+    <li class="k"><a class="pill" href="#application/forms">Enroll now</a></li>
+  </ul>
+</header>
+
+<main>
+  <section class="sec hero in" id="top">
+    <div class="bd" id="bd" aria-hidden="true">skills</div>
+    <div class="sp"></div>
+    <div class="hc" id="hcontent">
+      <div class="hero-left-col">
+        <h1><span id="hero-title-main">Master digital marketing.</span><span class="acc" id="hero-title-acc">Get career-ready.</span></h1>
+      </div>
+      <div class="aside">
+        <p id="hero-aside-desc">Industry-aligned training in AI SEO, paid ads, analytics, lead generation and more, taught through hands-on practice.</p>
+        <p class="price" id="hero-price-line">Online <s id="hero-price-online-was">₹10,000</s> <b id="hero-price-online">₹4,999</b> · Offline <s id="hero-price-offline-was">₹50,000</s> <b id="hero-price-offline">₹14,999</b></p>
+        <div class="ctas"><a class="btn" href="#application/forms" id="hero-primary-cta">Enroll now</a><a class="txt" href="#curriculum" id="hero-secondary-cta">View course</a></div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="sec" id="why">
+    <div class="blk">
+      <h2><span class="line"><span class="l" id="why-title-main">Skills employers</span></span><span class="line"><span class="l acc" id="why-title-acc" style="--d:.1s">actually hire for.</span></span></h2>
+      <p class="rv rv-lead" id="why-lead">Bridging college and corporate through immersive, tool-first marketing training.</p>
+      <ul class="rows" id="why-features-list">
+        <li class="rv" style="--i:1"><h3>Live Ad Budgets &amp; Campaigns</h3><p>Manage real client budgets across Meta &amp; Google Ads.</p></li>
+        <li class="rv" style="--i:2"><h3>AI-Assisted Workflow</h3><p>Use generative AI for keyword research, copy, and SEO ranking.</p></li>
+        <li class="rv" style="--i:3"><h3>Verified Portfolio &amp; Placement</h3><p>Build job-ready case studies with dedicated interview prep.</p></li>
+      </ul>
+      <div class="ctas rv" style="--i:4"><a class="btn" href="#application/forms">Enroll now &rarr;</a></div>
+    </div>
+  </section>
+
+  <section class="sec L" id="curriculum">
+    <div class="blk w">
+      <h2><span class="line"><span class="l" id="curriculum-title-main">Everything you need,</span></span><span class="line"><span class="l acc" id="curriculum-title-acc" style="--d:.1s">in one course.</span></span></h2>
+      <ul class="topics" id="curriculum-topics-list">
+        <li class="rv" style="--i:0"><h3>AI SEO</h3><p>Keywords &amp; rank optimisation</p></li>
+        <li class="rv" style="--i:1"><h3>Paid Media</h3><p>Meta &amp; Google Ads ROI</p></li>
+        <li class="rv" style="--i:2"><h3>Content Strategy</h3><p>Copywriting &amp; creative design</p></li>
+        <li class="rv" style="--i:3"><h3>Web Analytics</h3><p>GA4 tracking &amp; insights</p></li>
+        <li class="rv" style="--i:4"><h3>Lead Funnels</h3><p>Landing pages &amp; conversion</p></li>
+        <li class="rv" style="--i:5"><h3>Automation</h3><p>Email sequences &amp; CRM</p></li>
+      </ul>
+      <div class="ctas rv" style="--i:6"><a class="btn" href="#application/forms">Enroll now &rarr;</a></div>
+    </div>
+  </section>
+
+  <section class="sec" id="learn">
+    <div class="blk">
+      <h2><span class="line"><span class="l" id="learn-title-main">Learn it by</span></span><span class="line"><span class="l acc" id="learn-title-acc" style="--d:.1s">doing it.</span></span></h2>
+      <ol class="rows steps" id="learn-steps-list">
+        <li class="rv" style="--i:0"><h3>Core Playbooks</h3><p>Concise lessons on proven growth frameworks.</p></li>
+        <li class="rv" style="--i:1"><h3>Hands-on Labs</h3><p>Live practice inside industry-standard marketing tools.</p></li>
+        <li class="rv" style="--i:2"><h3>Proof of Work</h3><p>Deploy live campaigns to build verified case studies.</p></li>
+        <li class="rv" style="--i:3"><h3>Career Launch</h3><p>Resume review, mock interviews, and placement rounds.</p></li>
+      </ol>
+      <div class="ctas rv" style="--i:4"><a class="btn" href="#application/forms">Enroll now &rarr;</a></div>
+    </div>
+  </section>
+
+  <section class="sec L" id="pricing">
+    <div class="blk w">
+      <h2><span class="line"><span class="l" id="pricing-title-main">Choose how</span></span><span class="line"><span class="l acc" id="pricing-title-acc" style="--d:.1s">you learn.</span></span></h2>
+      <div class="cards" id="pricing-cards-container">
+        <div class="card rv" style="--i:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem">
+            <span class="k" id="pricing-online-name" style="font-weight:700">Online Batch</span>
+            <span class="off" id="pricing-online-off">50% off</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin:0.2rem 0 0.5rem">
+            <span class="now" id="pricing-online-now">₹4,999</span>
+            <span class="was" id="pricing-online-was">₹10,000</span>
+          </div>
+          <ul id="pricing-online-ul">
+            <li>Live interactive sessions</li>
+            <li>All 6 modules &amp; AI tools</li>
+            <li>TN Skills accredited certificate</li>
+          </ul>
+          <a class="btn" href="#application/forms" id="pricing-online-btn" data-mode="Online">Enroll online &rarr;</a>
+        </div>
+        <div class="card rv" style="--i:1;border-color:color-mix(in srgb,var(--acc) 38%,transparent)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem">
+            <span class="k" id="pricing-offline-name" style="font-weight:700;color:var(--acc)">Offline Classroom</span>
+            <span class="off" id="pricing-offline-off">70% off</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin:0.2rem 0 0.5rem">
+            <span class="now" id="pricing-offline-now" style="color:var(--acc)">₹14,999</span>
+            <span class="was" id="pricing-offline-was">₹50,000</span>
+          </div>
+          <ul id="pricing-offline-ul">
+            <li>In-person labs (Maduravoyal)</li>
+            <li>1-on-1 mentor guidance</li>
+            <li>Direct placement assistance</li>
+          </ul>
+          <a class="btn" href="#application/forms" id="pricing-offline-btn" data-mode="Offline">Enroll offline &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="company">
+    <div class="blk">
+      <h2><span class="line"><span class="l" id="about-title-main">About</span></span><span class="line"><span class="l acc" id="about-title-acc" style="--d:.1s">Plant Green Inertia.</span></span></h2>
+      <p class="rv rv-lead" id="about-lead">Official Training Partner of TN Skills, Tamil Nadu Skill Development Corporation (TNSDC). Empowering students and graduates with practical, high-demand skills to launch successful careers in digital marketing and tech.</p>
+      <div class="badges rv" id="about-badges-container" style="--i:1">
+        <span>TN Skills Official Partner</span>
+        <span>TNSDC Accredited</span>
+        <span>Chennai HQ</span>
+      </div>
+      <div class="ctas rv" style="--i:2"><a class="btn" href="#application/forms">Enroll now &rarr;</a></div>
+    </div>
+  </section>
+
+  <!-- Section 7: Concise Course Info in Form Section (Short & High Impact with Background Card) -->
+  <section class="sec L" id="enroll">
+    <div class="blk">
+      <h2>
+        <span class="line"><span class="l" id="next-cohort-title-main">Next cohort</span></span>
+        <span class="line"><span class="l acc" id="next-cohort-title-acc" style="--d:.1s">now open.</span></span>
+      </h2>
+      <p class="rv rv-lead" id="next-cohort-lead">
+        Tamil Nadu's premier government-recognized digital marketing cohort.
+      </p>
+      
+      <!-- Compact 2-Metric Highlight Grid -->
+      <div class="rv" style="--i:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0.65rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:0.9rem">
+        <div>
+          <b id="next-cohort-metric-1-val" style="display:block;font-size:0.9rem;color:var(--fg);font-weight:700">100+ Live Hours</b>
+          <span id="next-cohort-metric-1-label" style="font-size:0.72rem;color:var(--mute);line-height:1.3">Hands-on AI &amp; Ads Labs</span>
+        </div>
+        <div style="border-left:1px solid var(--line);padding-left:10px">
+          <b id="next-cohort-metric-2-val" style="display:block;font-size:0.9rem;color:var(--acc);font-weight:700">From ₹4,999</b>
+          <span id="next-cohort-metric-2-label" style="font-size:0.72rem;color:var(--mute);line-height:1.3">Up to 70% Subsidy</span>
+        </div>
+      </div>
+
+      <div class="ctas rv" style="--i:2;margin-top:0">
+        <a class="btn" href="#application/forms" id="btn-goto-application" style="width:100%;justify-content:center">
+          Open Application Form &rarr;
+        </a>
+      </div>
+      <p class="foot" style="margin-top:0.75rem;text-align:center">
+        © Plant Green Inertia · Official Training Partner of TN Skills, TNSDC
+      </p>
+    </div>
+  </section>
+</main>
+
+<!-- Full Structured Footer -->
+<footer id="footer">
+  <div class="fgrid">
+    <div class="fbrand">
+      <a class="logo" href="#top" aria-label="Plant Green Inertia"><img src="/logo_clean.png" alt="Plant Green Inertia" class="site-logo-img footer-logo-img" /></a>
+      <p id="footer-brand-pitch">The World's First Experiential Training Company, bridging college and corporate through immersive learning.</p>
+      <a class="btn" href="#application/forms">Enroll now</a>
+    </div>
+    <div class="fcol">
+      <h4>Office</h4>
+      <p class="f-addr" id="footer-office-address">No: 4, Alapakkam Main Road, Maduravoyal, Chennai - 600095</p>
+    </div>
+    <div class="fcol">
+      <h4>Support</h4>
+      <ul>
+        <li><a id="footer-phone-1" href="tel:9345029705">9345029705</a></li>
+        <li><a id="footer-phone-2" href="tel:9345886690">9345886690</a></li>
+        <li><a id="footer-email" href="mailto:plantgreeninertia@gmail.com">plantgreeninertia@gmail.com</a></li>
+        
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Follow Us</h4>
+      <ul class="f-socials">
+        <li><a id="footer-social-instagram" href="https://www.instagram.com/pginertia?stkn=MWZ6NHE1NHp1dWVvcQ==" target="_blank" rel="noopener">Instagram ↗</a></li>
+        <li><a id="footer-social-youtube" href="https://youtube.com/@plantgreeninertia" target="_blank" rel="noopener">YouTube ↗</a></li>
+        <li><a id="footer-social-linkedin" href="https://www.linkedin.com/company/plantgreeninertia/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a id="footer-social-whatsapp" href="https://wa.me/919345029705" target="_blank" rel="noopener">WhatsApp ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbar">
+    <span>© 2026 Plant Green Inertia. Developed with Passion.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+
+
+<!-- ==========================================================================
+     NEW SECTION: Fullpage Dedicated Application Portal at #application/forms
+     Features 3-Step Pagination: 1. Personal Details, 2. Course Details, 3. Payment
+     ========================================================================== -->
+<div id="application-portal">
+  <!-- Concentric Expanding Particle Wave Rings Canvas (Particles, Not Lines) -->
+  <canvas id="particle-waves-canvas" aria-hidden="true"></canvas>
+
+  <a href="#enroll" class="app-back-btn" id="app-back-btn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Back to Overview</span>
+  </a>
+
+
+
+  <div class="app-modal-card">
+    <div class="app-header">
+      <div class="app-badge">Official Training Partner · TN Skills, TNSDC</div>
+      <h2 class="app-title">Course Admission <span>Application</span></h2>
+      <p class="app-subtitle">Complete 3 simple steps to secure your batch credentials.</p>
+    </div>
+
+    <!-- 3-Step Pagination Stepper -->
+    <div class="stepper-bar">
+      <div class="step-item active" id="step-tab-1">
+        <span class="step-num">1</span>
+        <span class="step-title">Personal</span>
+      </div>
+      <div class="step-line" id="step-line-1"></div>
+      <div class="step-item" id="step-tab-2">
+        <span class="step-num">2</span>
+        <span class="step-title">Course</span>
+      </div>
+      <div class="step-line" id="step-line-2"></div>
+      <div class="step-item" id="step-tab-3">
+        <span class="step-num">3</span>
+        <span class="step-title">Payment</span>
+      </div>
+    </div>
+
+    <form id="app-form">
+      <!-- STEP 1: Personal Details -->
+      <div class="form-step-pane active" id="step-pane-1">
+        <div class="app-field-group">
+          <label class="app-label" for="inp-name">Full Student Name *</label>
+          <input class="app-input" id="inp-name" name="name" placeholder="Enter your name" required autocomplete="name">
+        </div>
+
+        <div class="app-grid-2">
+          <div class="app-field-group" style="margin-bottom:0">
+            <label class="app-label" for="inp-phone">WhatsApp Number *</label>
+            <input class="app-input" id="inp-phone" name="phone" type="tel" placeholder="e.g. 9999999999" required autocomplete="tel">
+          </div>
+          <div class="app-field-group" style="margin-bottom:0">
+            <label class="app-label" for="inp-email">Email Address *</label>
+            <input class="app-input" id="inp-email" name="email" type="email" placeholder="Enter your email address" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="app-field-group" style="margin-top:1.15rem">
+          <label class="app-label" for="inp-address">City / Location *</label>
+          <input class="app-input" id="inp-address" name="address" placeholder="Enter your city / location" required>
+        </div>
+
+        <div class="step-btn-row">
+          <button type="button" class="step-next-btn" id="btn-to-step-2">
+            <span>Next: Course Details &rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Course Details -->
+      <div class="form-step-pane" id="step-pane-2">
+        <div class="app-label" style="margin-bottom:7px">Select Learning Format *</div>
+        <div class="mode-toggle-group">
+          <button type="button" class="mode-toggle-btn active" id="btn-mode-online" data-target-mode="Online">
+            <span class="m-price">₹4,999</span>
+            <span class="m-tag">Online Batch (50% Off)</span>
+          </button>
+          <button type="button" class="mode-toggle-btn" id="btn-mode-offline" data-target-mode="Offline">
+            <span class="m-price">₹14,999</span>
+            <span class="m-tag">Offline Classroom (70% Off)</span>
+          </button>
+        </div>
+
+        <div class="app-field-group">
+          <label class="app-label" for="inp-college">College / University Name *</label>
+          <input class="app-input" id="inp-college" name="college" placeholder="Enter college / university name" required>
+        </div>
+
+        <div class="app-grid-2">
+          <div class="app-field-group" style="margin-bottom:0">
+            <label class="app-label" for="sel-degree">Highest Degree *</label>
+            <select class="app-input" id="sel-degree">
+              <option value="UG">Undergraduate (UG)</option>
+              <option value="PG">Postgraduate (PG)</option>
+              <option value="Diploma">Diploma / HSC</option>
+              <option value="Working Professional">Working Professional</option>
+            </select>
+          </div>
+          <div class="app-field-group" style="margin-bottom:0">
+            <label class="app-label" for="sel-status">Academic Status *</label>
+            <select class="app-input" id="sel-status">
+              <option value="Pursuing">Pursuing</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="step-btn-row">
+          <button type="button" class="step-prev-btn" id="btn-back-to-1">&larr; Back</button>
+          <button type="button" class="step-next-btn" id="btn-to-step-3">
+            <span>Next: Payment &rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Payment Verification & Confirmation -->
+      <div class="form-step-pane" id="step-pane-3">
+        <!-- Prominent Open in GPay Action at Top -->
+        <a id="btn-open-gpay" href="upi://pay?pa=lokeshlaven-2@okicici&pn=Laven%20Lokesh%20Barani&am=4999&cu=INR&tn=Plant%20Green%20Course%20Fee" class="gpay-top-btn" target="_blank" rel="noopener" title="Open in Google Pay (GPay)">
+          <div class="gpay-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.13C3.26 21.36 7.33 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.13z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.13c.95-2.83 3.6-4.96 6.72-4.96z"/>
+            </svg>
+          </div>
+          <div class="gpay-btn-labels">
+            <div class="gpay-main-text">
+              <span>Open in Google Pay (GPay)</span>
+              <span class="gpay-fast-badge">Direct Pay</span>
+            </div>
+            <div class="gpay-sub-text" id="gpay-btn-amt">Pay ₹4,999 directly via UPI / GPay app &rarr;</div>
+          </div>
+          <div class="gpay-arrow-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </div>
+        </a>
+
+        <div class="payment-info-box">
+          <div class="pay-row">
+            <span style="color:var(--acc);font-weight:700">UPI / GPay Payment</span>
+            <span style="font-weight:700;color:var(--fg);font-size:0.92rem" id="pay-amount-display">Payable: ₹4,999</span>
+          </div>
+          <div class="pay-row">
+            <span style="color:var(--mute)">UPI ID: <b style="color:var(--fg)">lokeshlaven-2@okicici</b></span>
+            <span class="pay-copy-badge" data-copy="lokeshlaven-2@okicici">Copy UPI</span>
+          </div>
+          <div class="pay-row">
+            <span style="color:var(--mute)">GPay / PhonePe: <b style="color:var(--fg)">8220699083</b></span>
+            <span class="pay-copy-badge" data-copy="8220699083">Copy No.</span>
+          </div>
+          <div class="pay-row" style="font-size:0.72rem;color:var(--mute)">
+            Recipient: Mr. Laven Lokesh Barani
+          </div>
+        </div>
+
+        <div class="app-field-group">
+          <label class="app-label" for="inp-utr">12-Digit UPI / UTR Ref Number *</label>
+          <input class="app-input" id="inp-utr" name="utr" placeholder="Enter 12-digit UPI / UTR number" required maxlength="25">
+        </div>
+
+        <div class="app-field-group" style="margin-bottom:0.4rem">
+          <label class="app-label" for="inp-screenshot">
+            <span>Payment Proof Screenshot (Upload) *</span>
+            <span style="opacity:0.6;font-size:0.72rem">No login needed</span>
+          </label>
+          <input type="file" id="inp-screenshot" accept="image/*" style="display:none">
+          <label class="file-upload-zone" for="inp-screenshot" id="screenshot-label">
+            <span id="upload-hint-text">📎 Attach payment screenshot file</span>
+          </label>
+        </div>
+
+        <div style="font-size:0.75rem;color:var(--mute);display:flex;align-items:center;gap:8px;margin:0.8rem 0 1rem">
+          <input type="checkbox" id="chk-refund" checked required style="width:15px;height:15px;accent-color:var(--acc);cursor:pointer">
+          <label for="chk-refund" style="cursor:pointer">Fee is non-refundable once batch seat is allocated.</label>
+        </div>
+
+        <div class="step-btn-row">
+          <button type="button" class="step-prev-btn" id="btn-back-to-2">&larr; Back</button>
+          <button class="app-submit-btn" type="submit" id="btn-submit-app">
+            <span>Submit Application ✓</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Instant Confirmation Card -->
+    <div class="app-success-box" id="app-success-box">
+      <div style="width:52px;height:52px;border-radius:50%;background:color-mix(in srgb,var(--acc) 15%,transparent);border:2px solid var(--acc);display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;color:var(--acc);font-size:1.6rem">✓</div>
+      <h3 style="font-size:1.3rem;color:var(--fg);margin-bottom:0.2rem">Application Submitted!</h3>
+      <p style="font-size:0.82rem;color:var(--mute);margin-bottom:1rem">Your admission details are saved in our verified admissions ledger.</p>
+      
+      <div style="background:color-mix(in srgb,var(--acc) 6%,transparent);border:1px dashed color-mix(in srgb,var(--acc) 35%,transparent);padding:0.85rem;border-radius:10px;margin-bottom:1.1rem;text-align:left">
+        <div style="font-size:0.7rem;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px">Application Reference ID</div>
+        <div style="font-size:1.2rem;font-weight:700;color:var(--acc);letter-spacing:.05em" id="conf-app-id">PGI-DM-12345</div>
+        <div style="font-size:0.78rem;color:var(--mute);margin-top:6px" id="conf-summary-text">Online Batch · ₹4,999 · Status: Pending UTR Verification</div>
+      </div>
+
+      <a id="conf-wa-btn" href="https://wa.me/918220699083?text=Hi,%20I%20have%20submitted%20my%20application%20for%20the%20Digital%20Marketing%20Course." target="_blank" class="app-submit-btn" style="text-decoration:none;background:#25D366;color:#fff;margin-bottom:0.6rem;height:40px">
+        <span>Notify Coordinator on WhatsApp</span>
+      </a>
+      <a href="#top" class="txt" style="display:inline-block;margin-top:0.3rem;color:var(--mute);font-size:0.8rem">Back to Course Home</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var stage=$("stage"),navEl=$("nav"),hc=$("hcontent"),bd=$("bd"),prog=$("prog");
+var secs=[].slice.call(document.querySelectorAll(".sec"));
+var coarse=matchMedia("(pointer: coarse)").matches,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var N=(coarse||innerWidth<700)?8000:15000,F='"Barlow Condensed"';
+var MAP=[0,1,2,3,5,0,4],SIDE=["c","R","L","R","L","R","L"];
+
+function hx(h){var n=parseInt(h.slice(1),16);return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]}
+
+/* Plant Green Inertia Brand Theme: White, Forest Green (#2d663b) & Charcoal (#201b18) */
+var BRAND_THEME = {
+  n: "Plant Green Inertia",
+  dark: 0,
+  bg: "#ffffff",
+  fg: "#201b18",
+  mute: "rgba(32, 27, 24, 0.72)",
+  line: "rgba(45, 102, 59, 0.16)",
+  acc: "#2d663b",
+  acc2: "#1f5e30",
+  onacc: "#ffffff",
+  card: "#ffffff",
+  field: "rgba(45, 102, 59, 0.04)",
+  optbg: "#ffffff",
+  p: {
+    l: ["#201b18", "#2d663b", "#ffffff"],
+    hl: "rgba(45, 102, 59, 0.25)",
+    hd: "rgba(32, 27, 24, 0.18)",
+    a: ["#34a853", "#2d663b"],
+    b: ["#2d8a45", "#1e6634"],
+    pale: "#201b18",
+    mid: "#2d8a45",
+    deep: "#1e6634",
+    pur: "#201b18",
+    acc: "#34a853",
+    rim: "#ffffff",
+    dc: ["#2d663b", "#201b18", "#ffffff"],
+    sw: ["#2d663b", "#201b18", "#ffffff"]
+  }
+};
+
+try {
+  localStorage.removeItem("pgi-theme");
+  localStorage.removeItem("pgi-theme-custom");
+} catch(e){}
+
+var P = BRAND_THEME.p;
+function setCss(th){
+  var r = document.documentElement.style, b = hx(th.bg);
+  r.setProperty("--bg", th.bg);
+  r.setProperty("--bgt", "rgba(" + Math.round(b[0]*255) + "," + Math.round(b[1]*255) + "," + Math.round(b[2]*255) + ",0)");
+  ["fg","mute","line","acc","acc2","onacc","card","field","optbg"].forEach(function(k){ r.setProperty("--"+k, th[k]); });
+  r.colorScheme = "light";
+}
+setCss(BRAND_THEME);
+
+window.applyDynamicThemeColors = function(th){
+  if(!th) return;
+  if(th.acc) BRAND_THEME.acc = th.acc;
+  if(th.acc2) BRAND_THEME.acc2 = th.acc2;
+  if(th.bg) BRAND_THEME.bg = th.bg;
+  if(th.fg) BRAND_THEME.fg = th.fg;
+  if(th.card) BRAND_THEME.card = th.card;
+  if(th.line) BRAND_THEME.line = th.line;
+  setCss(BRAND_THEME);
+
+  var p = th.particles || th;
+  if(p){
+    if(p.primary) BRAND_THEME.p.acc = p.primary;
+    if(p.secondary && p.accent){
+      BRAND_THEME.p.a = [p.accent, p.primary];
+      BRAND_THEME.p.b = [p.primary, p.secondary];
+    }
+    if(p.dust_colors && Array.isArray(p.dust_colors) && typeof DC !== 'undefined'){
+      var dpal = p.dust_colors.map(hx);
+      for(var i=0;i<DC.length/3;i++){
+        var c = dpal[Math.floor(Math.random()*dpal.length)];
+        var q = 0.9 + Math.random()*0.1;
+        DC[i*3]=Math.min(1, c[0]*q);
+        DC[i*3+1]=Math.min(1, c[1]*q);
+        DC[i*3+2]=Math.min(1, c[2]*q);
+      }
+      if(typeof dust !== 'undefined' && dust && dust.geo && dust.geo.attributes && dust.geo.attributes.aCol){
+        dust.col.set(DC);
+        dust.geo.attributes.aCol.needsUpdate = true;
+      }
+    }
+    if(window.updateGoldShaderTheme && (p.shader_colors || p.dust_colors)){
+      window.updateGoldShaderTheme(p.shader_colors || p.dust_colors);
+    }
+  }
+};
+
+function fillDust(DC){
+  var pal = [hx("#2d663b"), hx("#201b18"), hx("#1a5c2a"), hx("#201b18"), hx("#ffffff")];
+  for(var i=0;i<DC.length/3;i++){
+    var c = pal[Math.floor(Math.random()*pal.length)];
+    var q = 0.9 + Math.random()*0.1;
+    DC[i*3]=Math.min(1, c[0]*q);
+    DC[i*3+1]=Math.min(1, c[1]*q);
+    DC[i*3+2]=Math.min(1, c[2]*q);
+  }
+}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function sstep(a,b,x){var t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)}
+function rnd(n){var a=new Float32Array(n);for(var i=0;i<n;i++)a[i]=Math.random();return a}
+function mk(w,h){var c=document.createElement("canvas");c.width=w;c.height=h;return c}
+function lg(x,x0,y0,x1,y1,stops){var g=x.createLinearGradient(x0,y0,x1,y1);stops.forEach(function(s,i){g.addColorStop(i/(stops.length-1),s)});return g}
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+
+function buildLogo(){
+  var c = mk(688, 452), x = c.getContext("2d");
+  var img = document.getElementById("pgi-clean-logo");
+  if (img && img.naturalWidth > 0) {
+    x.drawImage(img, 0, 0, 688, 452);
+    return c;
+  }
+  var pad = 20, bw = 124, gap = 24;
+  x.font = "800 210px " + F;
+  var wm = Math.max(x.measureText("PLANT").width, x.measureText("GREEN").width);
+  var bx = pad + wm + gap;
+  c.width = Math.ceil(bx + bw + pad);
+  c.height = 452;
+  x = c.getContext("2d");
+  x.font = "800 210px " + F;
+  x.fillStyle = "#201b18";
+  x.fillText("PLANT", pad, 205);
+  x.fillText("GREEN", pad, 436);
+  var badgeH = 422;
+  x.fillStyle = "#2d663b";
+  rr(x, bx, 14, bw, badgeH, 8);
+  x.fill();
+  x.save();x.translate(bx + bw / 2, 14 + badgeH / 2);x.rotate(-Math.PI / 2);x.font = "700 96px " + F;x.textAlign = "center";x.textBaseline = "middle";
+  x.fillStyle = "#ffffff";
+  x.fillText("INERTIA", 0, 3);
+  x.restore();
+  return c;
+}
+function buildGrowth(){
+  var c=mk(600,720),x=c.getContext("2d"),h=[120,200,280,370,460],i;
+  for(i=0;i<5;i++){x.fillStyle=lg(x,0,690-h[i],0,690,(i===4?P.a:P.b));rr(x,50+i*100,690-h[i],78,h[i],14);x.fill()}
+  var pts=[[90,500],[190,420],[290,340],[390,250],[490,150]];
+  x.strokeStyle=P.acc;x.lineWidth=22;x.lineCap="round";x.lineJoin="round";x.beginPath();x.moveTo(pts[0][0],pts[0][1]);for(i=1;i<5;i++)x.lineTo(pts[i][0],pts[i][1]);x.stroke();
+  var a=Math.atan2(pts[4][1]-pts[3][1],pts[4][0]-pts[3][0]);x.save();x.translate(pts[4][0],pts[4][1]);x.rotate(a);x.fillStyle=P.acc;x.beginPath();x.moveTo(52,0);x.lineTo(-18,-44);x.lineTo(-18,44);x.closePath();x.fill();x.restore();
+  return c;
+}
+function buildSeo(){
+  var c=mk(600,720),x=c.getContext("2d");
+  x.strokeStyle=lg(x,60,100,420,460,[P.l[1],P.pur]);x.lineWidth=54;x.beginPath();x.arc(240,330,170,0,6.283);x.stroke();
+  x.strokeStyle=P.acc;x.lineWidth=72;x.lineCap="round";x.beginPath();x.moveTo(365,455);x.lineTo(500,600);x.stroke();
+  x.font="800 190px "+F;x.fillStyle=P.pale;x.textAlign="center";x.textBaseline="middle";x.fillText("SEO",240,340);return c;
+}
+function buildMega(){
+  var c=mk(720,720),x=c.getContext("2d");
+  x.fillStyle=P.mid;rr(x,45,320,110,120,20);x.fill();
+  x.fillStyle=lg(x,125,0,355,0,P.a);x.beginPath();x.moveTo(125,330);x.lineTo(355,180);x.lineTo(355,520);x.lineTo(125,430);x.closePath();x.fill();
+  x.fillStyle=P.rim;x.beginPath();x.ellipse(355,350,30,170,0,0,6.283);x.fill();
+  x.fillStyle=P.deep;rr(x,140,425,60,170,16);x.fill();
+  x.strokeStyle=P.acc;x.lineWidth=26;x.lineCap="round";
+  [95,155,215].forEach(function(r){x.beginPath();x.arc(370,350,r+35,-.55,.55);x.stroke()});
+  return c;
+}
+function buildFunnel(){
+  var c=mk(580,720),x=c.getContext("2d"),L=[[520,420,60,200],[400,300,215,200],[280,200,370,200],[110,110,525,150]],cols=[[P.a[0],P.mid],[P.mid,P.deep],[P.pur,P.acc],[P.a[0],P.acc]];
+  L.forEach(function(l,i){var cx=290,y=l[2],h=i===3?150:130;x.fillStyle=lg(x,0,y,0,y+h,cols[i]);x.beginPath();x.moveTo(cx-l[0]/2,y);x.lineTo(cx+l[0]/2,y);x.lineTo(cx+l[1]/2,y+h);x.lineTo(cx-l[1]/2,y+h);x.closePath();x.fill()});
+  return c;
+}
+function buildTarget(){
+  var c=mk(620,720),x=c.getContext("2d"),cs=[P.mid,P.pale,P.mid,P.pale,P.acc],rs=[250,200,150,100,50];
+  rs.forEach(function(r,i){x.fillStyle=cs[i];x.beginPath();x.arc(290,380,r,0,6.283);x.fill()});
+  x.strokeStyle=P.acc;x.lineWidth=16;x.lineCap="round";x.beginPath();x.moveTo(290,380);x.lineTo(500,170);x.stroke();
+  x.fillStyle=P.acc;x.beginPath();x.moveTo(530,140);x.lineTo(480,150);x.lineTo(510,180);x.closePath();x.fill();
+  x.beginPath();x.moveTo(530,140);x.lineTo(515,95);x.lineTo(480,130);x.closePath();x.fill();
+  x.beginPath();x.moveTo(530,140);x.lineTo(575,155);x.lineTo(540,185);x.closePath();x.fill();return c;
+}
+function sample(cv,sw){
+  var asp=cv.width/cv.height,sh=Math.round(sw/asp),c=mk(sw,sh),x=c.getContext("2d");x.drawImage(cv,0,0,sw,sh);
+  var d=x.getImageData(0,0,sw,sh).data,cand=[],xx,y,i;
+  for(y=0;y<sh;y++)for(xx=0;xx<sw;xx++){i=(y*sw+xx)*4;if(d[i+3]>110)cand.push(i,xx,y)}
+  var X=new Float32Array(N),Y=new Float32Array(N),C=new Float32Array(N*3),m=cand.length/3;
+  for(var k=0;k<N;k++){var j=Math.floor(Math.random()*m)*3;i=cand[j];X[k]=((cand[j+1]+Math.random())/sw-.5)*asp;Y[k]=(cand[j+2]+Math.random())/sh-.5;C[k*3]=d[i]/255;C[k*3+1]=d[i+1]/255;C[k*3+2]=d[i+2]/255}
+  return {X:X,Y:Y,C:C,asp:asp};
+}
+
+function start(){
+  var logoCv=buildLogo(),shapes=[sample(logoCv,320),sample(buildGrowth(),250),sample(buildSeo(),250),sample(buildMega(),270),sample(buildFunnel(),250),sample(buildTarget(),250)],asp0=shapes[0].asp;
+  var nd=coarse?500:1100,DX=new Float32Array(nd),DY=new Float32Array(nd),DC=new Float32Array(nd*3);
+  for(var i=0;i<nd;i++){DX[i]=(Math.random()-.5)*1.7;DY[i]=(Math.random()-.5)*1.5}fillDust(DC);
+
+  var pr=Math.min(devicePixelRatio||1,1.5);
+  var R=new THREE.WebGLRenderer({alpha:true,antialias:false,powerPreference:"high-performance"});
+  R.setPixelRatio(pr);R.setClearColor(0x000000,0);stage.appendChild(R.domElement);
+  var scene=new THREE.Scene(),cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+
+  var tex=new THREE.CanvasTexture(logoCv);tex.flipY=false;tex.minFilter=THREE.LinearMipmapLinearFilter;
+  var trailU=[];for(var i=0;i<32;i++)trailU.push(new THREE.Vector3());
+  var imgU={uTex:{value:tex},uRes:{value:new THREE.Vector2(1,1)},uDpr:{value:pr},uR:{value:200},uShow:{value:0},uRect:{value:new THREE.Vector4()},uT:{value:trailU}};
+  var img=new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.RawShaderMaterial({uniforms:imgU,transparent:true,depthTest:false,premultipliedAlpha:true,
+    vertexShader:"attribute vec3 position;void main(){gl_Position=vec4(position.xy,0.,1.);}",
+    fragmentShader:"precision highp float;uniform sampler2D uTex;uniform vec2 uRes;uniform float uDpr,uR,uShow;uniform vec4 uRect;uniform vec3 uT[32];void main(){vec2 px=vec2(gl_FragCoord.x,uRes.y*uDpr-gl_FragCoord.y)/uDpr;vec2 uv=(px-uRect.xy)/uRect.zw;if(uShow<.002||uv.x<0.||uv.x>1.||uv.y<0.||uv.y>1.){gl_FragColor=vec4(0.);return;}float f=0.;for(int i=0;i<32;i++){vec2 d=px-uT[i].xy;f=max(f,exp(-dot(d,d)/(uR*uR))*uT[i].z);}float E=smoothstep(.06,.5,f*1.15);vec4 t=texture2D(uTex,uv);float A=t.a*(1.-E)*uShow;gl_FragColor=vec4(t.rgb*A,A);}"}));
+  img.frustumCulled=false;img.renderOrder=0;scene.add(img);
+
+  function makeSet(X,Y,C,rest,dust,order){
+    var n=X[0].length,S={n:n,X:X,Y:Y,C:C,sd:rnd(n),ph:rnd(n),off:new Float32Array(n*2),vel:new Float32Array(n*2),P:new Float32Array(n*2),AS:new Float32Array(n*2),col:new Float32Array(C[0]),rest:rest,dust:dust,dot:{value:2},res:new THREE.Vector2(1,1)};
+    var geo=new THREE.BufferGeometry();
+    geo.setAttribute("position",new THREE.BufferAttribute(S.P,2).setUsage(THREE.DynamicDrawUsage));
+    geo.setAttribute("aCol",new THREE.BufferAttribute(S.col,3).setUsage(THREE.DynamicDrawUsage));
+    geo.setAttribute("aAS",new THREE.BufferAttribute(S.AS,2).setUsage(THREE.DynamicDrawUsage));
+    S.geo=geo;
+    S.pts=new THREE.Points(geo,new THREE.RawShaderMaterial({uniforms:{uRes:{value:S.res},uPx:{value:pr},uDot:S.dot},transparent:true,depthTest:false,premultipliedAlpha:true,
+      vertexShader:"precision highp float;attribute vec2 position;attribute vec3 aCol;attribute vec2 aAS;uniform vec2 uRes;uniform float uPx,uDot;varying vec3 vC;varying float vA;void main(){float g=clamp(aAS.y/12.,0.,1.)*.75;vC=mix(aCol,min(aCol*1.32+.10,vec3(1.)),g);vA=aAS.x;gl_Position=vec4(position.x/uRes.x*2.-1.,1.-position.y/uRes.y*2.,0.,1.);gl_PointSize=clamp(uDot*uPx*(1.+min(aAS.y,3.0)*.05),1.8,4.8);}",
+      fragmentShader:`precision highp float;
+        varying vec3 vC;
+        varying float vA;
+        void main(){
+          float d = length(gl_PointCoord - 0.5);
+          float a = smoothstep(0.5, 0.22, d) * vA;
+          if(a < 0.004) discard;
+          vec3 col = vC;
+          
+          // Boost brightness & vibrancy
+          if(col.g > col.r * 1.05){
+            // Luminous, bright leaf green
+            col = min(col * 1.30 + vec3(0.04, 0.12, 0.04), vec3(1.0));
+          } else {
+            // Clean charcoal without being overly black
+            col = min(col * 1.18 + 0.05, vec3(1.0));
+          }
+          
+          float isWhite = step(0.80, (vC.r + vC.g + vC.b) / 3.0);
+          vec3 greenRim = vec3(0.20, 0.52, 0.28);
+          col = mix(col, mix(greenRim, vec3(1.0), smoothstep(0.42, 0.16, d)), isWhite);
+          gl_FragColor = vec4(col * a, a);
+        }`}));
+    S.pts.frustumCulled=false;S.pts.renderOrder=order;scene.add(S.pts);return S;
+  }
+  var main=makeSet(shapes.map(function(s){return s.X}),shapes.map(function(s){return s.Y}),shapes.map(function(s){return s.C}),0,false,1);
+  var dust=makeSet([DX],[DY],[DC],.42,true,2);
+
+  window.pickTheme = function(){};
+
+  function rebuild(){
+    var lc=buildLogo(),sh=[sample(lc,320),sample(buildGrowth(),250),sample(buildSeo(),250),sample(buildMega(),270),sample(buildFunnel(),250),sample(buildTarget(),250)];
+    sh.forEach(function(s,k){main.X[k].set(s.X);main.Y[k].set(s.Y);main.C[k].set(s.C)});
+    tex.image=lc;tex.needsUpdate=true;
+    if(m>=1)main.col.set(main.C[ib]);else colDirty=true;
+    main.geo.attributes.aCol.needsUpdate=true;
+    fillDust(DC);dust.col.set(DC);dust.geo.attributes.aCol.needsUpdate=true;
+  }
+
+  var cleanImg = document.getElementById("pgi-clean-logo");
+  if (cleanImg) {
+    if (cleanImg.complete && cleanImg.naturalWidth > 0) {
+      setTimeout(rebuild, 20);
+    } else {
+      cleanImg.addEventListener("load", function() {
+        setTimeout(rebuild, 20);
+      });
+    }
+  }
+
+  function hs(a,b){var s=Math.sin(a*127.1+b*311.7)*43758.5453;return s-Math.floor(s)}
+  function vn(a,b){var ix=Math.floor(a),iy=Math.floor(b),fx=a-ix,fy=b-iy,ux=fx*fx*fx*(fx*(fx*6-15)+10),uy=fy*fy*fy*(fy*(fy*6-15)+10),p=hs(ix,iy),q=hs(ix+1,iy),r=hs(ix,iy+1),s=hs(ix+1,iy+1);return (p+(q-p)*ux)*(1-uy)+(r+(s-r)*ux)*uy}
+  var cvx=0,cvy=0;function curl(a,b){var e=.35;cvx=(vn(a,b+e)-vn(a,b-e))/(2*e);cvy=-(vn(a+e,b)-vn(a-e,b))/(2*e)}
+
+  var W=1,H=1,Rad=200,t=0,introT=rm?1:0,pres=0,pT=0,mx=-9999,my=-9999,tx=-9999,ty=-9999,pmx=0,pmy=0,mvx=0,mvy=0,trail=[],bb=[0,0,0,0],prevAct=0,STR=rm?.5:1,TURB=rm?.3:1,last=performance.now();
+  var ia=0,ib=0,m=1,want=0,imgA=0,colDirty=false,secTargets=[],cur={x:0,y:0,s:1},cx=0,cy=0,SZ=1,activeSec=0;
+  if(!rm)for(var i=0;i<main.n;i++){main.off[i*2]=(Math.random()-.5)*1100;main.off[i*2+1]=(Math.random()-.5)*600}
+
+  function relayout(){
+    W=stage.clientWidth;H=stage.clientHeight;R.setSize(W,H);imgU.uRes.value.set(W,H);main.res.set(W,H);dust.res.set(W,H);
+    Rad=200*clamp(Math.min(W,H*1.6)/1000,.6,1.25);imgU.uR.value=Rad;dust.dot.value=2.4;
+    var top=navEl.offsetHeight+8,bot=hc.offsetTop-8,bh=Math.max(120,bot-top),rw=W*(W>=1024?.9:.94);
+    if(rw/asp0>bh*1.1)rw=bh*1.1*asp0;
+    secTargets=[];
+    for(var s=0;s<secs.length;s++){
+      var side=SIDE[s],ap=shapes[MAP[s]].asp,T;
+      if(s===0){
+        if(W < 1024) {
+          var logoMaxH = Math.min(130, Math.min(bh * 0.75, (W * 0.70) / asp0));
+          var logoY = Math.max(90, Math.min(top + bh * 0.45, hc.offsetTop - logoMaxH * 0.55 - 10));
+          T = { x: W / 2, y: logoY, s: logoMaxH };
+        } else {
+          T = { x: W / 2, y: (top + bot) / 2, s: Math.min(H * 0.34, Math.min(260, (W * 0.36) / asp0)) };
+        }
+      }
+      else if(W >= 1024){
+        var maxW = Math.min(W, 1200);
+        var cardW = (s === 4 || s === 3) ? 520 : 470;
+        if(side === "R"){
+          var leftBound = (W - maxW) / 2 + cardW + 36;
+          var rightBound = W - (W - maxW) / 2 - 24;
+          var safeCenter = (leftBound + rightBound) / 2;
+          var availW = Math.max(160, rightBound - leftBound);
+          var sMax = Math.min(availW / ap, H * 0.48);
+          T = { x: safeCenter, y: H * 0.50, s: Math.min(sMax, Math.min(270, 360 / ap)) };
+        } else {
+          var leftBound = (W - maxW) / 2 + 24;
+          var rightBound = (W + maxW) / 2 - cardW - 36;
+          var safeCenter = (leftBound + rightBound) / 2;
+          var availW = Math.max(160, rightBound - leftBound);
+          var sMax = Math.min(availW / ap, H * 0.48);
+          T = { x: safeCenter, y: H * 0.50, s: Math.min(sMax, Math.min(270, 360 / ap)) };
+        }
+      }
+      else {
+        T = { x: W / 2, y: Math.max(120, H * 0.18), s: Math.min(H * 0.18, Math.min(180, (W * 0.60) / ap)) };
+      }
+      secTargets.push(T);
+    }
+    if(!cur.init){cur.x=secTargets[0].x;cur.y=secTargets[0].y;cur.s=secTargets[0].s;cur.init=true}
+    bd.style.fontSize=Math.min(bh*.65,130)+"px";bd.style.top=(top+bot)/2+"px";bd.style.left="50%";
+  }
+  addEventListener("resize",relayout);relayout();
+
+  window.relayoutStage = function(){
+    try {
+      relayout();
+      pickSec();
+      last = performance.now();
+      prevAct = 1;
+      if (main && main.pts) main.pts.visible = true;
+    } catch(err){}
+  };
+
+  function pickSec(){
+    var best=activeSec,h=innerHeight;
+    for(var s=0;s<secs.length;s++){var b=secs[s].getBoundingClientRect();if(b.top<h*.75)secs[s].classList.add("in");if(b.top<=h*.5&&b.bottom>h*.5)best=s}
+    if(best!==activeSec){activeSec=best;want=MAP[best]}
+  }
+  var isScrolling = false;
+  var scrollVel = 0;
+  var lastScrollY = window.scrollY;
+  var scrollStopTimer = null;
+  var scrollDisp = 0;
+
+  addEventListener("scroll", function(){
+    var curY = window.scrollY;
+    var diff = Math.abs(curY - lastScrollY);
+    lastScrollY = curY;
+    scrollVel = Math.min(1.0, scrollVel + Math.min(diff * 0.015, 0.3));
+    isScrolling = true;
+    
+    var h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = "scaleX(" + (h > 0 ? clamp(scrollY / h, 0, 1) : 0) + ")";
+
+    clearTimeout(scrollStopTimer);
+    scrollStopTimer = setTimeout(function(){
+      isScrolling = false;
+    }, 75);
+  }, { passive: true });
+
+  // Interactive Particle Physics for both mouse cursor and hand/finger touch
+  function onMove(e){
+    tx = e.clientX;
+    ty = e.clientY;
+    if(mx < -9000){ mx = pmx = tx; my = pmy = ty; }
+    pT = 1;
+    document.body.dataset.t = "1";
+  }
+  addEventListener("pointermove", onMove, {passive:true});
+  addEventListener("pointerdown", onMove, {passive:true});
+  document.addEventListener("pointerleave", function(){ pT = 0; });
+  addEventListener("pointerup", function(){ setTimeout(function(){ pT = 0; }, 320); }, {passive:true});
+  addEventListener("pointercancel", function(){ pT = 0; }, {passive:true});
+
+  function step(S,dt,e,swirl){
+    var n=S.n,ja=S.dust?0:ia,jb=S.dust?0:ib,XA=S.X[ja],XB=S.X[jb],YA=S.Y[ja],YB=S.Y[jb],off=S.off,vel=S.vel,P=S.P,AS=S.AS,sd=S.sd,ph=S.ph,act=0,R2=Rad*Rad,tn=trail.length,pr_=pres>.001,
+        rest=S.dust?S.rest:Math.max(S.rest,1-imgA),e1=1-e;
+    for(var i=0;i<n;i++){
+      var k=i*2,hx=cx+(XA[i]*e1+XB[i]*e)*SZ,hy=cy+(YA[i]*e1+YB[i]*e)*SZ;
+      if(S.dust){hx+=Math.sin(t*.4+ph[i]*6.28)*7;hy+=Math.cos(t*.33+ph[i]*8.1)*5}
+      var ox=off[k],oy=off[k+1],vx=vel[k],vy=vel[k+1],px=hx+ox,py=hy+oy,E=0,ax=0,ay=0,lt=.45+sd[i]*1.1;
+      if(tn&&px>bb[0]&&px<bb[2]&&py>bb[1]&&py<bb[3]){
+        var f=0;for(var j=0;j<tn;j++){var q=trail[j],dx=px-q.x,dy=py-q.y,d2=dx*dx+dy*dy;if(d2<R2*4){var g=Math.exp(-d2/R2)*q.s;if(g>f)f=g}}
+        E=sstep(.06,.5,f*1.15);
+      }
+      if(pr_){var ex=px-mx,ey=py-my,r2=ex*ex+ey*ey;
+        if(r2<R2*6){var fm=Math.exp(-r2/R2)*pres,il=1/Math.sqrt(r2+1),nx=ex*il,ny=ey*il,a1=fm*1.25*STR*lt,a2=fm*1.45*STR*(.4+sd[i]);ax+=nx*a1-ny*a2;ay+=ny*a1+nx*a2}}
+      if(E>.01){
+        ax+=(mvx*lt-vx)*E*.08;ay+=(mvy*lt-vy)*E*.08;
+        var qx=px*.0095+t*.35,qy=py*.0095-t*.2;curl(qx,qy);var c1=cvx,c2=cvy;curl(qx*2.3+7.1,qy*2.3+7.1);
+        ax+=(c1+.5*cvx)*E*1.2*TURB*lt;ay+=(c2+.5*cvy)*E*1.2*TURB*lt;
+      }
+      if(swirl>.002){ax+=Math.sin(py*.012+t*2)*swirl*.9*lt;ay+=Math.cos(px*.012-t*1.6)*swirl*.9*lt}
+      if(scrollDisp>0.02){
+        var flow=scrollDisp*2.8*lt;
+        ax+=Math.sin(sd[i]*6.28+t*2.5)*flow;
+        ay+=Math.cos(ph[i]*6.28-t*2.0)*flow;
+      }
+      var isResting = !isScrolling && scrollDisp < 0.01 && pres < 0.005;
+      var baseK = isResting ? 0.088 : 0.034;
+      var kk = baseK * (.75 + sd[i] * .5) * Math.max(0.25, 1 - swirl * .5);
+      ax -= ox * kk;
+      ay -= oy * kk;
+      vx += ax * dt;
+      vy += ay * dt;
+      var dm = Math.pow(isResting ? 0.78 : (0.90 + .025 * E), dt);
+      vx *= dm;
+      vy *= dm;
+      ox += vx * dt;
+      oy += vy * dt;
+      var maxOff = isResting ? 32 : 48;
+      if(ox > maxOff) ox = maxOff; else if(ox < -maxOff) ox = -maxOff;
+      if(oy > maxOff) oy = maxOff; else if(oy < -maxOff) oy = -maxOff;
+      var o2=ox*ox+oy*oy;if(o2<.0004&&vx*vx+vy*vy<.0004){ox=oy=vx=vy=0}
+      off[k]=ox;off[k+1]=oy;vel[k]=vx;vel[k+1]=vy;
+      P[k]=hx+ox;P[k+1]=hy+oy;AS[k]=Math.max(E,sstep(.35,2.5,Math.sqrt(o2)),rest);AS[k+1]=Math.min(6,Math.sqrt(vx*vx+vy*vy));
+      if(E>0||o2>.0004)act++;
+    }
+    S.geo.attributes.position.needsUpdate=true;S.geo.attributes.aAS.needsUpdate=true;return act;
+  }
+
+  function frame(now){
+    requestAnimationFrame(frame);
+    var ms=now-last;last=now;if(document.hidden)return;
+    var dt=clamp(ms/16.667,.25,3);pickSec();
+    var ease=1-Math.pow(1-.22,dt);pmx=mx;pmy=my;mx+=(tx-mx)*ease;my+=(ty-my)*ease;
+    mvx+=(clamp((mx-pmx)/dt,-60,60)-mvx)*.5;mvy+=(clamp((my-pmy)/dt,-60,60)-mvy)*.5;
+    pres+=(pT-pres)*(1-Math.pow(1-(pT>pres?.1:.035),dt));if(pres<.001&&!pT)pres=0;
+    if(introT<1)introT=Math.min(1,introT+Math.min(ms,100)/3200);
+    t+=dt/60*(1+pres*1.6);
+    
+    // Smooth scroll dispersion: rapid snap to 0 when stopped
+    if(!isScrolling){
+      scrollDisp *= Math.pow(0.55, dt);
+      if(scrollDisp < 0.005) scrollDisp = 0;
+    } else {
+      var targetDisp = Math.min(0.55, 0.18 + scrollVel * 0.35);
+      scrollDisp += (targetDisp - scrollDisp) * (1 - Math.pow(1 - 0.28, dt));
+    }
+    scrollVel *= Math.pow(0.85, dt);
+    if(scrollVel < 0.001) scrollVel = 0;
+    
+    // Smoothly anchor the final particle to form section (#enroll) when scrolling to footer
+    var T=secTargets[activeSec];
+    if(activeSec === 6 && secs[6]){
+      var eb = secs[6].getBoundingClientRect();
+      var baseOff = (W >= 900) ? Math.min(H * 0.52, eb.height * 0.5) : Math.max(130, Math.min(H * 0.19, eb.height * 0.22));
+      var dynY = eb.top + baseOff;
+      if (dynY < T.y) {
+        T = { x: T.x, y: dynY, s: T.s };
+      }
+    }
+    
+    var isResting = !isScrolling && scrollDisp < 0.01 && pres < 0.005;
+    var lkRate = isResting ? 0.20 : 0.12;
+    var lk = 1 - Math.pow(1 - lkRate, dt);
+    cur.x += (T.x - cur.x) * lk;
+    cur.y += (T.y - cur.y) * lk;
+    cur.s += (T.s - cur.s) * lk;
+    cx = cur.x; cy = cur.y; SZ = cur.s;
+    if(m < 1) m = Math.min(1, m + ms / 650); else if(want !== ib){ ia = ib; ib = want; m = 0; colDirty = true; }
+    var e=m*m*(3-2*m);
+    var baseSwirl=rm?0:Math.max(Math.pow(1-introT,2),4*m*(1-m)*.9);
+    var swirl=Math.max(baseSwirl, scrollDisp * 0.7);
+    
+    var atTop = window.scrollY < 20;
+    var tgtImg = (ib === 0 && m >= 1 && introT >= 0.75 && atTop && !isScrolling && scrollDisp < 0.04) ? 1 : 0;
+    imgA += (tgtImg - imgA) * (1 - Math.pow(1 - (tgtImg === 0 ? 0.35 : 0.07), dt));
+    if (Math.abs(tgtImg - imgA) < 0.002) imgA = tgtImg;
+    imgU.uShow.value = imgA;
+    imgU.uRect.value.set(cx - asp0 * SZ / 2, cy - SZ / 2, asp0 * SZ, SZ);
+    main.dot.value=clamp(SZ*.0092,2.8,4.4);
+    if(pres>.02)trail.push({x:mx,y:my,s:pres});
+    var dec=Math.pow(.955,dt),j;for(j=0;j<trail.length;j++)trail[j].s*=dec;
+    trail=trail.filter(function(q){return q.s>.03});if(trail.length>32)trail.splice(0,trail.length-32);
+    bb=[1e9,1e9,-1e9,-1e9];trail.forEach(function(q){bb[0]=Math.min(bb[0],q.x);bb[1]=Math.min(bb[1],q.y);bb[2]=Math.max(bb[2],q.x);bb[3]=Math.max(bb[3],q.y)});
+    var mg=Rad*2;bb[0]-=mg;bb[1]-=mg;bb[2]+=mg;bb[3]+=mg;
+    for(j=0;j<32;j++){var q=trail[j];trailU[j].set(q?q.x:0,q?q.y:0,q?q.s:0)}
+    if(colDirty){var ca=main.C[ia],cb=main.C[ib],col=main.col,e1=1-e;for(j=0;j<col.length;j++)col[j]=ca[j]*e1+cb[j]*e;main.geo.attributes.aCol.needsUpdate=true;if(m>=1)colDirty=false}
+    
+    // Check if scrolled into footer: hide particles so they don't linger over footer
+    var footEl = $("footer");
+    var footRect = footEl ? footEl.getBoundingClientRect() : null;
+    var eb6 = secs[6] ? secs[6].getBoundingClientRect() : null;
+    var inFooter = footRect && (footRect.top < H * 0.85 || (eb6 && eb6.bottom < H * 0.15));
+    var idle=ib===0&&m>=1&&imgA===1&&!trail.length&&pres<.001&&prevAct===0&&introT>=1&&Math.abs(T.s-cur.s)<.5&&Math.abs(T.x-cur.x)<.5;
+    
+    var showPts = !idle && !inFooter && cur.y > -SZ * 0.6;
+    main.pts.visible = showPts;
+    if(dust && dust.pts) dust.pts.visible = !inFooter;
+    if(showPts) prevAct = step(main, dt, e, swirl);
+    if(!inFooter) step(dust, dt, 0, 0);
+    R.render(scene,cam);
+  }
+  requestAnimationFrame(frame);
+}
+var go=false;function run(){if(!go){go=true;start()}}
+if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('800 100px "Barlow Condensed"'),document.fonts.load('700 100px "Barlow Condensed"')]).then(run,run);setTimeout(run,2500)}else run();
+})();
+
+/* ==========================================================================
+   Fullpage Routing (#application/forms) & 3-Step Paginated Form with Supabase
+   ========================================================================== */
+(function(){
+  var SUPABASE_URL = 'https://hswxckkvpmjndmwexioa.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_avGK3uUQfnDYN2ZbSRW3DA_8-R4Dz8v';
+  var sb = null;
+  if (window.supabase && window.supabase.createClient) {
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+
+  var isDemo = window.IS_DEMO_MODE === true ||
+               window.location.pathname === '/demo' ||
+               window.location.pathname.startsWith('/demo/') ||
+               window.location.hash === '#demo' ||
+               window.location.search.indexOf('demo=true') !== -1 ||
+               window.location.search.indexOf('source=temp') !== -1;
+  var targetTable = isDemo ? 'pgi_website_content_temp' : 'pgi_website_content';
+
+  var onlineFeeAmount = 4999;
+  var offlineFeeAmount = 14999;
+  var selectedMode = 'Online';
+  var feeAmount = 4999;
+  var currentStep = 1;
+
+  var appPortal = document.getElementById('application-portal');
+  var mainEl = document.querySelector('main');
+  var footerEl = document.getElementById('footer');
+  var navEl = document.getElementById('nav');
+  var stageEl = document.getElementById('stage');
+  var progEl = document.getElementById('prog');
+
+  // Multi-step pagination DOM elements
+  var stepPane1 = document.getElementById('step-pane-1');
+  var stepPane2 = document.getElementById('step-pane-2');
+  var stepPane3 = document.getElementById('step-pane-3');
+  var stepTab1 = document.getElementById('step-tab-1');
+  var stepTab2 = document.getElementById('step-tab-2');
+  var stepTab3 = document.getElementById('step-tab-3');
+  var stepLine1 = document.getElementById('step-line-1');
+  var stepLine2 = document.getElementById('step-line-2');
+
+  var btnToStep2 = document.getElementById('btn-to-step-2');
+  var btnBackTo1 = document.getElementById('btn-back-to-1');
+  var btnToStep3 = document.getElementById('btn-to-step-3');
+  var btnBackTo2 = document.getElementById('btn-back-to-2');
+
+  var btnOnline = document.getElementById('btn-mode-online');
+  var btnOffline = document.getElementById('btn-mode-offline');
+  var payAmountDisplay = document.getElementById('pay-amount-display');
+  var appForm = document.getElementById('app-form');
+  var appSuccessBox = document.getElementById('app-success-box');
+  var btnSubmit = document.getElementById('btn-submit-app');
+  var confAppId = document.getElementById('conf-app-id');
+  var confSummaryText = document.getElementById('conf-summary-text');
+  var confWaBtn = document.getElementById('conf-wa-btn');
+  var screenshotInput = document.getElementById('inp-screenshot');
+  var uploadHintText = document.getElementById('upload-hint-text');
+
+  // SPA Route Handling for http://localhost:5174/#application/forms
+  function handleRouting() {
+    var hash = window.location.hash || '';
+    if (hash === '#application/forms' || hash.indexOf('#application') === 0 || hash === '#apply' || hash === '#form' || hash === '#forms') {
+      document.body.classList.add('in-application-portal');
+      if (hash !== '#application/forms') {
+        try { history.replaceState(null, '', '#application/forms'); } catch(e){ window.location.hash = '#application/forms'; }
+      }
+      if (mainEl) mainEl.style.display = 'none';
+      if (footerEl) footerEl.style.display = 'none';
+      if (navEl) navEl.style.display = 'none';
+      if (stageEl) { stageEl.style.opacity = '0'; stageEl.style.pointerEvents = 'none'; }
+      if (progEl) progEl.style.display = 'none';
+      if (appPortal) {
+        appPortal.style.display = 'block';
+      }
+      window.scrollTo(0, 0);
+      goToStep(1);
+      triggerWaveAnimation();
+      if (window.resizeGoldCanvas) window.resizeGoldCanvas();
+    } else {
+      document.body.classList.remove('in-application-portal');
+      if (mainEl) mainEl.style.display = '';
+      if (footerEl) footerEl.style.display = '';
+      if (navEl) navEl.style.display = '';
+      if (stageEl) {
+        stageEl.style.display = '';
+        stageEl.style.opacity = '';
+        stageEl.style.pointerEvents = '';
+      }
+      if (progEl) progEl.style.display = '';
+      if (appPortal) appPortal.style.display = 'none';
+      if (hash && hash !== '#top') {
+        var el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+      if (window.relayoutStage) {
+        window.relayoutStage();
+      }
+      setTimeout(function(){
+        if (window.relayoutStage) window.relayoutStage();
+      }, 60);
+    }
+  }
+
+  var waveStartTime = performance.now();
+  function triggerWaveAnimation() {
+    waveStartTime = performance.now();
+  }
+  window.addEventListener('hashchange', handleRouting);
+  handleRouting();
+
+  function goToStep(step) {
+    currentStep = step;
+    [stepPane1, stepPane2, stepPane3].forEach(function(p, i){
+      if (p) p.classList.toggle('active', i + 1 === step);
+    });
+    if (stepTab1) {
+      stepTab1.classList.toggle('active', step === 1);
+      stepTab1.classList.toggle('done', step > 1);
+    }
+    if (stepLine1) stepLine1.classList.toggle('active', step >= 2);
+    if (stepTab2) {
+      stepTab2.classList.toggle('active', step === 2);
+      stepTab2.classList.toggle('done', step > 2);
+    }
+    if (stepLine2) stepLine2.classList.toggle('active', step >= 3);
+    if (stepTab3) {
+      stepTab3.classList.toggle('active', step === 3);
+    }
+  }
+
+  // Step 1 Validation & Transition
+  if (btnToStep2) {
+    btnToStep2.addEventListener('click', function(){
+      var name = document.getElementById('inp-name').value.trim();
+      var phone = document.getElementById('inp-phone').value.trim();
+      var email = document.getElementById('inp-email').value.trim();
+      var address = document.getElementById('inp-address').value.trim();
+      if (!name) { alert('Please enter student full name.'); return; }
+      if (!phone) { alert('Please enter WhatsApp mobile number.'); return; }
+      if (!email) { alert('Please enter email address.'); return; }
+      if (!address) { alert('Please enter your city/location.'); return; }
+      goToStep(2);
+    });
+  }
+
+  if (btnBackTo1) btnBackTo1.addEventListener('click', function(){ goToStep(1); });
+
+  // Step 2 Validation & Transition
+  if (btnToStep3) {
+    btnToStep3.addEventListener('click', function(){
+      var college = document.getElementById('inp-college').value.trim();
+      if (!college) { alert('Please enter college or qualification details.'); return; }
+      goToStep(3);
+    });
+  }
+
+  if (btnBackTo2) btnBackTo2.addEventListener('click', function(){ goToStep(2); });
+
+  function updateGPayButton() {
+    var btnGPay = document.getElementById('btn-open-gpay');
+    var amtSpan = document.getElementById('gpay-btn-amt');
+    var formattedAmt = Number(feeAmount).toLocaleString('en-IN');
+    var upiLink = 'upi://pay?pa=lokeshlaven-2@okicici&pn=' + encodeURIComponent('Laven Lokesh Barani') + '&am=' + feeAmount + '&cu=INR&tn=' + encodeURIComponent('Plant Green Course Fee');
+    if (btnGPay) btnGPay.setAttribute('href', upiLink);
+    if (amtSpan) amtSpan.textContent = 'Pay ₹' + formattedAmt + ' directly via UPI / GPay app \u2192';
+  }
+
+  function setMode(mode) {
+    selectedMode = mode;
+    if (mode === 'Online') {
+      feeAmount = onlineFeeAmount;
+      if (btnOnline) btnOnline.classList.add('active');
+      if (btnOffline) btnOffline.classList.remove('active');
+      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹' + Number(feeAmount).toLocaleString('en-IN');
+    } else {
+      feeAmount = offlineFeeAmount;
+      if (btnOffline) btnOffline.classList.add('active');
+      if (btnOnline) btnOnline.classList.remove('active');
+      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹' + Number(feeAmount).toLocaleString('en-IN');
+    }
+    updateGPayButton();
+  }
+
+  if (btnOnline) btnOnline.addEventListener('click', function(){ setMode('Online'); });
+  if (btnOffline) btnOffline.addEventListener('click', function(){ setMode('Offline'); });
+
+  // Update mode when pricing links are clicked
+  document.querySelectorAll('[data-mode]').forEach(function(el){
+    el.addEventListener('click', function(){
+      var m = el.getAttribute('data-mode');
+      if (m) setMode(m);
+    });
+  });
+
+  // 1-Tap Copy for UPI ID and GPay Number
+  document.querySelectorAll('.pay-copy-badge').forEach(function(badge){
+    badge.addEventListener('click', function(){
+      var text = badge.getAttribute('data-copy');
+      if (text && navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function(){
+          var original = badge.textContent;
+          badge.textContent = 'Copied!';
+          badge.style.background = 'color-mix(in srgb, var(--acc) 35%, transparent)';
+          setTimeout(function(){
+            badge.textContent = original;
+            badge.style.background = '';
+          }, 1800);
+        });
+      }
+    });
+  });
+
+  // Handle 1-Tap Open in GPay Redirection
+  var btnGPayEl = document.getElementById('btn-open-gpay');
+  if (btnGPayEl) {
+    btnGPayEl.addEventListener('click', function(e){
+      var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      var isAndroid = /Android/i.test(navigator.userAgent);
+      var upiUrl = 'upi://pay?pa=lokeshlaven-2@okicici&pn=' + encodeURIComponent('Laven Lokesh Barani') + '&am=' + feeAmount + '&cu=INR&tn=' + encodeURIComponent('Plant Green Course Fee');
+      var tezUrl = 'tez://upi/pay?pa=lokeshlaven-2@okicici&pn=' + encodeURIComponent('Laven Lokesh Barani') + '&am=' + feeAmount + '&cu=INR&tn=' + encodeURIComponent('Plant Green Course Fee');
+
+      if (isAndroid) {
+        e.preventDefault();
+        var clicked = Date.now();
+        window.location.href = tezUrl;
+        setTimeout(function(){
+          if (Date.now() - clicked < 1600) {
+            window.location.href = upiUrl;
+          }
+        }, 550);
+      } else if (isMobile) {
+        // iOS or general mobile follows native upi:// href
+      } else {
+        // Desktop: copy UPI ID and prompt user
+        e.preventDefault();
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText('lokeshlaven-2@okicici');
+        }
+        try { window.location.href = upiUrl; } catch(err){}
+        alert('UPI ID (lokeshlaven-2@okicici) copied to clipboard!\n\nTo complete payment of \u20B9' + Number(feeAmount).toLocaleString('en-IN') + ', open Google Pay (GPay) on your phone or use GPay number: 8220699083.');
+      }
+    });
+  }
+
+  // Screenshot input preview text
+  if (screenshotInput) {
+    screenshotInput.addEventListener('change', function(){
+      if (screenshotInput.files && screenshotInput.files[0]) {
+        var file = screenshotInput.files[0];
+        uploadHintText.textContent = '✓ ' + file.name.slice(0, 16) + '...';
+        uploadHintText.style.color = 'var(--acc)';
+      }
+    });
+  }
+
+  // Handle Application Form Submission to Supabase & Storage (No Auth Popup)
+  if (appForm) {
+    appForm.addEventListener('submit', async function(e){
+      e.preventDefault();
+      
+      var name = document.getElementById('inp-name').value.trim();
+      var phone = document.getElementById('inp-phone').value.trim();
+      var email = document.getElementById('inp-email').value.trim();
+      var address = document.getElementById('inp-address').value.trim();
+      var college = document.getElementById('inp-college').value.trim();
+      var degree = document.getElementById('sel-degree').value;
+      var status = document.getElementById('sel-status').value;
+      var utr = document.getElementById('inp-utr').value.trim();
+
+      if (!utr) {
+        alert('Please enter your 12-digit UPI / UTR transaction reference number.');
+        return;
+      }
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = '<span>Verifying & Saving...</span>';
+
+      var appId = 'PGI-DM-' + Math.floor(10000 + Math.random() * 90000);
+      var screenshotUrl = null;
+
+      // If student attached a screenshot file, upload silently to Supabase storage (no popup!)
+      if (screenshotInput && screenshotInput.files && screenshotInput.files[0]) {
+        var sFile = screenshotInput.files[0];
+        try {
+          btnSubmit.innerHTML = '<span>Saving payment proof...</span>';
+          if (sb) {
+            var fileExt = (sFile.name && sFile.name.indexOf('.') > -1) ? sFile.name.split('.').pop() : 'png';
+            var filePath = appId + '_' + Date.now() + '.' + fileExt;
+            var uploadRes = await sb.storage.from('payment_proofs').upload(filePath, sFile);
+            if (!uploadRes.error) {
+              var urlData = sb.storage.from('payment_proofs').getPublicUrl(filePath);
+              if (urlData && urlData.data) screenshotUrl = urlData.data.publicUrl;
+            } else {
+              console.warn('Supabase storage upload notice:', uploadRes.error);
+            }
+          }
+        } catch(sbErr) {
+          console.warn('Screenshot upload notice:', sbErr);
+        }
+      }
+
+      btnSubmit.innerHTML = '<span>Finalizing Registration...</span>';
+
+      // Record payload for public.enrollments table
+      var payload = {
+        application_id: appId,
+        name: name,
+        mobile_number: phone,
+        email: email || null,
+        address: address || 'Tamil Nadu',
+        college_name: college || 'Degree Program',
+        highest_study: degree || 'UG',
+        degree: degree || 'Undergraduate',
+        branch: 'Digital Marketing',
+        passing_status: status || 'Pursuing',
+        start_date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        mode: selectedMode,
+        fee_amount: feeAmount,
+        gpay_number: '8220699083',
+        upi_id: 'lokeshlaven-2@okicici',
+        recipient_name: 'Mr. Laven Lokesh Barani',
+        utr_number: utr,
+        payment_screenshot_url: screenshotUrl,
+        agreed_no_refund: true,
+        verification_status: 'pending'
+      };
+
+      try {
+        if (sb) {
+          var insertRes = await sb.from('enrollments').insert([payload]);
+          if (insertRes.error) {
+            console.error('Supabase Insert Error:', insertRes.error);
+          }
+        }
+      } catch (err) {
+        console.error('Database connection error:', err);
+      }
+
+      // Trigger Celebration Confetti
+      if (window.confetti) {
+        window.confetti({
+          particleCount: 85,
+          spread: 75,
+          origin: { y: 0.6 }
+        });
+      }
+
+      // Display Confirmation Box
+      if (confAppId) confAppId.textContent = appId;
+      if (confSummaryText) {
+        var proofNotice = screenshotUrl ? '<br><a href="' + screenshotUrl + '" target="_blank" style="color:var(--acc);font-weight:600;text-decoration:underline;display:inline-block;margin-top:6px">📁 View Uploaded Proof ↗</a>' : '';
+        confSummaryText.innerHTML = selectedMode + ' Batch · ₹' + feeAmount.toLocaleString() + ' · Status: Pending UTR Verification' + proofNotice;
+      }
+      if (confWaBtn) {
+        var waMsg = 'Hi Plant Green Inertia Team! I have submitted my admission application for the Digital Marketing Course.\n\nApplication ID: ' + appId + '\nName: ' + name + '\nMode: ' + selectedMode + ' (₹' + feeAmount + ')\nUTR: ' + utr;
+        if (screenshotUrl) waMsg += '\nPayment Proof: ' + screenshotUrl;
+        confWaBtn.href = 'https://wa.me/918220699083?text=' + encodeURIComponent(waMsg);
+      }
+
+      appForm.style.display = 'none';
+      if (appSuccessBox) appSuccessBox.style.display = 'block';
+    });
+  }
+
+  // ============================================================================
+  // Dynamic Content Hydration from Supabase (pgi_website_content / pgi_website_content_temp)
+  // ============================================================================
+  function escapeHtml(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function hydrateWebsiteContent(data) {
+    if (!data) return;
+
+    // 0. Dynamic Theme & Particle Colors from Database
+    var th = data.theme_colors || (data.content_json && data.content_json.theme_colors);
+    if (th && window.applyDynamicThemeColors) {
+      window.applyDynamicThemeColors(th);
+    }
+
+    var cJson = data.content_json || {};
+    var heroData = data.hero || cJson.hero;
+    var whyData = data.why || cJson.why;
+    var curData = (Array.isArray(data.curriculum) && data.curriculum.length) ? data.curriculum : cJson.curriculum;
+    var stepData = (Array.isArray(data.learning_steps) && data.learning_steps.length) ? data.learning_steps : cJson.learning_steps;
+    var priceData = data.pricing || cJson.pricing;
+    var aboutData = data.about || cJson.about;
+    var nextCohortData = data.next_cohort || cJson.next_cohort;
+    var contactData = data.contact || cJson.contact;
+
+    // 1. Hero Section
+    if (heroData) {
+      var h = heroData;
+      var elMain = document.getElementById('hero-title-main');
+      var elAcc = document.getElementById('hero-title-acc');
+      var elAsideDesc = document.getElementById('hero-aside-desc');
+      var elPriceOnline = document.getElementById('hero-price-online');
+      var elPriceOnlineWas = document.getElementById('hero-price-online-was');
+      var elPriceOffline = document.getElementById('hero-price-offline');
+      var elPriceOfflineWas = document.getElementById('hero-price-offline-was');
+      var elPrimaryCta = document.getElementById('hero-primary-cta');
+      var elSecCta = document.getElementById('hero-secondary-cta');
+
+      if (elMain && h.title_main) elMain.textContent = h.title_main;
+      if (elAcc && h.title_acc) elAcc.textContent = h.title_acc;
+      if (elAsideDesc && h.aside_desc) elAsideDesc.textContent = h.aside_desc;
+      if (elPriceOnline && h.price_online) elPriceOnline.textContent = h.price_online;
+      if (elPriceOnlineWas && h.price_online_was) elPriceOnlineWas.textContent = h.price_online_was;
+      if (elPriceOffline && h.price_offline) elPriceOffline.textContent = h.price_offline;
+      if (elPriceOfflineWas && h.price_offline_was) elPriceOfflineWas.textContent = h.price_offline_was;
+      if (elPrimaryCta && h.primary_cta) elPrimaryCta.textContent = h.primary_cta;
+      if (elSecCta && h.secondary_cta) elSecCta.textContent = h.secondary_cta;
+    }
+
+    // 2. Why Section
+    if (whyData) {
+      var w = whyData;
+      var elWhyMain = document.getElementById('why-title-main');
+      var elWhyAcc = document.getElementById('why-title-acc');
+      var elWhyLead = document.getElementById('why-lead');
+      var elWhyFeatures = document.getElementById('why-features-list');
+
+      if (elWhyMain && w.title_main) elWhyMain.textContent = w.title_main;
+      if (elWhyAcc && w.title_acc) elWhyAcc.textContent = w.title_acc;
+      if (elWhyLead && w.lead) elWhyLead.textContent = w.lead;
+      if (elWhyFeatures && Array.isArray(w.features) && w.features.length) {
+        elWhyFeatures.innerHTML = w.features.map(function(f, i){
+          return '<li class="rv" style="--i:' + (i + 1) + '">' +
+                 '<h3>' + escapeHtml(f.title || '') + '</h3>' +
+                 '<p>' + escapeHtml(f.desc || '') + '</p>' +
+                 '</li>';
+        }).join('');
+      }
+    }
+
+    // 3. Curriculum Section
+    if (Array.isArray(curData) && curData.length) {
+      var elCurriculumList = document.getElementById('curriculum-topics-list');
+      if (elCurriculumList) {
+        elCurriculumList.innerHTML = curData.map(function(c, i){
+          return '<li class="rv" style="--i:' + i + '">' +
+                 '<h3>' + escapeHtml(c.title || '') + '</h3>' +
+                 '<p>' + escapeHtml(c.desc || '') + '</p>' +
+                 '</li>';
+        }).join('');
+      }
+    }
+
+    // 4. Learning Steps Section
+    if (Array.isArray(stepData) && stepData.length) {
+      var elStepsList = document.getElementById('learn-steps-list');
+      if (elStepsList) {
+        elStepsList.innerHTML = stepData.map(function(s, i){
+          return '<li class="rv" style="--i:' + i + '">' +
+                 '<h3>' + escapeHtml(s.title || '') + '</h3>' +
+                 '<p>' + escapeHtml(s.desc || '') + '</p>' +
+                 '</li>';
+        }).join('');
+      }
+    }
+
+    // 5. Pricing Section & Application Form Fees
+    if (priceData) {
+      var pr = priceData;
+      var elPrMain = document.getElementById('pricing-title-main');
+      var elPrAcc = document.getElementById('pricing-title-acc');
+      if (elPrMain && pr.title_main) elPrMain.textContent = pr.title_main;
+      if (elPrAcc && pr.title_acc) elPrAcc.textContent = pr.title_acc;
+
+      if (pr.online) {
+        var on = pr.online;
+        var elOnName = document.getElementById('pricing-online-name');
+        var elOnOff = document.getElementById('pricing-online-off');
+        var elOnNow = document.getElementById('pricing-online-now');
+        var elOnWas = document.getElementById('pricing-online-was');
+        var elOnUl = document.getElementById('pricing-online-ul');
+        var elOnBtn = document.getElementById('pricing-online-btn');
+        var btnModeOnlinePrice = document.querySelector('#btn-mode-online .m-price');
+        var btnModeOnlineTag = document.querySelector('#btn-mode-online .m-tag');
+
+        if (elOnName && on.name) elOnName.textContent = on.name;
+        if (elOnOff && on.discount) elOnOff.textContent = on.discount;
+        if (elOnNow && on.price) elOnNow.textContent = on.price;
+        if (elOnWas && on.was) elOnWas.textContent = on.was;
+        if (elOnUl && Array.isArray(on.features)) {
+          elOnUl.innerHTML = on.features.map(function(f){ return '<li>' + escapeHtml(f) + '</li>'; }).join('');
+        }
+        if (elOnBtn && on.cta) elOnBtn.innerHTML = escapeHtml(on.cta) + ' &rarr;';
+        if (on.price_num) {
+          onlineFeeAmount = Number(on.price_num);
+          if (btnModeOnlinePrice) btnModeOnlinePrice.textContent = '₹' + onlineFeeAmount.toLocaleString('en-IN');
+        }
+        if (btnModeOnlineTag && on.discount) {
+          btnModeOnlineTag.textContent = 'Online Batch (' + on.discount + ')';
+        }
+      }
+
+      if (pr.offline) {
+        var off = pr.offline;
+        var elOffName = document.getElementById('pricing-offline-name');
+        var elOffDiscount = document.getElementById('pricing-offline-off');
+        var elOffNow = document.getElementById('pricing-offline-now');
+        var elOffWas = document.getElementById('pricing-offline-was');
+        var elOffUl = document.getElementById('pricing-offline-ul');
+        var elOffBtn = document.getElementById('pricing-offline-btn');
+        var btnModeOfflinePrice = document.querySelector('#btn-mode-offline .m-price');
+        var btnModeOfflineTag = document.querySelector('#btn-mode-offline .m-tag');
+
+        if (elOffName && off.name) elOffName.textContent = off.name;
+        if (elOffDiscount && off.discount) elOffDiscount.textContent = off.discount;
+        if (elOffNow && off.price) elOffNow.textContent = off.price;
+        if (elOffWas && off.was) elOffWas.textContent = off.was;
+        if (elOffUl && Array.isArray(off.features)) {
+          elOffUl.innerHTML = off.features.map(function(f){ return '<li>' + escapeHtml(f) + '</li>'; }).join('');
+        }
+        if (elOffBtn && off.cta) elOffBtn.innerHTML = escapeHtml(off.cta) + ' &rarr;';
+        if (off.price_num) {
+          offlineFeeAmount = Number(off.price_num);
+          if (btnModeOfflinePrice) btnModeOfflinePrice.textContent = '₹' + offlineFeeAmount.toLocaleString('en-IN');
+        }
+        if (btnModeOfflineTag && off.discount) {
+          btnModeOfflineTag.textContent = 'Offline Classroom (' + off.discount + ')';
+        }
+      }
+
+      // Re-apply current mode fee amounts
+      feeAmount = (selectedMode === 'Online') ? onlineFeeAmount : offlineFeeAmount;
+      if (payAmountDisplay) payAmountDisplay.textContent = 'Payable: ₹' + Number(feeAmount).toLocaleString('en-IN');
+      updateGPayButton();
+    }
+
+    // 6. About Section
+    if (aboutData) {
+      var ab = aboutData;
+      var elAbMain = document.getElementById('about-title-main');
+      var elAbAcc = document.getElementById('about-title-acc');
+      var elAbLead = document.getElementById('about-lead');
+      var elAbBadges = document.getElementById('about-badges-container');
+
+      if (elAbMain && ab.title_main) elAbMain.textContent = ab.title_main;
+      if (elAbAcc && ab.title_acc) elAbAcc.textContent = ab.title_acc;
+      if (elAbLead && ab.lead) elAbLead.textContent = ab.lead;
+      if (elAbBadges && Array.isArray(ab.badges)) {
+        elAbBadges.innerHTML = ab.badges.map(function(b){ return '<span>' + escapeHtml(b) + '</span>'; }).join('');
+      }
+    }
+
+    // 7. Next Cohort Section
+    if (nextCohortData) {
+      var nc = nextCohortData;
+      var elNcMain = document.getElementById('next-cohort-title-main');
+      var elNcAcc = document.getElementById('next-cohort-title-acc');
+      var elNcLead = document.getElementById('next-cohort-lead');
+      var elNcM1Val = document.getElementById('next-cohort-metric-1-val');
+      var elNcM1Lbl = document.getElementById('next-cohort-metric-1-label');
+      var elNcM2Val = document.getElementById('next-cohort-metric-2-val');
+      var elNcM2Lbl = document.getElementById('next-cohort-metric-2-label');
+
+      if (elNcMain && nc.title_main) elNcMain.textContent = nc.title_main;
+      if (elNcAcc && nc.title_acc) elNcAcc.textContent = nc.title_acc;
+      if (elNcLead && nc.lead) elNcLead.textContent = nc.lead;
+      if (elNcM1Val && nc.metric_1_val) elNcM1Val.textContent = nc.metric_1_val;
+      if (elNcM1Lbl && nc.metric_1_label) elNcM1Lbl.textContent = nc.metric_1_label;
+      if (elNcM2Val && nc.metric_2_val) elNcM2Val.textContent = nc.metric_2_val;
+      if (elNcM2Lbl && nc.metric_2_label) elNcM2Lbl.textContent = nc.metric_2_label;
+    }
+
+    // 8. Contact & Structured Footer
+    if (contactData) {
+      var c = contactData;
+      var elFBrand = document.getElementById('footer-brand-pitch');
+      var elFAddr = document.getElementById('footer-office-address');
+      var elFP1 = document.getElementById('footer-phone-1');
+      var elFP2 = document.getElementById('footer-phone-2');
+      var elFEmail = document.getElementById('footer-email');
+      var elFSocIg = document.getElementById('footer-social-instagram');
+      var elFSocYt = document.getElementById('footer-social-youtube');
+      var elFSocLi = document.getElementById('footer-social-linkedin');
+      var elFSocWa = document.getElementById('footer-social-whatsapp');
+
+      if (elFBrand && c.brand_pitch) elFBrand.textContent = c.brand_pitch;
+      if (elFAddr && (c.office_address || c.address)) elFAddr.textContent = (c.office_address || c.address);
+      if (elFP1 && c.phone_1) { elFP1.textContent = c.phone_1; elFP1.href = 'tel:' + c.phone_1; }
+      if (elFP2 && c.phone_2) { elFP2.textContent = c.phone_2; elFP2.href = 'tel:' + c.phone_2; }
+      if (elFEmail && c.email) { elFEmail.textContent = c.email; elFEmail.href = 'mailto:' + c.email; }
+      if (elFSocIg && c.instagram) elFSocIg.href = c.instagram;
+      if (elFSocYt && c.youtube) elFSocYt.href = c.youtube;
+      if (elFSocLi && c.linkedin) elFSocLi.href = c.linkedin;
+      if (elFSocWa && c.whatsapp) {
+        var waDigits = String(c.whatsapp).replace(/[^0-9]/g, '');
+        elFSocWa.href = 'https://wa.me/' + waDigits;
+      }
+    }
+
+    // Update inspector data
+    updateDemoInspector(data);
+
+    // Update 3D canvas particles to accommodate any shifted section heights
+    if (window.relayoutStage) {
+      setTimeout(window.relayoutStage, 60);
+    }
+  }
+
+  function updateDemoInspector(data) {
+    var jsonEl = document.getElementById('demo-json-viewer');
+    if (jsonEl && data) {
+      jsonEl.textContent = JSON.stringify(data, null, 2);
+    }
+    var syncEl = document.getElementById('demo-sync-time');
+    if (syncEl) {
+      var d = data.updated_at ? new Date(data.updated_at) : new Date();
+      syncEl.textContent = d.toLocaleTimeString() + ' (' + d.toLocaleDateString() + ')';
+    }
+  }
+
+  // Load content from Supabase
+  async function loadWebsiteContent() {
+    if (!sb) return;
+    try {
+      var res = await sb.from(targetTable).select('*').limit(1).single();
+      if (res && res.data) {
+        window.__ACTIVE_CONTENT = res.data;
+        hydrateWebsiteContent(res.data);
+      }
+    } catch (err) {
+      console.warn('Supabase content hydration notice for ' + targetTable + ':', err);
+    }
+  }
+
+  // Setup Realtime Database Subscription for instant updates
+  if (sb && sb.channel) {
+    try {
+      sb.channel('db-content-watch-' + targetTable)
+        .on('postgres_changes', { event: '*', schema: 'public', table: targetTable }, function(payload) {
+          if (payload && payload.new) {
+            window.__ACTIVE_CONTENT = payload.new;
+            hydrateWebsiteContent(payload.new);
+          }
+        })
+        .subscribe();
+    } catch (chanErr) {
+      console.warn('Realtime channel error:', chanErr);
+    }
+  }
+
+  // Trigger content loading
+  loadWebsiteContent();
+
+  // WebGL Shader for Application Portal (#application-portal) — Dynamic Theme Palettes
+  function initGoldDotsShader() {
+    var canvas = document.getElementById('gold-canvas');
+    if (!canvas || !window.THREE) return;
+    
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false });
+    var pr = Math.min(window.devicePixelRatio || 1, 1.5);
+    renderer.setPixelRatio(pr);
+    
+    var scene = new THREE.Scene();
+    var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    
+    function parseHexToVec3(h) {
+      var c = parseInt(h.slice(1), 16);
+      return new THREE.Vector3((c>>16&255)/255, (c>>8&255)/255, (c&255)/255);
+    }
+
+    var uniforms = {
+      u_time: { value: 0 },
+      u_resolution: { value: new THREE.Vector2(window.innerWidth * 2, window.innerHeight * 2) },
+      u_opacities: { value: [0.35, 0.45, 0.55, 0.65, 0.72, 0.8, 0.88, 0.94, 0.98, 1.0] },
+      u_colors: { value: [
+        parseHexToVec3('#2d663b'),
+        parseHexToVec3('#201b18'),
+        parseHexToVec3('#ffffff'),
+        parseHexToVec3('#1a5c2a'),
+        parseHexToVec3('#201b18'),
+        parseHexToVec3('#2d663b')
+      ] },
+      u_total_size: { value: 22.0 },
+      u_dot_size: { value: 6.0 },
+      u_reverse: { value: 0 }
+    };
+
+    window.updateGoldShaderTheme = function() {
+      if (!uniforms) return;
+      var c1 = parseHexToVec3('#2d663b');
+      var c2 = parseHexToVec3('#201b18');
+      var c3 = parseHexToVec3('#ffffff');
+      var c4 = parseHexToVec3('#1a5c2a');
+      var c5 = parseHexToVec3('#201b18');
+      var c6 = parseHexToVec3('#2d663b');
+      uniforms.u_colors.value = [c1, c2, c3, c4, c5, c6];
+    };
+
+    var material = new THREE.ShaderMaterial({
+      vertexShader: `
+        precision mediump float;
+        uniform vec2 u_resolution;
+        varying vec2 vFragCoord;
+        void main() {
+          gl_Position = vec4(position, 1.0);
+          vFragCoord = (position.xy + 1.0) * 0.5 * u_resolution;
+          vFragCoord.y = u_resolution.y - vFragCoord.y;
+        }
+      `,
+      fragmentShader: `
+        precision mediump float;
+        varying vec2 vFragCoord;
+
+        uniform float u_time;
+        uniform float u_opacities[10];
+        uniform vec3 u_colors[6];
+        uniform float u_total_size;
+        uniform float u_dot_size;
+        uniform vec2 u_resolution;
+
+        float PHI = 1.61803398874989484820459;
+        float random(vec2 xy) {
+            return fract(tan(distance(xy * PHI, xy) * 0.5) * xy.x);
+        }
+
+        void main() {
+            vec2 st = vFragCoord.xy;
+            st.x -= abs(floor((mod(u_resolution.x, u_total_size) - u_dot_size) * 0.5));
+            st.y -= abs(floor((mod(u_resolution.y, u_total_size) - u_dot_size) * 0.5));
+
+            float opacity = step(0.0, st.x) * step(0.0, st.y);
+
+            vec2 st2 = vec2(floor(st.x / u_total_size), floor(st.y / u_total_size));
+
+            float frequency = 5.0;
+            float show_offset = random(st2);
+            float rand = random(st2 * floor((u_time / frequency) + show_offset + frequency));
+            
+            int opIdx = int(clamp(rand * 10.0, 0.0, 9.0));
+            opacity *= u_opacities[opIdx];
+            
+            vec2 frac = fract(st / u_total_size);
+            opacity *= 1.0 - step(u_dot_size / u_total_size, frac.x);
+            opacity *= 1.0 - step(u_dot_size / u_total_size, frac.y);
+
+            int colIdx = int(clamp(show_offset * 6.0, 0.0, 5.0));
+            vec3 color = u_colors[colIdx];
+
+            float animation_speed_factor = 2.5;
+            vec2 center_grid = u_resolution / 2.0 / u_total_size;
+            float dist_from_center = distance(center_grid, st2);
+
+            float timing_offset_intro = dist_from_center * 0.01 + (random(st2) * 0.15);
+            opacity *= step(timing_offset_intro, u_time * animation_speed_factor);
+
+            gl_FragColor = vec4(color * opacity, opacity);
+        }
+      `,
+      uniforms: uniforms,
+      transparent: true,
+      depthTest: false
+    });
+
+    var geometry = new THREE.PlaneGeometry(2, 2);
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    function onResize() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      renderer.setSize(w, h);
+      uniforms.u_resolution.value.set(w * 2, h * 2);
+    }
+    window.addEventListener('resize', onResize);
+    window.resizeGoldCanvas = onResize;
+    onResize();
+
+    var startTime = performance.now();
+    function animate() {
+      requestAnimationFrame(animate);
+      uniforms.u_time.value = (performance.now() - startTime) / 1000.0;
+      renderer.render(scene, camera);
+    }
+    animate();
+  }
+
+  // Concentric Expanding Circular Particle Waves (Pure Particle Dots, No Lines)
+  function initParticleWaves() {
+    var canvas = document.getElementById('particle-waves-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var width = 0, height = 0;
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    var WAVES_COUNT = 2; // Exactly 2 waves at a time as requested
+    var DURATION = 3600; // ms per wave lifecycle
+    var PARTICLES_PER_RING = 52; // Distinct glowing particle dots around circumference
+
+    function render(now) {
+      requestAnimationFrame(render);
+      if (!document.body.classList.contains('in-application-portal')) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      ctx.scale(dpr, dpr);
+
+      // Center around form modal card if available, else center of screen
+      var cx = width / 2;
+      var cy = height / 2;
+      var cardHalf = 280;
+      var card = document.querySelector('.app-modal-card');
+      if (card) {
+        var rect = card.getBoundingClientRect();
+        cx = rect.left + rect.width / 2;
+        cy = rect.top + rect.height / 2;
+        // Diagonal half-size of the modal card
+        cardHalf = Math.sqrt(Math.pow(rect.width / 2, 2) + Math.pow(rect.height / 2, 2)) * 0.72;
+      }
+
+      // Shorter radius: hugs modal card tightly as a pulsating particle halo
+      var minRadius = cardHalf + 6;
+      var maxRadius = cardHalf + 95;
+
+      var cs = getComputedStyle(document.documentElement);
+      var acc = cs.getPropertyValue('--acc').trim() || '#ff3b81';
+      var acc2 = cs.getPropertyValue('--acc2').trim() || '#ffa8c5';
+
+      var elapsed = now - waveStartTime;
+
+      for (var w = 0; w < WAVES_COUNT; w++) {
+        var phase = (w / WAVES_COUNT) * DURATION;
+        var p = ((elapsed + phase) % DURATION) / DURATION; // 0 to 1
+
+        // Smooth cubic expansion curve
+        var easeOut = 1 - Math.pow(1 - p, 2.2);
+        var r = minRadius + (maxRadius - minRadius) * easeOut;
+
+        // Opacity envelope: quick fade-in, smooth quadratic fade-out
+        var alpha = 0;
+        if (p < 0.15) {
+          alpha = p / 0.15;
+        } else {
+          alpha = Math.pow(1 - (p - 0.15) / 0.85, 1.8);
+        }
+
+        if (alpha <= 0.005) continue;
+
+        // Particle dot size: 2.5px to 3.5px
+        var dotRadius = 3.0 * (1 - p * 0.25);
+
+        for (var i = 0; i < PARTICLES_PER_RING; i++) {
+          // Circumferential angle with slight continuous rotation
+          var angle = (i / PARTICLES_PER_RING) * Math.PI * 2 + (w * 0.28) + (now * 0.00015);
+          
+          // Organic micro-variation in particle radius so it looks like authentic floating particles
+          var jitter = Math.sin(i * 7.5 + w * 3.8) * 2.2;
+          var curR = r + jitter;
+
+          var px = cx + Math.cos(angle) * curR;
+          var py = cy + Math.sin(angle) * curR;
+
+          // Cycle through Brand Green, Minimal Black, and White (like in logo.png)
+          var color = (i % 3 === 0) ? '#2d663b' : (i % 3 === 1) ? '#201b18' : '#ffffff';
+          var isWhite = (i % 3 === 2);
+
+          // Soft outer particle glow aura
+          ctx.beginPath();
+          ctx.arc(px, py, dotRadius * 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = isWhite ? 'rgba(45, 102, 59, 0.45)' : color;
+          ctx.globalAlpha = alpha * 0.35;
+          ctx.fill();
+
+          // Bright solid particle dot
+          ctx.beginPath();
+          ctx.arc(px, py, dotRadius, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.globalAlpha = alpha * 0.95;
+          ctx.fill();
+        }
+      }
+
+      ctx.restore();
+    }
+
+    requestAnimationFrame(render);
+  }
+
+  function startPortals() {
+    initGoldDotsShader();
+    initParticleWaves();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startPortals);
+  } else {
+    setTimeout(startPortals, 200);
+  }
+})();
+</script>
+</body>
+</html>

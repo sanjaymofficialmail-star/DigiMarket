@@ -17,6 +17,21 @@ export default defineConfig({
           }
         }
       }
+    },
+    {
+      name: 'demo-route-middleware',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          const url = req.url || '';
+          const [pathname, search] = url.split('?');
+          const query = search ? '?' + search : '';
+          
+          if (pathname === '/demo') {
+            req.url = '/demo/' + query;
+          }
+          next();
+        });
+      }
     }
   ],
   resolve: {
@@ -35,7 +50,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html')
+        main: path.resolve(__dirname, 'index.html'),
+        demo: path.resolve(__dirname, 'demo/index.html')
       }
     }
   }
